@@ -8,8 +8,8 @@
         <version>0.0.1-SNAPSHOT</version>
     </parent>
 
-    <artifactId>canalx-core</artifactId>
-    <name>canalx-core</name>
+    <artifactId>canalx-router</artifactId>
+    <name>canalx-router</name>
     <packaging>jar</packaging>
 
     <dependencies>

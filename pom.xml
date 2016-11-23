@@ -25,6 +25,7 @@
         <servlet.version>2.5</servlet.version>
         <cglib.version>2.2.2</cglib.version>
         <log4j.version>1.2.16</log4j.version>
+        <gson.version>2.5</gson.version>
 
         <!--log-->
         <slf4j.version>1.7.7</slf4j.version>
@@ -39,6 +40,10 @@
 
     <modules>
         <module>canalx-core</module>
+        <module>canalx-injector</module>
+        <module>canalx-processor</module>
+        <module>canalx-router</module>
+        <module>canalx-starter</module>
     </modules>
 
     <dependencies>
@@ -71,9 +76,16 @@
             </dependency>
 
             <dependency>
-                <groupId>org.javassist</groupId>
-                <artifactId>javassist</artifactId>
-                <version>3.20.0-GA</version>
+                <groupId>com.google.code.gson</groupId>
+                <artifactId>gson</artifactId>
+                <version>${gson.version}</version>
+            </dependency>
+
+            <!-- tools -->
+            <dependency>
+                <groupId>org.projectlombok</groupId>
+                <artifactId>lombok</artifactId>
+                <version>1.14.4</version>
             </dependency>
 
             <!-- test -->
