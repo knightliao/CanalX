@@ -12,19 +12,17 @@ import java.util.Properties;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.google.gson.Gson;
-import com.knightliao.canalx.core.dto.MysqlEntry;
 import com.knightliao.canalx.core.exception.CanalxInjectorException;
 import com.knightliao.canalx.core.plugin.injector.ICanalInjector;
 import com.knightliao.canalx.core.plugin.injector.IEntryProcessorAware;
 import com.knightliao.canalx.core.plugin.injector.template.InjectorEntryProcessTemplate;
 import com.knightliao.canalx.core.support.annotation.PluginName;
+import com.knightliao.canalx.plugin.injector.kafka.support.InjectorSupport;
 
 import kafka.consumer.ConsumerConfig;
 import kafka.consumer.ConsumerIterator;
 import kafka.consumer.KafkaStream;
 import kafka.javaapi.consumer.ConsumerConnector;
-import kafka.message.MessageAndMetadata;
 
 /**
  * @author knightliao
@@ -34,7 +32,6 @@ import kafka.message.MessageAndMetadata;
 public class CanalxKafkaInjector implements ICanalInjector, IEntryProcessorAware {
 
     protected static final Logger LOGGER = LoggerFactory.getLogger(CanalxKafkaInjector.class);
-    private Gson gson = new Gson();
 
     // kafka consumer
     private ConsumerConnector consumer;
@@ -44,10 +41,6 @@ public class CanalxKafkaInjector implements ICanalInjector, IEntryProcessorAware
 
     // process entry template
     private InjectorEntryProcessTemplate injectorEntryProcessTemplate;
-
-    // read offset from kafka
-    private long offset;
-    private int partition;
 
     @Override
     public void init() throws CanalxInjectorException {
@@ -77,6 +70,7 @@ public class CanalxKafkaInjector implements ICanalInjector, IEntryProcessorAware
     @Override
     public void run() throws CanalxInjectorException {
 
+        // get topic data
         Map<String, Integer> topicCountMap = new HashMap<String, Integer>();
         topicCountMap.put(topic, 1);
         Map<String, List<KafkaStream<byte[], byte[]>>> consumerMap = consumer.createMessageStreams(topicCountMap);
@@ -85,24 +79,9 @@ public class CanalxKafkaInjector implements ICanalInjector, IEntryProcessorAware
 
         ConsumerIterator<byte[], byte[]> it = newOrderStreams.get(0).iterator();
 
-        while (it.hasNext()) {
-            MessageAndMetadata<byte[], byte[]> mm = it.next();
-            String message = new String(mm.message());
-            partition = mm.partition();
-            offset = mm.offset();
-
-            MysqlEntry entry = gson.fromJson(message, MysqlEntry.class);
-            if (entry.getEvent() == MysqlEntry.MYSQL_DELETE) {
-                continue;
-            }
-
-            LOGGER.debug(message);
-
-            if (injectorEntryProcessTemplate != null) {
-                injectorEntryProcessTemplate.processEntry(entry);
-            }
-        }
-
+        // inject
+        InjectorSupport injectorSupport = new InjectorSupport(it, injectorEntryProcessTemplate);
+        injectorSupport.processMsg();
     }
 
     @Override
