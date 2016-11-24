@@ -9,28 +9,14 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>bom</artifactId>
+    <artifactId>canalx-plugins</artifactId>
     <packaging>pom</packaging>
     <modules>
-        <module>logback-bom</module>
+        <module>canalx-processor-kv</module>
+        <module>canalx-injector-kafka</module>
     </modules>
 
     <dependencies>
-        <!-- logger facade -->
-        <dependency>
-            <groupId>org.slf4j</groupId>
-            <artifactId>slf4j-api</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.slf4j</groupId>
-            <artifactId>slf4j-ext</artifactId>
-        </dependency>
-
-        <!-- unit test -->
-        <dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
-        </dependency>
     </dependencies>
 
 </project>

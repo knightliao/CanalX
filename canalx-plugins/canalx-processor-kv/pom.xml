@@ -8,8 +8,8 @@
         <version>0.0.1-SNAPSHOT</version>
     </parent>
 
-    <artifactId>canalx-kv</artifactId>
-    <name>canalx-kv</name>
+    <artifactId>canalx-processor-kv</artifactId>
+    <name>canalx-processor-kv</name>
     <packaging>jar</packaging>
 
     <dependencies>

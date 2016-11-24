@@ -1,5 +1,8 @@
 package com.knightliao.canalx.core.plugin.injector.template;
 
+import com.knightliao.canalx.core.dto.MysqlEntry;
+import com.knightliao.canalx.core.exception.CanalxInjectorException;
+
 /**
  * entry process template
  *
@@ -8,5 +11,6 @@ package com.knightliao.canalx.core.plugin.injector.template;
  */
 public interface IInjectEntryProcessOperator {
 
-    void processEntry();
+    void processEntry(MysqlEntry mysqlEntry, IInjectEntryProcessCallback injectEntryProcessCallback) throws
+            CanalxInjectorException;
 }

@@ -1,9 +1,11 @@
 package com.knightliao.canalx.processor.exception;
 
+import com.knightliao.canalx.core.exception.CanalxException;
+
 /**
  *
  */
-public class CanalxProcessorException extends RuntimeException {
+public class CanalxProcessorException extends CanalxException {
     public CanalxProcessorException() {
     }
 

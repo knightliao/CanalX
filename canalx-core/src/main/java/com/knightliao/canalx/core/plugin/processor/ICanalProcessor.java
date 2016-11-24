@@ -1,7 +1,7 @@
 package com.knightliao.canalx.core.plugin.processor;
 
 import com.knightliao.canalx.core.dto.MysqlEntry;
-import com.knightliao.canalx.processor.exception.CanalxProcessorException;
+import com.knightliao.canalx.core.exception.CanalxProcessorException;
 
 /**
  * 消息处理接口
