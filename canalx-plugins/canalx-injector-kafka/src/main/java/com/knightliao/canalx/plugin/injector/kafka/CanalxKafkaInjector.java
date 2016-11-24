@@ -2,25 +2,52 @@ package com.knightliao.canalx.plugin.injector.kafka;
 
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStreamReader;
+import java.net.URL;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.Properties;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import com.google.gson.Gson;
+import com.knightliao.canalx.core.dto.MysqlEntry;
 import com.knightliao.canalx.core.exception.CanalxInjectorException;
 import com.knightliao.canalx.core.plugin.injector.ICanalInjector;
 import com.knightliao.canalx.core.plugin.injector.IEntryProcessorAware;
 import com.knightliao.canalx.core.plugin.injector.template.InjectorEntryProcessTemplate;
+import com.knightliao.canalx.core.support.annotation.PluginName;
 
 import kafka.consumer.ConsumerConfig;
+import kafka.consumer.ConsumerIterator;
+import kafka.consumer.KafkaStream;
 import kafka.javaapi.consumer.ConsumerConnector;
+import kafka.message.MessageAndMetadata;
 
 /**
  * @author knightliao
  * @date 2016/11/23 18:21
  */
+@PluginName(name = "canalx-injector-kafka")
 public class CanalxKafkaInjector implements ICanalInjector, IEntryProcessorAware {
 
+    protected static final Logger LOGGER = LoggerFactory.getLogger(CanalxKafkaInjector.class);
+    private Gson gson = new Gson();
+
+    // kafka consumer
     private ConsumerConnector consumer;
+
+    // topic
     private String topic;
+
+    // process entry template
     private InjectorEntryProcessTemplate injectorEntryProcessTemplate;
+
+    // read offset from kafka
+    private long offset;
+    private int partition;
 
     @Override
     public void init() throws CanalxInjectorException {
@@ -33,10 +60,12 @@ public class CanalxKafkaInjector implements ICanalInjector, IEntryProcessorAware
     }
 
     private void loadConfigAndInit() throws IOException {
-        String userDir = System.getProperty("user.dir");
 
         Properties kafkaProps = new Properties();
-        kafkaProps.load(new FileInputStream(userDir + "/conf/kafka.properties"));
+        URL url = CanalxKafkaInjector.class.getClassLoader().getResource("kafka.properties");
+        kafkaProps.load(new InputStreamReader(new FileInputStream(url.getPath()),
+                "utf-8"));
+
         ConsumerConfig consumerConfig = new ConsumerConfig(kafkaProps);
 
         String kafkaTopic = kafkaProps.getProperty("topic");
@@ -47,6 +76,32 @@ public class CanalxKafkaInjector implements ICanalInjector, IEntryProcessorAware
 
     @Override
     public void run() throws CanalxInjectorException {
+
+        Map<String, Integer> topicCountMap = new HashMap<String, Integer>();
+        topicCountMap.put(topic, 1);
+        Map<String, List<KafkaStream<byte[], byte[]>>> consumerMap = consumer.createMessageStreams(topicCountMap);
+
+        List<KafkaStream<byte[], byte[]>> newOrderStreams = consumerMap.get(topic);
+
+        ConsumerIterator<byte[], byte[]> it = newOrderStreams.get(0).iterator();
+
+        while (it.hasNext()) {
+            MessageAndMetadata<byte[], byte[]> mm = it.next();
+            String message = new String(mm.message());
+            partition = mm.partition();
+            offset = mm.offset();
+
+            MysqlEntry entry = gson.fromJson(message, MysqlEntry.class);
+            if (entry.getEvent() == MysqlEntry.MYSQL_DELETE) {
+                continue;
+            }
+
+            LOGGER.debug(message);
+
+            if (injectorEntryProcessTemplate != null) {
+                injectorEntryProcessTemplate.processEntry(entry);
+            }
+        }
 
     }
 

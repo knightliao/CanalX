@@ -24,13 +24,11 @@
         <dependency>
             <groupId>com.knightliao.canalx</groupId>
             <artifactId>canalx-core</artifactId>
-            <version>${project.version}</version>
         </dependency>
 
         <dependency>
             <groupId>com.knightliao.canalx</groupId>
             <artifactId>canalx-injector-kafka</artifactId>
-            <version>${project.version}</version>
         </dependency>
 
         <dependency>

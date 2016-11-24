@@ -11,10 +11,18 @@ import com.knightliao.canalx.core.exception.CanalxInjectorException;
  */
 public class InjectorEntryProcessTemplate implements IInjectEntryProcessOperator {
 
+    protected IInjectEntryProcessCallback injectEntryProcessCallback;
+
+    public InjectorEntryProcessTemplate(IInjectEntryProcessCallback injectEntryProcessCallback) {
+        this.injectEntryProcessCallback = injectEntryProcessCallback;
+    }
+
     @Override
-    public void processEntry(MysqlEntry mysqlEntry, IInjectEntryProcessCallback injectEntryProcessCallback) throws
+    public void processEntry(MysqlEntry mysqlEntry) throws
             CanalxInjectorException {
 
-        injectEntryProcessCallback.processEntry(mysqlEntry);
+        if (injectEntryProcessCallback != null) {
+            injectEntryProcessCallback.processMysqlEntry(mysqlEntry);
+        }
     }
 }

@@ -31,4 +31,8 @@ public class MysqlEntry {
 
     // keys
     private Set<String> keys;
+
+    public static final char MYSQL_INSERT = 'i';
+    public static final char MYSQL_UPDATE = 'u';
+    public static final char MYSQL_DELETE = 'd';
 }

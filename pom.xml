@@ -44,6 +44,7 @@
         <module>canalx-processor</module>
         <module>canalx-router</module>
         <module>canalx-starter</module>
+        <module>canalx-plugins</module>
     </modules>
 
     <dependencies>
@@ -83,15 +84,26 @@
 
             <dependency>
                 <groupId>com.knightliao.canalx</groupId>
-                <artifactId>canalx-core</artifactId>
+                <artifactId>canalx-injector-kafka</artifactId>
                 <version>${project.version}</version>
             </dependency>
 
             <dependency>
                 <groupId>org.apache.kafka</groupId>
-                <artifactId>kafka_2.10</artifactId>
-                <version>0.10.1.0</version>
+                <artifactId>kafka-clients</artifactId>
+                <version>0.8.2.0</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.apache.kafka</groupId>
+                <artifactId>kafka_2.9.2</artifactId>
+                <version>0.8.2.0</version>
+                <scope>compile</scope>
                 <exclusions>
+                    <exclusion>
+                        <groupId>org.slf4j</groupId>
+                        <artifactId>slf4j-log4j12</artifactId>
+                    </exclusion>
                     <exclusion>
                         <artifactId>jmxri</artifactId>
                         <groupId>com.sun.jmx</groupId>
@@ -152,11 +164,6 @@
             </dependency>
             <dependency>
                 <groupId>org.slf4j</groupId>
-                <artifactId>slf4j-log4j12</artifactId>
-                <version>${slf4j.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>org.slf4j</groupId>
                 <artifactId>slf4j-ext</artifactId>
                 <version>${slf4j.version}</version>
             </dependency>
@@ -168,11 +175,6 @@
             <dependency>
                 <groupId>org.slf4j</groupId>
                 <artifactId>jul-to-slf4j</artifactId>
-                <version>${slf4j.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>org.slf4j</groupId>
-                <artifactId>log4j-over-slf4j</artifactId>
                 <version>${slf4j.version}</version>
             </dependency>
             <dependency>

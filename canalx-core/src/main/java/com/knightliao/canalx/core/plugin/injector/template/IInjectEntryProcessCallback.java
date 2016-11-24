@@ -9,5 +9,5 @@ import com.knightliao.canalx.core.exception.CanalxInjectorException;
  */
 public interface IInjectEntryProcessCallback {
 
-    void processEntry(MysqlEntry mysqlEntry) throws CanalxInjectorException;
+    void processMysqlEntry(MysqlEntry mysqlEntry) throws CanalxInjectorException;
 }
