@@ -8,7 +8,7 @@ import com.knightliao.canalx.core.plugin.injector.template.InjectorEntryProcessT
  * @author knightliao
  * @date 2016/11/24 11:46
  */
-public interface IEntryProcessorAware {
+public interface IInjectorEntryProcessorAware {
 
     void setupProcessEntry(InjectorEntryProcessTemplate injectorEntryProcessTemplate);
 }
