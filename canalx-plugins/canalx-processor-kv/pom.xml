@@ -4,7 +4,7 @@
     <modelVersion>4.0.0</modelVersion>
     <parent>
         <groupId>com.knightliao.canalx</groupId>
-        <artifactId>canalx</artifactId>
+        <artifactId>canalx-plugins</artifactId>
         <version>0.0.1-SNAPSHOT</version>
     </parent>
 
@@ -24,6 +24,16 @@
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>com.knightliao.canalx</groupId>
+            <artifactId>canalx-core</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>com.knightliao.canalx</groupId>
+            <artifactId>canalx-select-db-json</artifactId>
         </dependency>
 
     </dependencies>

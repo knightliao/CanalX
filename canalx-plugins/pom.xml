@@ -16,7 +16,4 @@
         <module>canalx-injector-kafka</module>
     </modules>
 
-    <dependencies>
-    </dependencies>
-
 </project>

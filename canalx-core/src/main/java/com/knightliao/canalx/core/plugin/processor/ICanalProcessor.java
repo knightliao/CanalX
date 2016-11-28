@@ -15,23 +15,23 @@ public interface ICanalProcessor {
      * update
      *
      * @param entry
-     * @param table
+     * @param
      */
-    void processUpdate(MysqlEntry entry, String table) throws CanalxProcessorException;
+    void processUpdate(MysqlEntry entry) throws CanalxProcessorException;
 
     /**
      * insert
      *
      * @param entry
-     * @param table
+     * @param
      */
-    void processInsert(MysqlEntry entry, String table) throws CanalxProcessorException;
+    void processInsert(MysqlEntry entry) throws CanalxProcessorException;
 
     /**
      * delete
      *
      * @param entry
-     * @param table
+     * @param
      */
-    void processDelete(MysqlEntry entry, String table) throws CanalxProcessorException;
+    void processDelete(MysqlEntry entry) throws CanalxProcessorException;
 }

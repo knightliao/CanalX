@@ -32,6 +32,11 @@
         </dependency>
 
         <dependency>
+            <groupId>com.knightliao.canalx</groupId>
+            <artifactId>canalx-processor-kv</artifactId>
+        </dependency>
+
+        <dependency>
             <groupId>com.google.code.gson</groupId>
             <artifactId>gson</artifactId>
         </dependency>

@@ -59,8 +59,9 @@ public class InjectorSupport {
             }
 
             LOGGER.info(
-                    "Succeed to import an INSERT from table {}, mysql_delay={}, "
+                    "Succeed to do {} inject from table {}, mysql_delay={}, "
                             + "canal_delay={}, partition={}, offset={}",
+                    entry.getEvent(),
                     originTableName, elapsedSinceMysql, elapsedSinceCanal, partition, offset);
         }
     }

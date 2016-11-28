@@ -84,7 +84,19 @@
 
             <dependency>
                 <groupId>com.knightliao.canalx</groupId>
+                <artifactId>canalx-select-db-json</artifactId>
+                <version>0.0.1-SNAPSHOT</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.knightliao.canalx</groupId>
                 <artifactId>canalx-injector-kafka</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.knightliao.canalx</groupId>
+                <artifactId>canalx-processor-kv</artifactId>
                 <version>${project.version}</version>
             </dependency>
 
