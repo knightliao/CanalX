@@ -84,19 +84,31 @@
 
             <dependency>
                 <groupId>com.knightliao.canalx</groupId>
+                <artifactId>canalx-injector-kafka</artifactId>
+                <version>0.0.1-SNAPSHOT</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.knightliao.canalx</groupId>
+                <artifactId>canalx-processor-kv</artifactId>
+                <version>0.0.1-SNAPSHOT</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.knightliao.canalx</groupId>
                 <artifactId>canalx-select-db-json</artifactId>
                 <version>0.0.1-SNAPSHOT</version>
             </dependency>
 
             <dependency>
                 <groupId>com.knightliao.canalx</groupId>
-                <artifactId>canalx-injector-kafka</artifactId>
+                <artifactId>canalx-injector</artifactId>
                 <version>${project.version}</version>
             </dependency>
 
             <dependency>
                 <groupId>com.knightliao.canalx</groupId>
-                <artifactId>canalx-processor-kv</artifactId>
+                <artifactId>canalx-processor</artifactId>
                 <version>${project.version}</version>
             </dependency>
 
@@ -149,6 +161,12 @@
                 <groupId>org.projectlombok</groupId>
                 <artifactId>lombok</artifactId>
                 <version>1.14.4</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.reflections</groupId>
+                <artifactId>reflections</artifactId>
+                <version>0.9.9-RC1</version>
             </dependency>
 
             <!-- test -->
