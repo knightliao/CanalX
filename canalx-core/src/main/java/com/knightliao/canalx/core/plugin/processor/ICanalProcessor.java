@@ -1,7 +1,8 @@
 package com.knightliao.canalx.core.plugin.processor;
 
-import com.knightliao.canalx.core.dto.MysqlEntry;
+import com.knightliao.canalx.core.dto.MysqlEntryWrap;
 import com.knightliao.canalx.core.exception.CanalxProcessorException;
+import com.knightliao.canalx.core.exception.CanalxProcessorInitException;
 
 /**
  * 消息处理接口
@@ -17,7 +18,7 @@ public interface ICanalProcessor {
      * @param entry
      * @param
      */
-    void processUpdate(MysqlEntry entry) throws CanalxProcessorException;
+    void processUpdate(MysqlEntryWrap entry) throws CanalxProcessorException;
 
     /**
      * insert
@@ -25,7 +26,7 @@ public interface ICanalProcessor {
      * @param entry
      * @param
      */
-    void processInsert(MysqlEntry entry) throws CanalxProcessorException;
+    void processInsert(MysqlEntryWrap entry) throws CanalxProcessorException;
 
     /**
      * delete
@@ -33,5 +34,10 @@ public interface ICanalProcessor {
      * @param entry
      * @param
      */
-    void processDelete(MysqlEntry entry) throws CanalxProcessorException;
+    void processDelete(MysqlEntryWrap entry) throws CanalxProcessorException;
+
+    /**
+     * @throws CanalxProcessorInitException
+     */
+    void init() throws CanalxProcessorInitException;
 }

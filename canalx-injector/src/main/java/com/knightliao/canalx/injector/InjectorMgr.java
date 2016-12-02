@@ -2,6 +2,8 @@ package com.knightliao.canalx.injector;
 
 import java.util.List;
 
+import com.knightliao.canalx.core.exception.CanalxInjectorException;
+import com.knightliao.canalx.core.exception.CanalxInjectorInitException;
 import com.knightliao.canalx.core.plugin.injector.ICanalInjector;
 import com.knightliao.canalx.core.plugin.injector.template.IInjectEntryProcessCallback;
 
@@ -18,8 +20,12 @@ public interface InjectorMgr {
 
     /**
      * 执行
-     *
-     * @param injectEntryProcessCallback
      */
-    void runInjector(IInjectEntryProcessCallback injectEntryProcessCallback);
+    void runInjector() throws CanalxInjectorException;
+
+    /**
+     *
+     */
+    void init(IInjectEntryProcessCallback injectEntryProcessCallback) throws
+            CanalxInjectorInitException;
 }

@@ -1,8 +1,7 @@
 package com.knightliao.canalx.core.plugin.injector;
 
-import java.io.IOException;
-
 import com.knightliao.canalx.core.exception.CanalxInjectorException;
+import com.knightliao.canalx.core.exception.CanalxInjectorInitException;
 
 /**
  * 数据输入 injector
@@ -12,7 +11,7 @@ import com.knightliao.canalx.core.exception.CanalxInjectorException;
  */
 public interface ICanalInjector {
 
-    void init() throws CanalxInjectorException;
+    void init() throws CanalxInjectorInitException;
 
     void run() throws CanalxInjectorException;
 

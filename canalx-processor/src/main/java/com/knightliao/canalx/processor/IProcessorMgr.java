@@ -2,8 +2,9 @@ package com.knightliao.canalx.processor;
 
 import java.util.List;
 
-import com.knightliao.canalx.core.dto.MysqlEntry;
 import com.knightliao.canalx.core.dto.MysqlEntryWrap;
+import com.knightliao.canalx.core.exception.CanalxProcessorException;
+import com.knightliao.canalx.core.exception.CanalxProcessorInitException;
 import com.knightliao.canalx.core.plugin.processor.ICanalProcessor;
 
 /**
@@ -22,6 +23,11 @@ public interface IProcessorMgr {
      *
      * @param
      */
-    void runProcessor(MysqlEntryWrap entry);
+    void runProcessor(MysqlEntryWrap entry) throws CanalxProcessorException;
+
+    /**
+     *
+     */
+    void init() throws CanalxProcessorInitException;
 }
 

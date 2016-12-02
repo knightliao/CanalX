@@ -6,5 +6,7 @@ package com.knightliao.canalx.plugin.processor.kv.data;
  */
 public interface ICanalxKv {
 
-    String get(String key);
+    String get(String tableId, String key);
+
+    void put(String tableId, String key, String value);
 }

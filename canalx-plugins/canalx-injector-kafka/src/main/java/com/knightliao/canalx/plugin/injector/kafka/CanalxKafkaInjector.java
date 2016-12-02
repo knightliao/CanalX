@@ -16,6 +16,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.knightliao.canalx.core.exception.CanalxInjectorException;
+import com.knightliao.canalx.core.exception.CanalxInjectorInitException;
 import com.knightliao.canalx.core.plugin.injector.ICanalInjector;
 import com.knightliao.canalx.core.plugin.injector.IInjectorEntryProcessorAware;
 import com.knightliao.canalx.core.plugin.injector.template.InjectorEntryProcessTemplate;
@@ -52,12 +53,12 @@ public class CanalxKafkaInjector implements ICanalInjector, IInjectorEntryProces
     private final static String CONFIG_FILE_NAME = "kafka.properties";
 
     @Override
-    public void init() throws CanalxInjectorException {
+    public void init() throws CanalxInjectorInitException {
 
         try {
             this.loadConfigAndInit();
         } catch (Exception e) {
-            throw new CanalxInjectorException(e);
+            throw new CanalxInjectorInitException(e);
         }
     }
 

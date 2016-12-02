@@ -1,8 +1,14 @@
 package com.knightliao.canalx.plugin.processor.kv.data;
 
 import java.io.IOException;
+import java.util.Map;
 
-import com.knightliao.canalx.core.exception.CanalxInjectorException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import com.knightliao.canalx.db.DbFetchControllerFactory;
+import com.knightliao.canalx.db.IDbFetchController;
+import com.knightliao.canalx.db.exception.CanalxSelectDbJsonInitException;
 
 /**
  * 单实例
@@ -12,11 +18,11 @@ import com.knightliao.canalx.core.exception.CanalxInjectorException;
  */
 public class CanalxKvInstance {
 
+    protected static final Logger LOGGER = LoggerFactory.getLogger(CanalxKvInstance.class);
+
     private static ICanalxKv iCanalxKv = new CanalxKvDefaultImpl();
 
     private static volatile boolean isInit = false;
-
-    private static CanalxKvConfig canalxKvConfig = new CanalxKvConfig();
 
     public static void init() {
 
@@ -27,21 +33,31 @@ public class CanalxKvInstance {
             isInit = true;
 
         } catch (Exception e) {
-            throw new CanalxInjectorException(e);
+
+            LOGGER.error(e.toString());
         }
     }
 
     /**
      * @throws IOException
      */
-    private static void loadConfigAndInit() throws IOException {
-
-        // setup config
-        canalxKvConfig.setupConfig();
+    private static void loadConfigAndInit()
+            throws IOException, ClassNotFoundException, CanalxSelectDbJsonInitException {
 
         // load sql data
-        //  DbFetcherFactory.getDefaultDbFetcher(canalxKvConfig.getDriverClass(), canalxKvConfig.getDbUrl(),
-        //        canalxKvConfig.getUserName(), canalxKvConfig.getPassword());
+        IDbFetchController iDbFetchController = DbFetchControllerFactory.getDefaultDbController();
+
+        Map<String, Map<String, String>> dataInitMap = iDbFetchController.getInitDbKv();
+
+        for (String tableId : dataInitMap.keySet()) {
+
+            Map<String, String> tableKvMap = dataInitMap.get(tableId);
+
+            for (String key : tableKvMap.keySet()) {
+
+                iCanalxKv.put(tableId, key, tableKvMap.get(key));
+            }
+        }
     }
 
     /**
@@ -49,14 +65,33 @@ public class CanalxKvInstance {
      *
      * @return
      */
-    public static String get(String key) {
+    public static String get(String tableId, String key) {
 
         if (isInit) {
 
-            return iCanalxKv.get(key);
+            return iCanalxKv.get(tableId, key);
         } else {
 
             return null;
+        }
+    }
+
+    /**
+     * @param key
+     *
+     * @return
+     */
+    public static boolean put(String tableId, String key, String value) {
+
+        if (isInit) {
+
+            iCanalxKv.put(tableId, key, value);
+
+            return true;
+
+        } else {
+
+            return false;
         }
     }
 }

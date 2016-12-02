@@ -12,8 +12,10 @@ import org.slf4j.LoggerFactory;
 
 import com.knightliao.canalx.core.dto.MysqlEntry;
 import com.knightliao.canalx.core.dto.MysqlEntryWrap;
+import com.knightliao.canalx.core.exception.CanalxPluginException;
+import com.knightliao.canalx.core.exception.CanalxProcessorException;
+import com.knightliao.canalx.core.exception.CanalxProcessorInitException;
 import com.knightliao.canalx.core.plugin.IPlugin;
-import com.knightliao.canalx.core.plugin.injector.ICanalInjector;
 import com.knightliao.canalx.core.plugin.processor.ICanalProcessor;
 import com.knightliao.canalx.core.support.annotation.PluginName;
 import com.knightliao.canalx.processor.IProcessorMgr;
@@ -28,16 +30,12 @@ public class ProcessorMgrImpl implements IProcessorMgr, IPlugin {
 
     private Map<String, ICanalProcessor> innerCanalProcessors = new LinkedHashMap<String, ICanalProcessor>(10);
 
+    private List<ICanalProcessor> iCanalProcessors = new ArrayList<>(10);
+
     @Override
-    public void loadPlugin(String scanPack, Set<String> specifyPluginNames) {
+    public void loadPlugin(String scanPack, Set<String> specifyPluginNames) throws CanalxPluginException {
 
         Reflections reflections = new Reflections(scanPack);
-        Set<Class<? extends ICanalInjector>> canalInjectors = reflections.getSubTypesOf(ICanalInjector
-                .class);
-
-        //
-        //  load processor
-        //
         Set<Class<? extends ICanalProcessor>> canalProcessors = reflections.getSubTypesOf(ICanalProcessor
                 .class);
 
@@ -59,18 +57,15 @@ public class ProcessorMgrImpl implements IProcessorMgr, IPlugin {
                 LOGGER.error(e.toString());
             }
         }
-    }
-
-    @Override
-    public List<ICanalProcessor> getProcessorPlugin() {
-
-        List<ICanalProcessor> iCanalProcessors = new ArrayList<>(10);
 
         for (String processorName : innerCanalProcessors.keySet()) {
 
             iCanalProcessors.add(innerCanalProcessors.get(processorName));
         }
+    }
 
+    @Override
+    public List<ICanalProcessor> getProcessorPlugin() {
         return iCanalProcessors;
     }
 
@@ -78,7 +73,7 @@ public class ProcessorMgrImpl implements IProcessorMgr, IPlugin {
      * @param entry
      */
     @Override
-    public void runProcessor(MysqlEntryWrap entry) {
+    public void runProcessor(MysqlEntryWrap entry) throws CanalxProcessorException {
 
         List<ICanalProcessor> iCanalProcessors = this.getProcessorPlugin();
 
@@ -89,21 +84,29 @@ public class ProcessorMgrImpl implements IProcessorMgr, IPlugin {
 
                 LOGGER.info("run processor... {}  insert", icanalProcessor.getClass());
 
-                icanalProcessor.processInsert(mysqlEntry);
+                icanalProcessor.processInsert(entry);
 
             } else if (mysqlEntry.getEvent() == MysqlEntry.MYSQL_UPDATE) {
 
                 LOGGER.info("run processor... {}  update", icanalProcessor.getClass());
 
-                icanalProcessor.processUpdate(mysqlEntry);
+                icanalProcessor.processUpdate(entry);
 
             } else if (mysqlEntry.getEvent() == MysqlEntry.MYSQL_DELETE) {
 
                 LOGGER.info("run processor... {} delete", icanalProcessor.getClass());
 
-                icanalProcessor.processDelete(mysqlEntry);
+                icanalProcessor.processDelete(entry);
             }
 
+        }
+    }
+
+    @Override
+    public void init() throws CanalxProcessorInitException {
+
+        for (ICanalProcessor iCanalProcessor : iCanalProcessors) {
+            iCanalProcessor.init();
         }
     }
 }

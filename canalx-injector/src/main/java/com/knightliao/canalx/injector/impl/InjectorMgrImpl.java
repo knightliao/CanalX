@@ -10,6 +10,8 @@ import org.reflections.Reflections;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.knightliao.canalx.core.exception.CanalxInjectorException;
+import com.knightliao.canalx.core.exception.CanalxInjectorInitException;
 import com.knightliao.canalx.core.plugin.IPlugin;
 import com.knightliao.canalx.core.plugin.injector.ICanalInjector;
 import com.knightliao.canalx.core.plugin.injector.IInjectorEntryProcessorAware;
@@ -88,10 +90,20 @@ public class InjectorMgrImpl implements InjectorMgr, IPlugin {
     }
 
     /**
-     * @param injectEntryProcessCallback
+     * @param
      */
     @Override
-    public void runInjector(IInjectEntryProcessCallback injectEntryProcessCallback) {
+    public void runInjector() throws CanalxInjectorException {
+
+        if (fistInjector != null) {
+
+            // run
+            fistInjector.run();
+        }
+    }
+
+    @Override
+    public void init(IInjectEntryProcessCallback injectEntryProcessCallback) throws CanalxInjectorInitException {
 
         if (fistInjector != null) {
 
@@ -102,9 +114,7 @@ public class InjectorMgrImpl implements InjectorMgr, IPlugin {
 
             // init
             fistInjector.init();
-
-            // run
-            fistInjector.run();
         }
+
     }
 }

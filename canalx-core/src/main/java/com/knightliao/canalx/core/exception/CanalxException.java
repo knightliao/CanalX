@@ -3,7 +3,7 @@ package com.knightliao.canalx.core.exception;
 /**
  *
  */
-public class CanalxException extends RuntimeException {
+public class CanalxException extends Exception {
     public CanalxException() {
     }
 

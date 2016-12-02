@@ -27,7 +27,7 @@
     </appender>
 
     <logger name="org.apache.zookeeper">
-        <level value="WARN"/>
+        <level value="ERROR"/>
     </logger>
 
     <logger name="com.knightliao.canalx">
