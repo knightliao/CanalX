@@ -1,6 +1,7 @@
 package com.knightliao.canalx.core.plugin.injector.template;
 
 import com.knightliao.canalx.core.dto.MysqlEntry;
+import com.knightliao.canalx.core.dto.MysqlEntryWrap;
 import com.knightliao.canalx.core.exception.CanalxInjectorException;
 
 /**
@@ -11,6 +12,6 @@ import com.knightliao.canalx.core.exception.CanalxInjectorException;
  */
 public interface IInjectEntryProcessOperator {
 
-    void processEntry(MysqlEntry mysqlEntry) throws
+    void processEntry(MysqlEntryWrap mysqlEntry) throws
             CanalxInjectorException;
 }

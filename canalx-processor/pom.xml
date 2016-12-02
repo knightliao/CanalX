@@ -27,6 +27,11 @@
         </dependency>
 
         <dependency>
+            <groupId>com.knightliao.canalx</groupId>
+            <artifactId>canalx-processor-kv</artifactId>
+        </dependency>
+
+        <dependency>
             <groupId>com.google.code.gson</groupId>
             <artifactId>gson</artifactId>
         </dependency>
@@ -34,6 +39,16 @@
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.reflections</groupId>
+            <artifactId>reflections</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
         </dependency>
 
     </dependencies>

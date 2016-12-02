@@ -8,6 +8,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Properties;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.TimeUnit;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -34,13 +37,19 @@ public class CanalxKafkaInjector implements ICanalInjector, IInjectorEntryProces
     protected static final Logger LOGGER = LoggerFactory.getLogger(CanalxKafkaInjector.class);
 
     // kafka consumer
-    private ConsumerConnector consumer;
+    private ConsumerConnector consumer = null;
 
-    // topic
-    private String topic;
+    // topics
+    private String[] topics;
 
     // process entry template
     private InjectorEntryProcessTemplate injectorEntryProcessTemplate;
+
+    // thread executors
+    private ExecutorService executor = null;
+
+    //
+    private final static String CONFIG_FILE_NAME = "kafka.properties";
 
     @Override
     public void init() throws CanalxInjectorException {
@@ -55,38 +64,71 @@ public class CanalxKafkaInjector implements ICanalInjector, IInjectorEntryProces
     private void loadConfigAndInit() throws IOException {
 
         Properties kafkaProps = new Properties();
-        URL url = CanalxKafkaInjector.class.getClassLoader().getResource("kafka.properties");
-        kafkaProps.load(new InputStreamReader(new FileInputStream(url.getPath()),
-                "utf-8"));
+        URL url = CanalxKafkaInjector.class.getClassLoader().getResource(CONFIG_FILE_NAME);
+        if (url != null) {
+            LOGGER.info("loading config file {}", url.toString());
 
-        ConsumerConfig consumerConfig = new ConsumerConfig(kafkaProps);
+            kafkaProps.load(new InputStreamReader(new FileInputStream(url.getPath()),
+                    "utf-8"));
 
-        String kafkaTopic = kafkaProps.getProperty("topic");
+            ConsumerConfig consumerConfig = new ConsumerConfig(kafkaProps);
 
-        this.consumer = kafka.consumer.Consumer.createJavaConsumerConnector(consumerConfig);
-        this.topic = kafkaTopic;
+            //
+            String kafkaTopicStr = kafkaProps.getProperty("topics");
+            this.topics = kafkaTopicStr.split(",");
+
+            // consumer
+            this.consumer = kafka.consumer.Consumer.createJavaConsumerConnector(consumerConfig);
+        } else {
+
+            LOGGER.warn("cannot find config file {}", CONFIG_FILE_NAME);
+        }
     }
 
     @Override
     public void run() throws CanalxInjectorException {
 
-        // get topic data
-        Map<String, Integer> topicCountMap = new HashMap<String, Integer>();
-        topicCountMap.put(topic, 1);
-        Map<String, List<KafkaStream<byte[], byte[]>>> consumerMap = consumer.createMessageStreams(topicCountMap);
+        if (consumer != null) {
 
-        List<KafkaStream<byte[], byte[]>> newOrderStreams = consumerMap.get(topic);
+            // set topic map
+            Map<String, Integer> topicCountMap = new HashMap<String, Integer>();
 
-        ConsumerIterator<byte[], byte[]> it = newOrderStreams.get(0).iterator();
+            for (String topic : topics) {
+                topicCountMap.put(topic, 1);
 
-        // inject
-        InjectorSupport injectorSupport = new InjectorSupport(it, injectorEntryProcessTemplate);
-        injectorSupport.processMsg();
+            }
+
+            // get stream
+            Map<String, List<KafkaStream<byte[], byte[]>>> consumerMap = consumer.createMessageStreams(topicCountMap);
+
+            // executors
+            executor = Executors.newFixedThreadPool(consumerMap.size());
+            for (String topicStr : consumerMap.keySet()) {
+
+                List<KafkaStream<byte[], byte[]>> newOrderStreams = consumerMap.get(topicStr);
+
+                ConsumerIterator<byte[], byte[]> it = newOrderStreams.get(0).iterator();
+
+                executor.submit(new InjectorSupport(it, topicStr, injectorEntryProcessTemplate));
+            }
+        }
     }
 
     @Override
     public void shutdown() throws CanalxInjectorException {
 
+        if (executor != null) {
+            executor.shutdown();
+
+            try {
+                if (!executor.awaitTermination(5000, TimeUnit.MILLISECONDS)) {
+                    LOGGER.info("Timed out waiting for consumer threads (topic: {} ) to shut down, exiting uncleanly",
+                            topics);
+                }
+            } catch (InterruptedException e) {
+                LOGGER.error("Interrupted during shutdown, exiting uncleanly");
+            }
+        }
     }
 
     @Override

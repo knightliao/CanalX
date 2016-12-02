@@ -28,12 +28,12 @@
 
         <dependency>
             <groupId>com.knightliao.canalx</groupId>
-            <artifactId>canalx-injector-kafka</artifactId>
+            <artifactId>canalx-injector</artifactId>
         </dependency>
 
         <dependency>
             <groupId>com.knightliao.canalx</groupId>
-            <artifactId>canalx-processor-kv</artifactId>
+            <artifactId>canalx-processor</artifactId>
         </dependency>
 
         <dependency>

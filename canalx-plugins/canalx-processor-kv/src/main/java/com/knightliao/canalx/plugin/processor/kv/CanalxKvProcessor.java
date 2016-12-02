@@ -13,7 +13,7 @@ import com.knightliao.canalx.core.support.annotation.PluginName;
  * @date 2016/11/23 18:21
  */
 @PluginName(name = "canalx-processor-kv")
-public class CanalxKvProcessor implements ICanalProcessor {
+public class CanalxKvProcessor implements ICanalProcessor, IProcessorInitAware {
 
     protected static final Logger LOGGER = LoggerFactory.getLogger(CanalxKvProcessor.class);
 
@@ -30,6 +30,11 @@ public class CanalxKvProcessor implements ICanalProcessor {
 
     @Override
     public void processDelete(MysqlEntry entry) throws CanalxProcessorException {
+
+    }
+
+    @Override
+    public void init() {
 
     }
 }
