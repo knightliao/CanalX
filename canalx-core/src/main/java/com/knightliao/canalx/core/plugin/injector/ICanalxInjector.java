@@ -9,7 +9,7 @@ import com.knightliao.canalx.core.exception.CanalxInjectorInitException;
  * @author knightliao
  * @date 2016/11/23 18:21
  */
-public interface ICanalInjector {
+public interface ICanalxInjector {
 
     void init() throws CanalxInjectorInitException;
 

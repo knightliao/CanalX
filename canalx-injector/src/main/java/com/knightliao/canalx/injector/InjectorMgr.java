@@ -4,7 +4,7 @@ import java.util.List;
 
 import com.knightliao.canalx.core.exception.CanalxInjectorException;
 import com.knightliao.canalx.core.exception.CanalxInjectorInitException;
-import com.knightliao.canalx.core.plugin.injector.ICanalInjector;
+import com.knightliao.canalx.core.plugin.injector.ICanalxInjector;
 import com.knightliao.canalx.core.plugin.injector.template.IInjectEntryProcessCallback;
 
 /**
@@ -16,7 +16,7 @@ public interface InjectorMgr {
     /**
      * @return
      */
-    List<ICanalInjector> getInjectorPlugin();
+    List<ICanalxInjector> getInjectorPlugin();
 
     /**
      * 执行

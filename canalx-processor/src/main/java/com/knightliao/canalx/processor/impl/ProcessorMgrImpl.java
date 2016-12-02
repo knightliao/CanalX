@@ -16,7 +16,7 @@ import com.knightliao.canalx.core.exception.CanalxPluginException;
 import com.knightliao.canalx.core.exception.CanalxProcessorException;
 import com.knightliao.canalx.core.exception.CanalxProcessorInitException;
 import com.knightliao.canalx.core.plugin.IPlugin;
-import com.knightliao.canalx.core.plugin.processor.ICanalProcessor;
+import com.knightliao.canalx.core.plugin.processor.ICanalxProcessor;
 import com.knightliao.canalx.core.support.annotation.PluginName;
 import com.knightliao.canalx.processor.IProcessorMgr;
 
@@ -28,18 +28,18 @@ public class ProcessorMgrImpl implements IProcessorMgr, IPlugin {
 
     protected static final Logger LOGGER = LoggerFactory.getLogger(ProcessorMgrImpl.class);
 
-    private Map<String, ICanalProcessor> innerCanalProcessors = new LinkedHashMap<String, ICanalProcessor>(10);
+    private Map<String, ICanalxProcessor> innerCanalProcessors = new LinkedHashMap<String, ICanalxProcessor>(10);
 
-    private List<ICanalProcessor> iCanalProcessors = new ArrayList<>(10);
+    private List<ICanalxProcessor> iCanalxProcessors = new ArrayList<>(10);
 
     @Override
     public void loadPlugin(String scanPack, Set<String> specifyPluginNames) throws CanalxPluginException {
 
         Reflections reflections = new Reflections(scanPack);
-        Set<Class<? extends ICanalProcessor>> canalProcessors = reflections.getSubTypesOf(ICanalProcessor
+        Set<Class<? extends ICanalxProcessor>> canalProcessors = reflections.getSubTypesOf(ICanalxProcessor
                 .class);
 
-        for (Class<? extends ICanalProcessor> canalProcessor : canalProcessors) {
+        for (Class<? extends ICanalxProcessor> canalProcessor : canalProcessors) {
 
             String pluginName = canalProcessor.getAnnotation(PluginName.class).name();
 
@@ -50,7 +50,7 @@ public class ProcessorMgrImpl implements IProcessorMgr, IPlugin {
             LOGGER.info("loading processor: {} - {}", pluginName, canalProcessor.toString());
 
             try {
-                Class<ICanalProcessor> canalProcessorClass = (Class<ICanalProcessor>) canalProcessor;
+                Class<ICanalxProcessor> canalProcessorClass = (Class<ICanalxProcessor>) canalProcessor;
 
                 innerCanalProcessors.put(pluginName, canalProcessorClass.newInstance());
             } catch (Exception e) {
@@ -60,13 +60,13 @@ public class ProcessorMgrImpl implements IProcessorMgr, IPlugin {
 
         for (String processorName : innerCanalProcessors.keySet()) {
 
-            iCanalProcessors.add(innerCanalProcessors.get(processorName));
+            iCanalxProcessors.add(innerCanalProcessors.get(processorName));
         }
     }
 
     @Override
-    public List<ICanalProcessor> getProcessorPlugin() {
-        return iCanalProcessors;
+    public List<ICanalxProcessor> getProcessorPlugin() {
+        return iCanalxProcessors;
     }
 
     /**
@@ -75,9 +75,9 @@ public class ProcessorMgrImpl implements IProcessorMgr, IPlugin {
     @Override
     public void runProcessor(MysqlEntryWrap entry) throws CanalxProcessorException {
 
-        List<ICanalProcessor> iCanalProcessors = this.getProcessorPlugin();
+        List<ICanalxProcessor> iCanalxProcessors = this.getProcessorPlugin();
 
-        for (ICanalProcessor icanalProcessor : iCanalProcessors) {
+        for (ICanalxProcessor icanalProcessor : iCanalxProcessors) {
 
             MysqlEntry mysqlEntry = entry.getMysqlEntry();
             if (mysqlEntry.getEvent() == MysqlEntry.MYSQL_INSERT) {
@@ -105,8 +105,8 @@ public class ProcessorMgrImpl implements IProcessorMgr, IPlugin {
     @Override
     public void init() throws CanalxProcessorInitException {
 
-        for (ICanalProcessor iCanalProcessor : iCanalProcessors) {
-            iCanalProcessor.init();
+        for (ICanalxProcessor iCanalxProcessor : iCanalxProcessors) {
+            iCanalxProcessor.init();
         }
     }
 }

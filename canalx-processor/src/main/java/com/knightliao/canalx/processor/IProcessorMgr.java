@@ -5,7 +5,7 @@ import java.util.List;
 import com.knightliao.canalx.core.dto.MysqlEntryWrap;
 import com.knightliao.canalx.core.exception.CanalxProcessorException;
 import com.knightliao.canalx.core.exception.CanalxProcessorInitException;
-import com.knightliao.canalx.core.plugin.processor.ICanalProcessor;
+import com.knightliao.canalx.core.plugin.processor.ICanalxProcessor;
 
 /**
  * @author knightliao
@@ -16,7 +16,7 @@ public interface IProcessorMgr {
     /**
      * @return
      */
-    List<ICanalProcessor> getProcessorPlugin();
+    List<ICanalxProcessor> getProcessorPlugin();
 
     /**
      * 执行

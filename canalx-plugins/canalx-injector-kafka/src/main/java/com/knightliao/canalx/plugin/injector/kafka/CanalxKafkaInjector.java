@@ -17,7 +17,7 @@ import org.slf4j.LoggerFactory;
 
 import com.knightliao.canalx.core.exception.CanalxInjectorException;
 import com.knightliao.canalx.core.exception.CanalxInjectorInitException;
-import com.knightliao.canalx.core.plugin.injector.ICanalInjector;
+import com.knightliao.canalx.core.plugin.injector.ICanalxInjector;
 import com.knightliao.canalx.core.plugin.injector.IInjectorEntryProcessorAware;
 import com.knightliao.canalx.core.plugin.injector.template.InjectorEntryProcessTemplate;
 import com.knightliao.canalx.core.support.annotation.PluginName;
@@ -33,7 +33,7 @@ import kafka.javaapi.consumer.ConsumerConnector;
  * @date 2016/11/23 18:21
  */
 @PluginName(name = "canalx-injector-kafka")
-public class CanalxKafkaInjector implements ICanalInjector, IInjectorEntryProcessorAware {
+public class CanalxKafkaInjector implements ICanalxInjector, IInjectorEntryProcessorAware {
 
     protected static final Logger LOGGER = LoggerFactory.getLogger(CanalxKafkaInjector.class);
 

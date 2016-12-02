@@ -13,7 +13,7 @@ import org.slf4j.LoggerFactory;
 import com.knightliao.canalx.core.exception.CanalxInjectorException;
 import com.knightliao.canalx.core.exception.CanalxInjectorInitException;
 import com.knightliao.canalx.core.plugin.IPlugin;
-import com.knightliao.canalx.core.plugin.injector.ICanalInjector;
+import com.knightliao.canalx.core.plugin.injector.ICanalxInjector;
 import com.knightliao.canalx.core.plugin.injector.IInjectorEntryProcessorAware;
 import com.knightliao.canalx.core.plugin.injector.template.IInjectEntryProcessCallback;
 import com.knightliao.canalx.core.plugin.injector.template.InjectorEntryProcessTemplate;
@@ -29,9 +29,9 @@ public class InjectorMgrImpl implements InjectorMgr, IPlugin {
     protected static final Logger LOGGER = LoggerFactory.getLogger(InjectorMgrImpl.class);
 
     // injector
-    private Map<String, ICanalInjector> innerCanalInjectors = new LinkedHashMap<String, ICanalInjector>(10);
+    private Map<String, ICanalxInjector> innerCanalInjectors = new LinkedHashMap<String, ICanalxInjector>(10);
 
-    private ICanalInjector fistInjector = null;
+    private ICanalxInjector fistInjector = null;
 
     /**
      * load plugins
@@ -43,11 +43,11 @@ public class InjectorMgrImpl implements InjectorMgr, IPlugin {
     public void loadPlugin(String scanPack, Set<String> specifyPluginNames) {
 
         Reflections reflections = new Reflections(scanPack);
-        Set<Class<? extends ICanalInjector>> canalInjectors = reflections.getSubTypesOf(ICanalInjector
+        Set<Class<? extends ICanalxInjector>> canalInjectors = reflections.getSubTypesOf(ICanalxInjector
                 .class);
 
         boolean isFirst = true;
-        for (Class<? extends ICanalInjector> canalInjector : canalInjectors) {
+        for (Class<? extends ICanalxInjector> canalInjector : canalInjectors) {
 
             String pluginName = canalInjector.getAnnotation(PluginName.class).name();
 
@@ -58,7 +58,7 @@ public class InjectorMgrImpl implements InjectorMgr, IPlugin {
             LOGGER.info("loading injector: {} - {}", pluginName, canalInjector.toString());
 
             try {
-                Class<ICanalInjector> canalInjectorClass = (Class<ICanalInjector>) canalInjector;
+                Class<ICanalxInjector> canalInjectorClass = (Class<ICanalxInjector>) canalInjector;
 
                 innerCanalInjectors.put(pluginName, canalInjectorClass.newInstance());
 
@@ -77,9 +77,9 @@ public class InjectorMgrImpl implements InjectorMgr, IPlugin {
      * @return
      */
     @Override
-    public List<ICanalInjector> getInjectorPlugin() {
+    public List<ICanalxInjector> getInjectorPlugin() {
 
-        List<ICanalInjector> iCanalInjectors = new ArrayList<>(10);
+        List<ICanalxInjector> iCanalInjectors = new ArrayList<>(10);
 
         for (String processorName : innerCanalInjectors.keySet()) {
 

@@ -5,7 +5,8 @@ import org.slf4j.LoggerFactory;
 
 import com.knightliao.canalx.core.dto.MysqlEntryWrap;
 import com.knightliao.canalx.core.exception.CanalxProcessorException;
-import com.knightliao.canalx.core.plugin.processor.ICanalProcessor;
+import com.knightliao.canalx.core.plugin.processor.ICanalxProcessor;
+import com.knightliao.canalx.core.plugin.router.ICanalxRouter;
 import com.knightliao.canalx.core.support.annotation.PluginName;
 import com.knightliao.canalx.plugin.processor.kv.data.CanalxKvInstance;
 
@@ -14,7 +15,7 @@ import com.knightliao.canalx.plugin.processor.kv.data.CanalxKvInstance;
  * @date 2016/11/23 18:21
  */
 @PluginName(name = "canalx-processor-kv")
-public class CanalxKvProcessor implements ICanalProcessor {
+public class CanalxKvProcessor implements ICanalxProcessor, ICanalxRouter {
 
     protected static final Logger LOGGER = LoggerFactory.getLogger(CanalxKvProcessor.class);
 
@@ -44,5 +45,17 @@ public class CanalxKvProcessor implements ICanalProcessor {
 
         LOGGER.info("start to init {}", CanalxKvProcessor.class.toString());
         CanalxKvInstance.init();
+    }
+
+    /**
+     * @param tableId
+     * @param key
+     *
+     * @return
+     */
+    @Override
+    public String get(String tableId, String key) {
+
+        return CanalxKvInstance.get(tableId, key);
     }
 }

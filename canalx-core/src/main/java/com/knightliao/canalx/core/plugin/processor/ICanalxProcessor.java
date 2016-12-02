@@ -10,7 +10,7 @@ import com.knightliao.canalx.core.exception.CanalxProcessorInitException;
  * @author knightliao
  * @date 2016/11/23 17:08
  */
-public interface ICanalProcessor {
+public interface ICanalxProcessor {
 
     /**
      * update
