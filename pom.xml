@@ -102,6 +102,12 @@
 
             <dependency>
                 <groupId>com.knightliao.canalx</groupId>
+                <artifactId>canalx-router</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.knightliao.canalx</groupId>
                 <artifactId>canalx-injector</artifactId>
                 <version>${project.version}</version>
             </dependency>
