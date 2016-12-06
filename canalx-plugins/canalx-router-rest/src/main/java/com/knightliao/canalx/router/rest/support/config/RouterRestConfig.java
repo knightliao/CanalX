@@ -1,5 +1,7 @@
 package com.knightliao.canalx.router.rest.support.config;
 
+import com.knightliao.canalx.core.support.context.ICanalxContext;
+
 import lombok.Data;
 
 /**
@@ -9,4 +11,9 @@ import lombok.Data;
 @Data
 public class RouterRestConfig {
 
+    private String serverPort = "8080";
+
+    public static void initConfig(ICanalxContext iCanalxContext) {
+
+    }
 }

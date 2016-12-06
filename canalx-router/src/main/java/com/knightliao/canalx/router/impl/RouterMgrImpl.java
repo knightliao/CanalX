@@ -16,6 +16,7 @@ import com.knightliao.canalx.core.plugin.IPlugin;
 import com.knightliao.canalx.core.plugin.router.ICanalxRouter;
 import com.knightliao.canalx.core.support.annotation.PluginName;
 import com.knightliao.canalx.core.support.context.ICanalxContext;
+import com.knightliao.canalx.core.support.context.ICanalxContextAware;
 import com.knightliao.canalx.router.IRouterMgr;
 
 /**
@@ -64,6 +65,10 @@ public class RouterMgrImpl implements IRouterMgr, IPlugin {
     public void init() throws CanalxRouterException {
 
         if (firstCanalxRouter != null) {
+
+            if (firstCanalxRouter instanceof ICanalxContextAware) {
+                ((ICanalxContextAware) firstCanalxRouter).setCanalxContext(iCanalxContext);
+            }
 
             // init
             firstCanalxRouter.init();

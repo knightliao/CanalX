@@ -19,6 +19,7 @@ import com.knightliao.canalx.core.plugin.injector.template.IInjectEntryProcessCa
 import com.knightliao.canalx.core.plugin.injector.template.InjectorEntryProcessTemplate;
 import com.knightliao.canalx.core.support.annotation.PluginName;
 import com.knightliao.canalx.core.support.context.ICanalxContext;
+import com.knightliao.canalx.core.support.context.ICanalxContextAware;
 import com.knightliao.canalx.injector.InjectorMgr;
 
 /**
@@ -115,6 +116,10 @@ public class InjectorMgrImpl implements InjectorMgr, IPlugin {
             if (firstInjector instanceof IInjectorEntryProcessorAware) {
                 ((IInjectorEntryProcessorAware) firstInjector).setupProcessEntry(new InjectorEntryProcessTemplate
                         (injectEntryProcessCallback));
+            }
+
+            if (firstInjector instanceof ICanalxContextAware) {
+                ((ICanalxContextAware) firstInjector).setCanalxContext(iCanalxContext);
             }
 
             // init

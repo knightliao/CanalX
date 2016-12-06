@@ -19,6 +19,7 @@ import com.knightliao.canalx.core.plugin.IPlugin;
 import com.knightliao.canalx.core.plugin.processor.ICanalxProcessor;
 import com.knightliao.canalx.core.support.annotation.PluginName;
 import com.knightliao.canalx.core.support.context.ICanalxContext;
+import com.knightliao.canalx.core.support.context.ICanalxContextAware;
 import com.knightliao.canalx.processor.IProcessorMgr;
 
 /**
@@ -111,6 +112,11 @@ public class ProcessorMgrImpl implements IProcessorMgr, IPlugin {
     public void init() throws CanalxProcessorInitException {
 
         for (ICanalxProcessor iCanalxProcessor : iCanalxProcessors) {
+
+            if (iCanalxProcessor instanceof ICanalxContextAware) {
+                ((ICanalxContextAware) iCanalxProcessor).setCanalxContext(iCanalxContext);
+            }
+
             iCanalxProcessor.init();
         }
     }
