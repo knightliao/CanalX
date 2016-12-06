@@ -14,4 +14,6 @@ public interface ICanalxRouter {
     void start() throws CanalxRouterException;
 
     void init();
+
+    void shutdown() throws CanalxRouterException;
 }

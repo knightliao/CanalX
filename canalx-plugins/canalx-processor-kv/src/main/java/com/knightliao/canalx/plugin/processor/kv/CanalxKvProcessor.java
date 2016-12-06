@@ -19,6 +19,8 @@ public class CanalxKvProcessor implements ICanalxProcessor, ICanalxDataRouter {
 
     protected static final Logger LOGGER = LoggerFactory.getLogger(CanalxKvProcessor.class);
 
+    private String fileName = "canalx-db-kv.xml";
+
     @Override
     public void processUpdate(MysqlEntryWrap entry) throws CanalxProcessorException {
 
@@ -44,7 +46,7 @@ public class CanalxKvProcessor implements ICanalxProcessor, ICanalxDataRouter {
     public void init() {
 
         LOGGER.info("start to init {}", CanalxKvProcessor.class.toString());
-        CanalxKvInstance.init();
+        CanalxKvInstance.init(fileName);
     }
 
     /**

@@ -35,6 +35,11 @@ public class CanalxRouterRest implements ICanalxRouter {
 
     }
 
+    @Override
+    public void shutdown() throws CanalxRouterException {
+
+    }
+
     private void loadConfigAndInit() throws IOException {
 
         Properties kafkaProps = new Properties();

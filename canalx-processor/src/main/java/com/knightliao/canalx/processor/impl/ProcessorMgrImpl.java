@@ -18,6 +18,7 @@ import com.knightliao.canalx.core.exception.CanalxProcessorInitException;
 import com.knightliao.canalx.core.plugin.IPlugin;
 import com.knightliao.canalx.core.plugin.processor.ICanalxProcessor;
 import com.knightliao.canalx.core.support.annotation.PluginName;
+import com.knightliao.canalx.core.support.context.ICanalxContext;
 import com.knightliao.canalx.processor.IProcessorMgr;
 
 /**
@@ -30,7 +31,11 @@ public class ProcessorMgrImpl implements IProcessorMgr, IPlugin {
 
     private Map<String, ICanalxProcessor> innerCanalProcessors = new LinkedHashMap<String, ICanalxProcessor>(10);
 
+    //
     private List<ICanalxProcessor> iCanalxProcessors = new ArrayList<>(10);
+
+    // context
+    private ICanalxContext iCanalxContext = null;
 
     @Override
     public void loadPlugin(String scanPack, Set<String> specifyPluginNames) throws CanalxPluginException {
@@ -108,5 +113,10 @@ public class ProcessorMgrImpl implements IProcessorMgr, IPlugin {
         for (ICanalxProcessor iCanalxProcessor : iCanalxProcessors) {
             iCanalxProcessor.init();
         }
+    }
+
+    @Override
+    public void setCanalxContext(ICanalxContext iCanalxContext) {
+        this.iCanalxContext = iCanalxContext;
     }
 }

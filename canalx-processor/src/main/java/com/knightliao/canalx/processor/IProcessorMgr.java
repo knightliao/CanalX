@@ -6,12 +6,13 @@ import com.knightliao.canalx.core.dto.MysqlEntryWrap;
 import com.knightliao.canalx.core.exception.CanalxProcessorException;
 import com.knightliao.canalx.core.exception.CanalxProcessorInitException;
 import com.knightliao.canalx.core.plugin.processor.ICanalxProcessor;
+import com.knightliao.canalx.core.support.context.ICanalxContextAware;
 
 /**
  * @author knightliao
  * @date 2016/12/1 11:52
  */
-public interface IProcessorMgr {
+public interface IProcessorMgr extends ICanalxContextAware {
 
     /**
      * @return

@@ -18,6 +18,7 @@ import com.knightliao.canalx.core.plugin.injector.IInjectorEntryProcessorAware;
 import com.knightliao.canalx.core.plugin.injector.template.IInjectEntryProcessCallback;
 import com.knightliao.canalx.core.plugin.injector.template.InjectorEntryProcessTemplate;
 import com.knightliao.canalx.core.support.annotation.PluginName;
+import com.knightliao.canalx.core.support.context.ICanalxContext;
 import com.knightliao.canalx.injector.InjectorMgr;
 
 /**
@@ -31,7 +32,11 @@ public class InjectorMgrImpl implements InjectorMgr, IPlugin {
     // injector
     private Map<String, ICanalxInjector> innerCanalInjectors = new LinkedHashMap<String, ICanalxInjector>(10);
 
-    private ICanalxInjector fistInjector = null;
+    //
+    private ICanalxInjector firstInjector = null;
+
+    // context
+    private ICanalxContext iCanalxContext = null;
 
     /**
      * load plugins
@@ -63,7 +68,7 @@ public class InjectorMgrImpl implements InjectorMgr, IPlugin {
                 innerCanalInjectors.put(pluginName, canalInjectorClass.newInstance());
 
                 if (isFirst) {
-                    fistInjector = innerCanalInjectors.get(pluginName);
+                    firstInjector = innerCanalInjectors.get(pluginName);
                     isFirst = false;
                 }
 
@@ -95,26 +100,31 @@ public class InjectorMgrImpl implements InjectorMgr, IPlugin {
     @Override
     public void runInjector() throws CanalxInjectorException {
 
-        if (fistInjector != null) {
+        if (firstInjector != null) {
 
             // run
-            fistInjector.run();
+            firstInjector.run();
         }
     }
 
     @Override
     public void init(IInjectEntryProcessCallback injectEntryProcessCallback) throws CanalxInjectorInitException {
 
-        if (fistInjector != null) {
+        if (firstInjector != null) {
 
-            if (fistInjector instanceof IInjectorEntryProcessorAware) {
-                ((IInjectorEntryProcessorAware) fistInjector).setupProcessEntry(new InjectorEntryProcessTemplate
+            if (firstInjector instanceof IInjectorEntryProcessorAware) {
+                ((IInjectorEntryProcessorAware) firstInjector).setupProcessEntry(new InjectorEntryProcessTemplate
                         (injectEntryProcessCallback));
             }
 
             // init
-            fistInjector.init();
+            firstInjector.init();
         }
 
+    }
+
+    @Override
+    public void setCanalxContext(ICanalxContext iCanalxContext) {
+        this.iCanalxContext = iCanalxContext;
     }
 }

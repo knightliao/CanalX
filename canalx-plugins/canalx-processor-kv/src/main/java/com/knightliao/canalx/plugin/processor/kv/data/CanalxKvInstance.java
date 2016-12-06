@@ -24,11 +24,11 @@ public class CanalxKvInstance {
 
     private static volatile boolean isInit = false;
 
-    public static void init() {
+    public static void init(String configFilePath) {
 
         try {
 
-            loadConfigAndInit();
+            loadConfigAndInit(configFilePath);
 
             isInit = true;
 
@@ -41,13 +41,13 @@ public class CanalxKvInstance {
     /**
      * @throws IOException
      */
-    private static void loadConfigAndInit()
+    private static void loadConfigAndInit(String configFilePath)
             throws IOException, ClassNotFoundException, CanalxSelectDbJsonInitException {
 
         // load sql data
         IDbFetchController iDbFetchController = DbFetchControllerFactory.getDefaultDbController();
 
-        Map<String, Map<String, String>> dataInitMap = iDbFetchController.getInitDbKv();
+        Map<String, Map<String, String>> dataInitMap = iDbFetchController.getInitDbKv(configFilePath);
 
         for (String tableId : dataInitMap.keySet()) {
 

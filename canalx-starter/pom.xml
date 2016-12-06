@@ -37,6 +37,11 @@
         </dependency>
 
         <dependency>
+            <groupId>com.knightliao.canalx</groupId>
+            <artifactId>canalx-router</artifactId>
+        </dependency>
+
+        <dependency>
             <groupId>com.google.code.gson</groupId>
             <artifactId>gson</artifactId>
         </dependency>
