@@ -1,12 +1,17 @@
 package com.knightliao.canalx.core.plugin.router;
 
+import com.knightliao.canalx.core.exception.CanalxRouterException;
+
 /**
- * router数据接口
- *
  * @author knightliao
- * @date 2016/11/23 17:08
+ * @date 2016/12/2 18:42
  */
 public interface ICanalxRouter {
 
-    String get(String tableId, String key);
+    /**
+     * @throws
+     */
+    void start() throws CanalxRouterException;
+
+    void init();
 }

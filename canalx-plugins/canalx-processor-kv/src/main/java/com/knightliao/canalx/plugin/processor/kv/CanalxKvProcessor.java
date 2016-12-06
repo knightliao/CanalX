@@ -6,7 +6,7 @@ import org.slf4j.LoggerFactory;
 import com.knightliao.canalx.core.dto.MysqlEntryWrap;
 import com.knightliao.canalx.core.exception.CanalxProcessorException;
 import com.knightliao.canalx.core.plugin.processor.ICanalxProcessor;
-import com.knightliao.canalx.core.plugin.router.ICanalxRouter;
+import com.knightliao.canalx.core.plugin.router.ICanalxDataRouter;
 import com.knightliao.canalx.core.support.annotation.PluginName;
 import com.knightliao.canalx.plugin.processor.kv.data.CanalxKvInstance;
 
@@ -15,7 +15,7 @@ import com.knightliao.canalx.plugin.processor.kv.data.CanalxKvInstance;
  * @date 2016/11/23 18:21
  */
 @PluginName(name = "canalx-processor-kv")
-public class CanalxKvProcessor implements ICanalxProcessor, ICanalxRouter {
+public class CanalxKvProcessor implements ICanalxProcessor, ICanalxDataRouter {
 
     protected static final Logger LOGGER = LoggerFactory.getLogger(CanalxKvProcessor.class);
 
