@@ -9,6 +9,8 @@ import com.knightliao.canalx.core.support.annotation.PluginName;
 import com.knightliao.canalx.core.support.context.ICanalxContext;
 import com.knightliao.canalx.core.support.context.ICanalxContextAware;
 import com.knightliao.canalx.router.rest.support.config.RouterRestConfig;
+import com.knightliao.canalx.router.rest.support.server.CanalxRouterServerFactory;
+import com.knightliao.canalx.router.rest.support.server.ICanalxRouterServer;
 
 /**
  * @author knightliao
@@ -19,24 +21,40 @@ public class CanalxRouterRest implements ICanalxRouter, ICanalxContextAware {
 
     protected static final Logger LOGGER = LoggerFactory.getLogger(CanalxRouterRest.class);
 
+    // config
     protected RouterRestConfig routerRestConfig = new RouterRestConfig();
 
+    // context
     protected ICanalxContext canalxContext;
+
+    //
+    protected ICanalxRouterServer iCanalxRouterServer = CanalxRouterServerFactory.getDefaultRouterServer();
 
     protected boolean isInit = false;
 
     @Override
     public void start() throws CanalxRouterException {
 
+        if (isInit) {
+
+            if (iCanalxRouterServer != null) {
+
+                iCanalxRouterServer.start(routerRestConfig.getServerPort());
+            }
+        }
     }
 
     @Override
-    public void init() {
+    public void init() throws CanalxRouterException {
 
-        if (canalxContext != null) {
-            RouterRestConfig.initConfig(canalxContext);
+        try {
+            if (canalxContext != null) {
+                routerRestConfig.initConfig(canalxContext);
 
-            isInit = true;
+                isInit = true;
+            }
+        } catch (Exception e) {
+            throw new CanalxRouterException(e);
         }
 
     }
@@ -44,6 +62,9 @@ public class CanalxRouterRest implements ICanalxRouter, ICanalxContextAware {
     @Override
     public void shutdown() throws CanalxRouterException {
 
+        if (isInit) {
+            iCanalxRouterServer.stop();
+        }
     }
 
     @Override

@@ -11,9 +11,13 @@ import lombok.Data;
 @Data
 public class RouterRestConfig {
 
-    private String serverPort = "8080";
+    private int serverPort = 8080;
 
-    public static void initConfig(ICanalxContext iCanalxContext) {
+    public void initConfig(ICanalxContext iCanalxContext) throws Exception {
 
+        // port
+        String port = iCanalxContext.getProperty("canalx.plugin.router.port");
+
+        serverPort = Integer.parseInt(port);
     }
 }

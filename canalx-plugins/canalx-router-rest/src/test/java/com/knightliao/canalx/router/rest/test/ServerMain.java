@@ -1,10 +1,10 @@
-package com.knightliao.canalx.router.rest;
+package com.knightliao.canalx.router.rest.test;
 
 import org.eclipse.jetty.server.Server;
 import org.eclipse.jetty.servlet.ServletContextHandler;
 import org.eclipse.jetty.servlet.ServletHolder;
 
-import com.knightliao.canalx.router.rest.handler.EntryPointHandler;
+import com.knightliao.canalx.router.rest.test.handler.EntryPointTestHandler;
 
 /**
  * @author knightliao
@@ -27,7 +27,7 @@ public class ServerMain {
         // Tells the Jersey Servlet which REST service/class to load.
         jerseyServlet.setInitParameter(
                 "jersey.config.server.provider.classnames",
-                EntryPointHandler.class.getCanonicalName());
+                EntryPointTestHandler.class.getCanonicalName());
 
         try {
             jettyServer.start();

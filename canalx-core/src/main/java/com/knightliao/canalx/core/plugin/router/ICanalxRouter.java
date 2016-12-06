@@ -13,7 +13,7 @@ public interface ICanalxRouter {
      */
     void start() throws CanalxRouterException;
 
-    void init();
+    void init() throws CanalxRouterException;
 
     void shutdown() throws CanalxRouterException;
 }
