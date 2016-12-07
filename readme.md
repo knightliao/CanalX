@@ -15,7 +15,8 @@
 - 数据处理功能(processor):
 	- `Data`->`KV`。将变更Data数据转化成全内存的`KV`存储。(已发布, 插件 `canalx-processor-kv`)
 	- `Data`->`Redis`。将变更Data数据转化成`Redis`中间件存储。(开发中, 插件 `canalx-processor-redis`)
-	- `Data`->`History`。将变更Data数据转化成`History`用户操作日志存储。(开发中, 插件 `canalx-processor-history`)
+	- `Data`->`History`。将变更Data数据转化成`History`存储。(开发中, 插件 `canalx-processor-history`)
+	- `Data`->`Notification`。将变更Data数据转化成`Notification`存储。(开发中, 插件 `canalx-processor-notification`)
 - 数据发布功能(router):
 	- `web-rest`发布。将processor中的数据以 `web-rest` 接口的方式。(已发布, 插件 `canalx-router-rest`)
 	- `dubbo`发布。将processor中的数据以 `dubbo-rpc` 接口的方式(开发中, )
