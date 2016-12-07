@@ -1,10 +1,12 @@
-package com.knightliao.canalx.plugin.processor.kv.data;
+package com.knightliao.canalx.plugin.processor.kv.data.impl;
 
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import com.knightliao.canalx.plugin.processor.kv.data.ICanalxKv;
 
 /**
  * @author knightliao

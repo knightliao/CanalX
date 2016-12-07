@@ -1,6 +1,7 @@
 package com.knightliao.canalx.plugin.processor.kv.data;
 
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.Map;
 
 import org.slf4j.Logger;
@@ -9,6 +10,7 @@ import org.slf4j.LoggerFactory;
 import com.knightliao.canalx.db.DbFetchControllerFactory;
 import com.knightliao.canalx.db.IDbFetchController;
 import com.knightliao.canalx.db.exception.CanalxSelectDbJsonInitException;
+import com.knightliao.canalx.plugin.processor.kv.data.impl.CanalxKvDefaultImpl;
 
 /**
  * 单实例
@@ -21,6 +23,12 @@ public class CanalxKvInstance {
     protected static final Logger LOGGER = LoggerFactory.getLogger(CanalxKvInstance.class);
 
     private static ICanalxKv iCanalxKv = new CanalxKvDefaultImpl();
+
+    // id fetcher
+    private static IDbFetchController iDbFetchController = DbFetchControllerFactory.getDefaultDbController();
+
+    // 记录 tableid -> table key
+    private static Map<String, String> tableKeyMap = new HashMap<>();
 
     private static volatile boolean isInit = false;
 
@@ -44,10 +52,8 @@ public class CanalxKvInstance {
     private static void loadConfigAndInit(String configFilePath)
             throws IOException, ClassNotFoundException, CanalxSelectDbJsonInitException {
 
-        // load sql data
-        IDbFetchController iDbFetchController = DbFetchControllerFactory.getDefaultDbController();
-
-        Map<String, Map<String, String>> dataInitMap = iDbFetchController.getInitDbKv(configFilePath);
+        iDbFetchController.init(configFilePath);
+        Map<String, Map<String, String>> dataInitMap = iDbFetchController.getInitDbKv();
 
         for (String tableId : dataInitMap.keySet()) {
 
@@ -57,7 +63,10 @@ public class CanalxKvInstance {
 
                 iCanalxKv.put(tableId, key, tableKvMap.get(key));
             }
-            LOGGER.info("tableId: {} loads ok", tableId);
+
+            String tableKey = iDbFetchController.getTableKey(tableId);
+            tableKeyMap.put(tableId, tableKey);
+            LOGGER.info("tableId: {} , Tablekey {} loads ok", tableId, tableKey);
         }
     }
 
@@ -93,6 +102,15 @@ public class CanalxKvInstance {
         } else {
 
             return false;
+        }
+    }
+
+    public static String getTableKey(String tableId) {
+        if (tableKeyMap.containsKey(tableId)) {
+            return tableKeyMap.get(tableId);
+        } else {
+
+            return "";
         }
     }
 }
