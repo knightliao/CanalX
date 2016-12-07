@@ -46,7 +46,7 @@ public class CanalxContextImpl implements ICanalxContext {
 
     @Override
     public Set<String> getRouterPluginName() {
-        String processorStr = properties.getProperty("canalx.router.processor", "");
+        String processorStr = properties.getProperty("canalx.plugin.router", "");
         Set<String> ret = new LinkedHashSet<>(10);
         String[] data = processorStr.split(",");
         for (String item : data) {

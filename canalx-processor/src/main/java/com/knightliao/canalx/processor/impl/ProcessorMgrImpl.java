@@ -20,6 +20,7 @@ import com.knightliao.canalx.core.plugin.processor.ICanalxProcessor;
 import com.knightliao.canalx.core.support.annotation.PluginName;
 import com.knightliao.canalx.core.support.context.ICanalxContext;
 import com.knightliao.canalx.core.support.context.ICanalxContextAware;
+import com.knightliao.canalx.core.support.reflection.ReflectionUtil;
 import com.knightliao.canalx.processor.IProcessorMgr;
 
 /**
@@ -41,7 +42,7 @@ public class ProcessorMgrImpl implements IProcessorMgr, IPlugin {
     @Override
     public void loadPlugin(String scanPack, Set<String> specifyPluginNames) throws CanalxPluginException {
 
-        Reflections reflections = new Reflections(scanPack);
+        Reflections reflections = ReflectionUtil.getReflection(scanPack);
         Set<Class<? extends ICanalxProcessor>> canalProcessors = reflections.getSubTypesOf(ICanalxProcessor
                 .class);
 

@@ -17,6 +17,7 @@ import com.knightliao.canalx.core.plugin.router.ICanalxRouter;
 import com.knightliao.canalx.core.support.annotation.PluginName;
 import com.knightliao.canalx.core.support.context.ICanalxContext;
 import com.knightliao.canalx.core.support.context.ICanalxContextAware;
+import com.knightliao.canalx.core.support.reflection.ReflectionUtil;
 import com.knightliao.canalx.router.IRouterMgr;
 
 /**
@@ -89,12 +90,12 @@ public class RouterMgrImpl implements IRouterMgr, IPlugin {
     @Override
     public void loadPlugin(String scanPack, Set<String> specifyPluginNames) throws CanalxPluginException {
 
-        Reflections reflections = new Reflections(scanPack);
-        Set<Class<? extends ICanalxRouter>> canalInjectors = reflections.getSubTypesOf(ICanalxRouter
+        Reflections reflections = ReflectionUtil.getReflection(scanPack);
+        Set<Class<? extends ICanalxRouter>> canalxRouters = reflections.getSubTypesOf(ICanalxRouter
                 .class);
 
         boolean isFirst = true;
-        for (Class<? extends ICanalxRouter> canalInjector : canalInjectors) {
+        for (Class<? extends ICanalxRouter> canalInjector : canalxRouters) {
 
             String pluginName = canalInjector.getAnnotation(PluginName.class).name();
 
@@ -102,7 +103,7 @@ public class RouterMgrImpl implements IRouterMgr, IPlugin {
                 continue;
             }
 
-            LOGGER.info("loading injector: {} - {}", pluginName, canalInjector.toString());
+            LOGGER.info("loading router: {} - {}", pluginName, canalInjector.toString());
 
             try {
                 Class<ICanalxRouter> canalInjectorClass = (Class<ICanalxRouter>) canalInjector;

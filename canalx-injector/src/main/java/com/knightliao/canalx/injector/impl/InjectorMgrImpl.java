@@ -20,6 +20,7 @@ import com.knightliao.canalx.core.plugin.injector.template.InjectorEntryProcessT
 import com.knightliao.canalx.core.support.annotation.PluginName;
 import com.knightliao.canalx.core.support.context.ICanalxContext;
 import com.knightliao.canalx.core.support.context.ICanalxContextAware;
+import com.knightliao.canalx.core.support.reflection.ReflectionUtil;
 import com.knightliao.canalx.injector.InjectorMgr;
 
 /**
@@ -48,7 +49,7 @@ public class InjectorMgrImpl implements InjectorMgr, IPlugin {
     @Override
     public void loadPlugin(String scanPack, Set<String> specifyPluginNames) {
 
-        Reflections reflections = new Reflections(scanPack);
+        Reflections reflections = ReflectionUtil.getReflection(scanPack);
         Set<Class<? extends ICanalxInjector>> canalInjectors = reflections.getSubTypesOf(ICanalxInjector
                 .class);
 
