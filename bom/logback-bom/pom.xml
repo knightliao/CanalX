@@ -12,6 +12,7 @@
     <groupId>com.knightliao.canalx.bom</groupId>
     <artifactId>logback-bom</artifactId>
     <packaging>pom</packaging>
+    <version>0.0.1-SNAPSHOT</version>
 
     <dependencies>
         <dependency>
