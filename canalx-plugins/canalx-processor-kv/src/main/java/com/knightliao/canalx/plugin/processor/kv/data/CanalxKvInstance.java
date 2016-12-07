@@ -57,6 +57,7 @@ public class CanalxKvInstance {
 
                 iCanalxKv.put(tableId, key, tableKvMap.get(key));
             }
+            LOGGER.info("tableId: {} loads ok", tableId);
         }
     }
 

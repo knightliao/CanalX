@@ -3,6 +3,7 @@ package com.knightliao.canalx.core.support.context;
 import java.io.IOException;
 import java.util.Set;
 
+import com.knightliao.canalx.core.plugin.router.ICanalxDataRouter;
 import com.knightliao.canalx.core.support.properties.IProperties;
 
 /**
@@ -18,4 +19,6 @@ public interface ICanalxContext extends IProperties {
     Set<String> getRouterPluginName();
 
     void load() throws IOException;
+
+    ICanalxDataRouter getProcessorAsDataSource(String processorName);
 }

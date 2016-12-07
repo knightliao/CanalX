@@ -3,12 +3,14 @@ package com.knightliao.canalx.plugin.processor.kv;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.knightliao.canalx.core.dto.MysqlEntry;
 import com.knightliao.canalx.core.dto.MysqlEntryWrap;
 import com.knightliao.canalx.core.exception.CanalxProcessorException;
 import com.knightliao.canalx.core.plugin.processor.ICanalxProcessor;
 import com.knightliao.canalx.core.plugin.router.ICanalxDataRouter;
 import com.knightliao.canalx.core.support.annotation.PluginName;
 import com.knightliao.canalx.plugin.processor.kv.data.CanalxKvInstance;
+import com.knightliao.canalx.plugin.processor.kv.support.TableTopicUtil;
 
 /**
  * @author knightliao
@@ -31,11 +33,19 @@ public class CanalxKvProcessor implements ICanalxProcessor, ICanalxDataRouter {
     public void processInsert(MysqlEntryWrap entry) throws CanalxProcessorException {
 
         LOGGER.info(entry.toString());
+
+        String topic = entry.getTopic();
+        MysqlEntry mysqlEntry = entry.getMysqlEntry();
+        String table = mysqlEntry.getTable();
+
+        String tableId = TableTopicUtil.getTableId(topic, table);
+
     }
 
     @Override
     public void processDelete(MysqlEntryWrap entry) throws CanalxProcessorException {
 
+        // not process
         LOGGER.info(entry.toString());
     }
 

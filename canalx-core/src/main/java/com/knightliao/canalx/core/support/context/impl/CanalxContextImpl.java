@@ -5,17 +5,25 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.URL;
 import java.util.LinkedHashSet;
+import java.util.Map;
 import java.util.Properties;
 import java.util.Set;
 
+import com.knightliao.canalx.core.plugin.processor.ICanalxProcessor;
+import com.knightliao.canalx.core.plugin.router.ICanalxDataRouter;
 import com.knightliao.canalx.core.support.context.ICanalxContext;
+import com.knightliao.canalx.core.support.context.IDataSourceAware;
 
 /**
  * @author knightliao
  * @date 2016/12/6 19:32
  */
-public class CanalxContextImpl implements ICanalxContext {
+public class CanalxContextImpl implements ICanalxContext, IDataSourceAware {
+
     private final Properties properties;
+
+    // data source provider
+    private Map<String, ICanalxProcessor> iCanalxProcessorMap;
 
     public CanalxContextImpl() {
         properties = new Properties();
@@ -61,8 +69,40 @@ public class CanalxContextImpl implements ICanalxContext {
         properties.load(new InputStreamReader(new FileInputStream(url.getPath()), "utf-8"));
     }
 
+    /**
+     * 获取某一个 processor 作为 router 的数据源
+     *
+     * @param processorName
+     *
+     * @return
+     */
+    @Override
+    public ICanalxDataRouter getProcessorAsDataSource(String processorName) {
+        for (String iCanalxProcessorName : iCanalxProcessorMap.keySet()) {
+            if (iCanalxProcessorName.equals(processorName)) {
+
+                ICanalxProcessor iCanalxProcessor = iCanalxProcessorMap.get(processorName);
+                if (iCanalxProcessor instanceof ICanalxDataRouter) {
+                    return (ICanalxDataRouter) iCanalxProcessor;
+                }
+            }
+        }
+
+        return null;
+    }
+
     @Override
     public String getProperty(String item) {
         return properties.getProperty(item);
+    }
+
+    /**
+     * 设置数据源
+     *
+     * @param iCanalxProcessorMap
+     */
+    @Override
+    public void setDataSource(Map<String, ICanalxProcessor> iCanalxProcessorMap) {
+        this.iCanalxProcessorMap = iCanalxProcessorMap;
     }
 }

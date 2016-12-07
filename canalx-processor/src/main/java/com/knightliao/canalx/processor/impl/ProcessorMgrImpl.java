@@ -20,6 +20,7 @@ import com.knightliao.canalx.core.plugin.processor.ICanalxProcessor;
 import com.knightliao.canalx.core.support.annotation.PluginName;
 import com.knightliao.canalx.core.support.context.ICanalxContext;
 import com.knightliao.canalx.core.support.context.ICanalxContextAware;
+import com.knightliao.canalx.core.support.context.IDataSourceAware;
 import com.knightliao.canalx.core.support.reflection.ReflectionUtil;
 import com.knightliao.canalx.processor.IProcessorMgr;
 
@@ -68,6 +69,10 @@ public class ProcessorMgrImpl implements IProcessorMgr, IPlugin {
         for (String processorName : innerCanalProcessors.keySet()) {
 
             iCanalxProcessors.add(innerCanalProcessors.get(processorName));
+        }
+
+        if (iCanalxContext instanceof IDataSourceAware) {
+            ((IDataSourceAware) iCanalxContext).setDataSource(this.innerCanalProcessors);
         }
     }
 
@@ -125,5 +130,9 @@ public class ProcessorMgrImpl implements IProcessorMgr, IPlugin {
     @Override
     public void setCanalxContext(ICanalxContext iCanalxContext) {
         this.iCanalxContext = iCanalxContext;
+
+        if (iCanalxContext instanceof IDataSourceAware) {
+            ((IDataSourceAware) iCanalxContext).setDataSource(this.innerCanalProcessors);
+        }
     }
 }
