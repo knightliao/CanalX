@@ -11,6 +11,7 @@
     <artifactId>canalx-processor</artifactId>
     <name>canalx-processor</name>
     <packaging>jar</packaging>
+    <version>${canalx.version}</version>
 
     <dependencies>
 
@@ -24,11 +25,13 @@
         <dependency>
             <groupId>com.knightliao.canalx</groupId>
             <artifactId>canalx-core</artifactId>
+            <version>${canalx.version}</version>
         </dependency>
 
         <dependency>
             <groupId>com.knightliao.canalx</groupId>
             <artifactId>canalx-processor-kv</artifactId>
+            <version>${canalx-processor-kv.version}</version>
         </dependency>
 
         <dependency>

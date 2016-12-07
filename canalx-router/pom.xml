@@ -11,6 +11,7 @@
     <artifactId>canalx-router</artifactId>
     <name>canalx-router</name>
     <packaging>jar</packaging>
+    <version>${canalx.version}</version>
 
     <dependencies>
 
@@ -24,6 +25,7 @@
         <dependency>
             <groupId>com.knightliao.canalx</groupId>
             <artifactId>canalx-core</artifactId>
+            <version>${canalx.version}</version>
         </dependency>
 
         <dependency>
@@ -44,6 +46,7 @@
         <dependency>
             <groupId>com.knightliao.canalx</groupId>
             <artifactId>canalx-router-rest</artifactId>
+            <version>${canalx-router-rest.version}</version>
         </dependency>
 
         <dependency>

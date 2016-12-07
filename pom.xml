@@ -11,6 +11,14 @@
 
     <properties>
 
+        <!-- 模块版本号 -->
+        <canalx.version>0.0.1-SNAPSHOT</canalx.version>
+        <canalx-select-db-json.version>0.0.1-SNAPSHOT</canalx-select-db-json.version>
+        <canalx-injector-kafka.version>0.0.1-SNAPSHOT</canalx-injector-kafka.version>
+        <canalx-processor-kv.version>0.0.1-SNAPSHOT</canalx-processor-kv.version>
+        <canalx-router-rest.version>0.0.1-SNAPSHOT</canalx-router-rest.version>
+        <canalx-router-kepler.version>0.0.1-SNAPSHOT</canalx-router-kepler.version>
+
         <!-- Spring項目配置 -->
         <encoding>UTF-8</encoding>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -74,55 +82,7 @@
                 <artifactId>logback-bom</artifactId>
                 <optional>true</optional>
                 <type>pom</type>
-                <version>${project.version}</version>
-            </dependency>
-
-            <dependency>
-                <groupId>com.knightliao.canalx</groupId>
-                <artifactId>canalx-core</artifactId>
-                <version>${project.version}</version>
-            </dependency>
-
-            <dependency>
-                <groupId>com.knightliao.canalx</groupId>
-                <artifactId>canalx-injector-kafka</artifactId>
                 <version>0.0.1-SNAPSHOT</version>
-            </dependency>
-
-            <dependency>
-                <groupId>com.knightliao.canalx</groupId>
-                <artifactId>canalx-processor-kv</artifactId>
-                <version>0.0.1-SNAPSHOT</version>
-            </dependency>
-
-            <dependency>
-                <groupId>com.knightliao.canalx</groupId>
-                <artifactId>canalx-router-rest</artifactId>
-                <version>0.0.1-SNAPSHOT</version>
-            </dependency>
-
-            <dependency>
-                <groupId>com.knightliao.canalx</groupId>
-                <artifactId>canalx-select-db-json</artifactId>
-                <version>0.0.1-SNAPSHOT</version>
-            </dependency>
-
-            <dependency>
-                <groupId>com.knightliao.canalx</groupId>
-                <artifactId>canalx-router</artifactId>
-                <version>${project.version}</version>
-            </dependency>
-
-            <dependency>
-                <groupId>com.knightliao.canalx</groupId>
-                <artifactId>canalx-injector</artifactId>
-                <version>${project.version}</version>
-            </dependency>
-
-            <dependency>
-                <groupId>com.knightliao.canalx</groupId>
-                <artifactId>canalx-processor</artifactId>
-                <version>${project.version}</version>
             </dependency>
 
             <dependency>

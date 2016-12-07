@@ -11,6 +11,7 @@
     <artifactId>canalx-injector</artifactId>
     <name>canalx-injector</name>
     <packaging>jar</packaging>
+    <version>${canalx.version}</version>
 
     <dependencies>
 
@@ -24,11 +25,13 @@
         <dependency>
             <groupId>com.knightliao.canalx</groupId>
             <artifactId>canalx-core</artifactId>
+            <version>${canalx.version}</version>
         </dependency>
 
         <dependency>
             <groupId>com.knightliao.canalx</groupId>
             <artifactId>canalx-injector-kafka</artifactId>
+            <version>${canalx-injector-kafka.version}</version>
         </dependency>
 
         <dependency>

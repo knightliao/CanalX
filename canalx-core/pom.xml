@@ -11,6 +11,7 @@
     <artifactId>canalx-core</artifactId>
     <name>canalx-core</name>
     <packaging>jar</packaging>
+    <version>${canalx.version}</version>
 
     <dependencies>
 
