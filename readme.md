@@ -6,6 +6,7 @@
 - 热点数据缓存KV服务
 - 用户操作日志服务
 - 数据变更通知服务
+- 搜索服务
 
 `CanalX`是一个框架, 采用插件式开发, 可扩展性极强. 目前(以及短期)的插件有:
 
@@ -17,6 +18,7 @@
 	- `Data`->`Redis`。将变更Data数据转化成`Redis`中间件存储。(开发中, 插件 `canalx-processor-redis`)
 	- `Data`->`History`。将变更Data数据转化成`History`存储。(开发中, 插件 `canalx-processor-history`)
 	- `Data`->`Notification`。将变更Data数据转化成`Notification`存储。(开发中, 插件 `canalx-processor-notification`)
+	- `Data`->`ElasticSearch`。将变更Data数据转化成`ElasticSearch`搜索服务。(开发中, 插件 `canalx-processor-es`)
 - 数据发布功能(router):
 	- `web-rest`发布。将processor中的数据以 `web-rest` 接口的方式。(已发布, 插件 `canalx-router-rest`)
 	- `dubbo`发布。将processor中的数据以 `dubbo-rpc` 接口的方式(开发中, )
