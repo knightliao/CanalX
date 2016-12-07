@@ -7,9 +7,11 @@ import com.knightliao.canalx.core.dto.MysqlEntryWrap;
 import com.knightliao.canalx.core.exception.CanalxProcessorException;
 import com.knightliao.canalx.core.plugin.processor.ICanalxProcessor;
 import com.knightliao.canalx.core.plugin.router.ICanalxDataRouter;
+import com.knightliao.canalx.core.support.annotation.EntryFilterList;
 import com.knightliao.canalx.core.support.annotation.PluginName;
 import com.knightliao.canalx.plugin.processor.kv.data.CanalxKvInstance;
 import com.knightliao.canalx.plugin.processor.kv.support.TableTopicUtil;
+import com.knightliao.canalx.plugin.processor.kv.support.filter.EntryTimeFilter;
 import com.knightliao.canalx.plugin.processor.kv.support.transform.EntryTransformFactory;
 import com.knightliao.canalx.plugin.processor.kv.support.transform.IEntryTransform;
 import com.knightliao.canalx.plugin.processor.kv.support.transform.TransformResult;
@@ -19,6 +21,7 @@ import com.knightliao.canalx.plugin.processor.kv.support.transform.TransformResu
  * @date 2016/11/23 18:21
  */
 @PluginName(name = "canalx-processor-kv")
+@EntryFilterList(classes = {EntryTimeFilter.class})
 public class CanalxKvProcessor implements ICanalxProcessor, ICanalxDataRouter {
 
     protected static final Logger LOGGER = LoggerFactory.getLogger(CanalxKvProcessor.class);
@@ -42,7 +45,7 @@ public class CanalxKvProcessor implements ICanalxProcessor, ICanalxDataRouter {
             LOGGER.error("cannot find tableKey for tableId {} with insert op.", tableId);
         } else {
 
-            TransformResult transformResult = insertTransform.entry2Json(entry.getMysqlEntry(), tableKey);
+            TransformResult transformResult = updateTransform.entry2Json(entry.getMysqlEntry(), tableKey);
             CanalxKvInstance.put(tableId, transformResult.getKey(), transformResult.getValue());
         }
 

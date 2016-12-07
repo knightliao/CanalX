@@ -1,6 +1,8 @@
 package com.knightliao.canalx.processor.impl;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -10,19 +12,24 @@ import org.reflections.Reflections;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.knightliao.canalx.core.dto.MysqlEntry;
 import com.knightliao.canalx.core.dto.MysqlEntryWrap;
 import com.knightliao.canalx.core.exception.CanalxPluginException;
 import com.knightliao.canalx.core.exception.CanalxProcessorException;
 import com.knightliao.canalx.core.exception.CanalxProcessorInitException;
 import com.knightliao.canalx.core.plugin.IPlugin;
+import com.knightliao.canalx.core.plugin.processor.EntryFilterChainFactory;
 import com.knightliao.canalx.core.plugin.processor.ICanalxProcessor;
+import com.knightliao.canalx.core.plugin.processor.IEntryFilter;
+import com.knightliao.canalx.core.plugin.processor.IEntryFilterChain;
+import com.knightliao.canalx.core.support.annotation.EntryFilterList;
 import com.knightliao.canalx.core.support.annotation.PluginName;
 import com.knightliao.canalx.core.support.context.ICanalxContext;
 import com.knightliao.canalx.core.support.context.ICanalxContextAware;
 import com.knightliao.canalx.core.support.context.IDataSourceAware;
 import com.knightliao.canalx.core.support.reflection.ReflectionUtil;
 import com.knightliao.canalx.processor.IProcessorMgr;
+import com.knightliao.canalx.processor.impl.chain.ICanalxProcessorAware;
+import com.knightliao.canalx.processor.impl.chain.ProcessCoreFilter;
 
 /**
  * @author knightliao
@@ -33,6 +40,9 @@ public class ProcessorMgrImpl implements IProcessorMgr, IPlugin {
     protected static final Logger LOGGER = LoggerFactory.getLogger(ProcessorMgrImpl.class);
 
     private Map<String, ICanalxProcessor> innerCanalProcessors = new LinkedHashMap<String, ICanalxProcessor>(10);
+
+    // entry filter
+    private Map<String, IEntryFilterChain> innerCanalEntryFilterMap = new HashMap<>();
 
     //
     private List<ICanalxProcessor> iCanalxProcessors = new ArrayList<>(10);
@@ -58,11 +68,17 @@ public class ProcessorMgrImpl implements IProcessorMgr, IPlugin {
             LOGGER.info("loading processor: {} - {}", pluginName, canalProcessor.toString());
 
             try {
+
                 Class<ICanalxProcessor> canalProcessorClass = (Class<ICanalxProcessor>) canalProcessor;
 
-                innerCanalProcessors.put(pluginName, canalProcessorClass.newInstance());
+                ICanalxProcessor iCanalxProcessor = canalProcessorClass.newInstance();
+
+                // load filter
+                loadEntryFilterList(pluginName, canalProcessorClass, iCanalxProcessor);
+
+                innerCanalProcessors.put(pluginName, iCanalxProcessor);
             } catch (Exception e) {
-                LOGGER.error(e.toString());
+                LOGGER.error(e.toString(), e);
             }
         }
 
@@ -76,6 +92,46 @@ public class ProcessorMgrImpl implements IProcessorMgr, IPlugin {
         }
     }
 
+    /**
+     * 载入filter
+     *
+     * @param canalProcessorClass
+     */
+    private void loadEntryFilterList(String pluginName, Class<ICanalxProcessor> canalProcessorClass, ICanalxProcessor
+            iCanalxProcessor) {
+
+        // get filter list
+        EntryFilterList entryFilterList = canalProcessorClass.getAnnotation(EntryFilterList.class);
+        Class<?>[] classes = entryFilterList.classes();
+        List<Class<?>> classList = new ArrayList<>(Arrays.asList(classes));
+
+        // add core
+        classList.add(ProcessCoreFilter.class);
+
+        List<IEntryFilter> iEntryFilters = new ArrayList<>();
+
+        for (Class<?> curClass : classList) {
+
+            try {
+
+                IEntryFilter iEntryFilter = (IEntryFilter) curClass.newInstance();
+
+                // core filter
+                if (iEntryFilter instanceof ICanalxProcessorAware) {
+                    ((ICanalxProcessorAware) iEntryFilter).setupICanalxProcessor(iCanalxProcessor);
+                }
+
+                iEntryFilters.add(iEntryFilter);
+
+            } catch (Exception e) {
+                LOGGER.error(e.toString(), e);
+            }
+        }
+
+        IEntryFilterChain iEntryFilterChain = EntryFilterChainFactory.getEntryFilterChain(iEntryFilters);
+        innerCanalEntryFilterMap.put(pluginName, iEntryFilterChain);
+    }
+
     @Override
     public List<ICanalxProcessor> getProcessorPlugin() {
         return iCanalxProcessors;
@@ -87,30 +143,11 @@ public class ProcessorMgrImpl implements IProcessorMgr, IPlugin {
     @Override
     public void runProcessor(MysqlEntryWrap entry) throws CanalxProcessorException {
 
-        List<ICanalxProcessor> iCanalxProcessors = this.getProcessorPlugin();
+        for (String pluginName : innerCanalEntryFilterMap.keySet()) {
 
-        for (ICanalxProcessor icanalProcessor : iCanalxProcessors) {
-
-            MysqlEntry mysqlEntry = entry.getMysqlEntry();
-            if (mysqlEntry.getEvent() == MysqlEntry.MYSQL_INSERT) {
-
-                LOGGER.info("run processor... {}  insert", icanalProcessor.getClass());
-
-                icanalProcessor.processInsert(entry);
-
-            } else if (mysqlEntry.getEvent() == MysqlEntry.MYSQL_UPDATE) {
-
-                LOGGER.info("run processor... {}  update", icanalProcessor.getClass());
-
-                icanalProcessor.processUpdate(entry);
-
-            } else if (mysqlEntry.getEvent() == MysqlEntry.MYSQL_DELETE) {
-
-                LOGGER.info("run processor... {} delete", icanalProcessor.getClass());
-
-                icanalProcessor.processDelete(entry);
-            }
-
+            // filter
+            IEntryFilterChain iEntryFilterChain = innerCanalEntryFilterMap.get(pluginName);
+            iEntryFilterChain.doFilter(entry);
         }
     }
 
