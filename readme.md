@@ -1,5 +1,5 @@
-
-## CanalX
+CanalX [![Build Status](https://travis-ci.org/knightliao/canalx.svg?branch=master)](https://travis-ci.org/knightliao/canalx) [![Coverage Status](https://coveralls.io/repos/knightliao/canalx/badge.png?branch=master)](https://coveralls.io/r/knightliao/canalx?branch=master)
+=======
 
 docs: http://canalx.readthedocs.io/en/latest/
 
