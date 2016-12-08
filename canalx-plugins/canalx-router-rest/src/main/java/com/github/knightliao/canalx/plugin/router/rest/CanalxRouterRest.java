@@ -56,7 +56,7 @@ public class CanalxRouterRest implements ICanalxRouter, ICanalxContextAware {
             if (canalxContext != null) {
 
                 // config
-                routerRestConfig.initConfig(canalxContext);
+                routerRestConfig.init(canalxContext);
 
                 // get data source
                 this.iCanalxDataRouter = canalxContext.getProcessorAsDataSource(routerRestConfig.getDataSource());

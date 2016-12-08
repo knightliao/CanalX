@@ -1,8 +1,11 @@
 package com.github.knightliao.canalx.plugin.router.rest.support.config;
 
+import java.util.Properties;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.github.knightliao.canalx.core.support.config.IConfig;
 import com.github.knightliao.canalx.core.support.context.ICanalxContext;
 
 import lombok.Data;
@@ -12,7 +15,7 @@ import lombok.Data;
  * @date 2016/12/2 18:53
  */
 @Data
-public class RouterRestConfig {
+public class RouterRestConfig implements IConfig {
 
     protected static final Logger LOGGER = LoggerFactory.getLogger(RouterRestConfig.class);
 
@@ -20,8 +23,8 @@ public class RouterRestConfig {
 
     private String dataSource = "";
 
-    public void initConfig(ICanalxContext iCanalxContext) throws Exception {
-
+    @Override
+    public void init(ICanalxContext iCanalxContext) throws Exception {
         // port
         String port = iCanalxContext.getProperty("canalx.plugin.router.port");
 
@@ -32,5 +35,10 @@ public class RouterRestConfig {
         this.dataSource = dataSource;
 
         LOGGER.debug("router config: port:{}, dataSource:{}", port, dataSource);
+    }
+
+    @Override
+    public void init(Properties properties) throws Exception {
+
     }
 }
