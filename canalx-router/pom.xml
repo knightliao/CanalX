@@ -3,7 +3,7 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <parent>
-        <groupId>com.knightliao.canalx</groupId>
+        <groupId>com.github.knightliao.canalx</groupId>
         <artifactId>canalx</artifactId>
         <version>0.0.1-SNAPSHOT</version>
     </parent>
@@ -16,14 +16,14 @@
     <dependencies>
 
         <dependency>
-            <groupId>com.knightliao.canalx.bom</groupId>
+            <groupId>com.github.knightliao.canalx.bom</groupId>
             <artifactId>logback-bom</artifactId>
             <optional>true</optional>
             <type>pom</type>
         </dependency>
 
         <dependency>
-            <groupId>com.knightliao.canalx</groupId>
+            <groupId>com.github.knightliao.canalx</groupId>
             <artifactId>canalx-core</artifactId>
             <version>${canalx.version}</version>
         </dependency>
@@ -44,7 +44,7 @@
         </dependency>
 
         <dependency>
-            <groupId>com.knightliao.canalx</groupId>
+            <groupId>com.github.knightliao.canalx</groupId>
             <artifactId>canalx-router-rest</artifactId>
             <version>${canalx-router-rest.version}</version>
         </dependency>

@@ -30,7 +30,7 @@
         <level value="ERROR"/>
     </logger>
 
-    <logger name="com.knightliao.canalx">
+    <logger name="com.github.knightliao.canalx">
         <level value="DEBUG"/>
     </logger>
 
