@@ -32,7 +32,7 @@ public class ReflectionUtil {
         //
         // filter
         //
-        FilterBuilder filterBuilder = new FilterBuilder().includePackage("com.knightliao.canalx.core.plugin");
+        FilterBuilder filterBuilder = new FilterBuilder().includePackage("com.github.knightliao.canalx.core.plugin");
 
         for (String packName : packNameList) {
             filterBuilder = filterBuilder.includePackage(packName);

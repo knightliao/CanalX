@@ -37,27 +37,28 @@ public class InjectorKafkaConfig implements IConfig {
     @Override
     public void init(ICanalxContext iCanalxContext) throws Exception {
 
+        //
+        String currentTopics = iCanalxContext.getProperty("canalx.plugin.injector.topics");
+        this.topics = currentTopics.split(",");
+
+        topicList = Arrays.asList(topics);
+
+        LOGGER.debug("injector config: topics:{}", topicList);
     }
 
     @Override
-    public void init(Properties properties) throws Exception {
+    public void init() throws Exception {
 
-        // load config
-        Properties kafkaProps = loadConfigAndInit();
-
-        //
-        String kafkaTopicStr = kafkaProps.getProperty("topics");
-        this.topics = kafkaTopicStr.split(",");
-
-        topicList = Arrays.asList(topics);
+        loadConfigAndInit();
     }
 
-    private Properties loadConfigAndInit() throws Exception {
+    private void loadConfigAndInit() throws Exception {
 
         Properties kafkaProps = new Properties();
         URL url = InjectorKafkaConfig.class.getClassLoader().getResource(CONFIG_FILE_NAME);
         if (url != null) {
-            LOGGER.info("loading config file {}", url.toString());
+
+            LOGGER.info("loading injector kafka config file {}", url.toString());
 
             kafkaProps.load(new InputStreamReader(new FileInputStream(url.getPath()),
                     "utf-8"));
@@ -72,6 +73,5 @@ public class InjectorKafkaConfig implements IConfig {
             LOGGER.warn("cannot find config file {}", CONFIG_FILE_NAME);
         }
 
-        return kafkaProps;
     }
 }

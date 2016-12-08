@@ -1,7 +1,5 @@
 package com.github.knightliao.canalx.plugin.router.rest.support.config;
 
-import java.util.Properties;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -38,7 +36,7 @@ public class RouterRestConfig implements IConfig {
     }
 
     @Override
-    public void init(Properties properties) throws Exception {
+    public void init() throws Exception {
 
     }
 }

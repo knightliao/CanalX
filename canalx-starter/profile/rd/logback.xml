@@ -34,6 +34,10 @@
         <level value="DEBUG"/>
     </logger>
 
+    <logger name="org.reflections.Reflections">
+        <level value="WARN"/>
+    </logger>
+
     <root level="INFO">
         <appender-ref ref="stdout"/>
         <appender-ref ref="logfile"/>

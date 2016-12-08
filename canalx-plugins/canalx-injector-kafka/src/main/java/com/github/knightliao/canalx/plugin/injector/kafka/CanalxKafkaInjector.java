@@ -43,7 +43,7 @@ public class CanalxKafkaInjector implements ICanalxInjector, IInjectorEntryProce
     private ExecutorService executor = null;
 
     //
-    private ICanalxContext iCanalxContext;
+    private ICanalxContext iCanalxContext = null;
 
     @Override
     public void init() throws CanalxInjectorInitException {
