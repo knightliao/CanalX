@@ -25,3 +25,11 @@ docs: http://canalx.readthedocs.io/en/latest/
 	- `web-rest`发布。将processor中的数据以 `web-rest` 接口的方式。(已发布, 插件 `canalx-router-rest`)
 	- `dubbo`发布。将processor中的数据以 `dubbo-rpc` 接口的方式(开发中, 插件 `canalx-router-dubbo`)
 	- `kepler`发布。将processor中的数据以 `kepler-rpc` 接口的方式(开发中, 插件 `canalx-router-kepler`)
+
+## 推荐
+
+- 有态度无广告的搜索引擎: https://www.sov5.com
+- 微读 - 高品质阅读: http://www.100weidu.com
+- Python中国社区: http://www.python88.com
+- Disconf - 分布式配置管理平台: http://github.com/knightliao/disconf
+- CanalX - 基于 `Canal` 的数据感知服务框架: http://github.com/knightliao/canalX
