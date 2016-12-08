@@ -66,7 +66,7 @@ public class CanalxKvInstance {
 
             String tableKey = iDbFetchController.getTableKey(tableId);
             tableKeyMap.put(tableId, tableKey);
-            LOGGER.info("tableId: {} , Tablekey {} loads ok", tableId, tableKey);
+            LOGGER.info("tableId: {} , TableKey {} loads ok", tableId, tableKey);
         }
     }
 
