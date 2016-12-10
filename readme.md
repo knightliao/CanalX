@@ -1,4 +1,4 @@
-CanalX [![Build Status](https://travis-ci.org/knightliao/CanalX.svg?branch=master)](https://travis-ci.org/knightliao/CanalX) [![Coverage Status](https://coveralls.io/repos/knightliao/CanalX/badge.png?branch=master)](https://coveralls.io/r/knightliao/CanalX?branch=master)
+CanalX [![Build Status](https://travis-ci.org/knightliao/CanalX.svg?branch=master)](https://travis-ci.org/knightliao/CanalX) [![Coverage Status](https://coveralls.io/repos/github/knightliao/CanalX/badge.svg?branch=master)](https://coveralls.io/github/knightliao/CanalX?branch=master)
 =======
 
 docs: http://canalx.readthedocs.io/en/latest/
