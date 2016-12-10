@@ -67,12 +67,6 @@
             <version>0.9.9-RC1</version>
         </dependency>
 
-        <dependency>
-            <groupId>com.github.knightliao.test</groupId>
-            <artifactId>jutf</artifactId>
-            <scope>test</scope>
-        </dependency>
-
     </dependencies>
 
     <build>

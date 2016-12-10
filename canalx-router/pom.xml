@@ -49,17 +49,6 @@
             <version>${canalx-router-rest.version}</version>
         </dependency>
 
-        <dependency>
-            <groupId>org.slf4j</groupId>
-            <artifactId>slf4j-api</artifactId>
-        </dependency>
-
-        <dependency>
-            <groupId>com.github.knightliao.test</groupId>
-            <artifactId>jutf</artifactId>
-            <scope>test</scope>
-        </dependency>
-
     </dependencies>
 
     <build>
