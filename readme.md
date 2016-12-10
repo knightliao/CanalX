@@ -6,8 +6,9 @@ CanalX
 [![Coverage Status](https://coveralls.io/repos/github/knightliao/CanalX/badge.svg?branch=master)](https://coveralls.io/github/knightliao/CanalX?branch=master)
 [![Maven Central](https://maven-badges.herokuapp.com/maven-central/com.github.knightliao.canalx/canalx/badge.svg?style=plastic)](https://maven-badges.herokuapp.com/maven-central/com.github.knightliao.canalx/canalx)
 
-
 docs: http://canalx.readthedocs.io/en/latest/
+
+待发布状态, 敬请期待
 
 基于 `Canal` 的数据感知服务框架. 可用于围绕数据库`Mysql`进行数据相关的各式业务开发, 并建立各式各样的服务平台。例如:
 
