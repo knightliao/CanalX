@@ -15,7 +15,7 @@
         <canalx.version>0.0.1-SNAPSHOT</canalx.version>
         <bom.version>0.0.1-SNAPSHOT</bom.version>
         <canalx-plugins.version>0.0.1-SNAPSHOT</canalx-plugins.version>
-        <canalx-select-db-json.version>0.0.1-SNAPSHOT</canalx-select-db-json.version>
+        <canalx-select-db-json.version>0.0.1</canalx-select-db-json.version>
         <canalx-injector-kafka.version>0.0.1-SNAPSHOT</canalx-injector-kafka.version>
         <canalx-processor-kv.version>0.0.1-SNAPSHOT</canalx-processor-kv.version>
         <canalx-router-rest.version>0.0.1-SNAPSHOT</canalx-router-rest.version>
@@ -154,7 +154,7 @@
                 <groupId>com.github.knightliao.test</groupId>
                 <artifactId>jutf</artifactId>
                 <scope>test</scope>
-                <version>1.0.2-SNAPSHOT</version>
+                <version>1.0.2</version>
             </dependency>
 
             <!-- logger -->
@@ -328,6 +328,15 @@
 
         </plugins>
     </build>
+
+    <licenses>
+        <license>
+            <name>Apache 2</name>
+            <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+            <distribution>repo</distribution>
+            <comments>A business-friendly OSS license</comments>
+        </license>
+    </licenses>
 
     <developers>
         <developer>

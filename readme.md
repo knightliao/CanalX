@@ -1,5 +1,11 @@
-CanalX [![Build Status](https://travis-ci.org/knightliao/CanalX.svg?branch=master)](https://travis-ci.org/knightliao/CanalX) [![Coverage Status](https://coveralls.io/repos/github/knightliao/CanalX/badge.svg?branch=master)](https://coveralls.io/github/knightliao/CanalX?branch=master)
+CanalX 
 =======
+
+[![Apache License 2](https://img.shields.io/badge/license-ASF2-blue.svg)](https://www.apache.org/licenses/LICENSE-2.0.txt)
+[![Build Status](https://travis-ci.org/knightliao/CanalX.svg?branch=master)](https://travis-ci.org/knightliao/CanalX) 
+[![Coverage Status](https://coveralls.io/repos/github/knightliao/CanalX/badge.svg?branch=master)](https://coveralls.io/github/knightliao/CanalX?branch=master)
+[![Maven Central](https://maven-badges.herokuapp.com/maven-central/com.github.knightliao.canalx/canalx/badge.svg?style=plastic)](https://maven-badges.herokuapp.com/maven-central/com.github.knightliao.canalx/canalx)
+
 
 docs: http://canalx.readthedocs.io/en/latest/
 
