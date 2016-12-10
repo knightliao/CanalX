@@ -33,3 +33,5 @@ docs: http://canalx.readthedocs.io/en/latest/
 - Python中国社区: http://www.python88.com
 - Disconf - 分布式配置管理平台: http://github.com/knightliao/disconf
 - CanalX - 基于 `Canal` 的数据感知服务框架: http://github.com/knightliao/canalX
+- jutf - Java Unit Test Framework: https://github.com/knightliao/jutf
+
