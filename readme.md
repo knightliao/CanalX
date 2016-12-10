@@ -32,6 +32,10 @@ docs: http://canalx.readthedocs.io/en/latest/
 	- `dubbo`发布。将processor中的数据以 `dubbo-rpc` 接口的方式(开发中, 插件 `canalx-router-dubbo`)
 	- `kepler`发布。将processor中的数据以 `kepler-rpc` 接口的方式(开发中, 插件 `canalx-router-kepler`)
 
+### main dependency
+
+- canalx-select-db-json - Fetch MYSQL's data to K-V style data.  http://github.com/knightliao/canalx-select-db-json
+
 ## 推荐
 
 - 有态度无广告的搜索引擎: https://www.sov5.com
