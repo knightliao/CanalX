@@ -3,11 +3,11 @@ package com.github.knightliao.canalx.plugin.injector.kafka.support;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.google.gson.Gson;
 import com.github.knightliao.canalx.core.dto.MysqlEntry;
 import com.github.knightliao.canalx.core.dto.MysqlEntryWrap;
-import com.github.knightliao.canalx.core.plugin.injector.template.InjectorEntryProcessTemplate;
+import com.github.knightliao.canalx.core.plugin.injector.template.InjectorEventProcessTemplate;
 import com.github.knightliao.canalx.plugin.injector.kafka.CanalxKafkaInjector;
+import com.google.gson.Gson;
 
 import kafka.consumer.ConsumerIterator;
 import kafka.message.MessageAndMetadata;
@@ -26,13 +26,13 @@ public class InjectorSupport implements Runnable {
 
     private String topic;
 
-    private InjectorEntryProcessTemplate injectorEntryProcessTemplate;
+    private InjectorEventProcessTemplate injectorEventProcessTemplate;
 
     public InjectorSupport(ConsumerIterator<byte[], byte[]> it, String topic,
-                           InjectorEntryProcessTemplate injectorEntryProcessTemplate) {
+                           InjectorEventProcessTemplate injectorEventProcessTemplate) {
         this.it = it;
         this.topic = topic;
-        this.injectorEntryProcessTemplate = injectorEntryProcessTemplate;
+        this.injectorEventProcessTemplate = injectorEventProcessTemplate;
     }
 
     @Override
@@ -68,8 +68,8 @@ public class InjectorSupport implements Runnable {
 
                 String originTableName = entry.getTable();
 
-                if (injectorEntryProcessTemplate != null) {
-                    injectorEntryProcessTemplate.processEntry(mysqlEntryWrap);
+                if (injectorEventProcessTemplate != null) {
+                    injectorEventProcessTemplate.processEntry(mysqlEntryWrap);
                 }
 
                 LOGGER.info(

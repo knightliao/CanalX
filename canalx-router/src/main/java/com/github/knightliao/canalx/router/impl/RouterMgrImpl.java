@@ -77,6 +77,18 @@ public class RouterMgrImpl implements IRouterMgr, IPlugin {
     }
 
     @Override
+    public void shutdown() {
+
+        if (firstCanalxRouter != null) {
+            try {
+                firstCanalxRouter.shutdown();
+            } catch (CanalxRouterException e) {
+                LOGGER.warn(e.toString());
+            }
+        }
+    }
+
+    @Override
     public void setCanalxContext(ICanalxContext iCanalxContext) {
         this.iCanalxContext = iCanalxContext;
     }

@@ -30,5 +30,7 @@ public interface IProcessorMgr extends ICanalxContextAware {
      *
      */
     void init() throws CanalxProcessorInitException;
+
+    void shutdown();
 }
 

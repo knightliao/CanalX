@@ -6,15 +6,17 @@ import org.slf4j.LoggerFactory;
 import com.github.knightliao.canalx.core.dto.MysqlEntryWrap;
 import com.github.knightliao.canalx.core.exception.CanalxProcessorException;
 import com.github.knightliao.canalx.core.plugin.processor.ICanalxProcessor;
+import com.github.knightliao.canalx.core.plugin.processor.support.TableTopicUtil;
+import com.github.knightliao.canalx.core.plugin.processor.support.filter.EntryTimeFilter;
+import com.github.knightliao.canalx.core.plugin.processor.support.transform.EntryTransformFactory;
+import com.github.knightliao.canalx.core.plugin.processor.support.transform.IEntryTransform;
+import com.github.knightliao.canalx.core.plugin.processor.support.transform.TransformResult;
 import com.github.knightliao.canalx.core.plugin.router.ICanalxDataRouter;
 import com.github.knightliao.canalx.core.support.annotation.EntryFilterList;
 import com.github.knightliao.canalx.core.support.annotation.PluginName;
+import com.github.knightliao.canalx.core.support.context.ICanalxContext;
+import com.github.knightliao.canalx.core.support.context.ICanalxContextAware;
 import com.github.knightliao.canalx.plugin.processor.kv.data.CanalxKvInstance;
-import com.github.knightliao.canalx.plugin.processor.kv.support.filter.EntryTimeFilter;
-import com.github.knightliao.canalx.plugin.processor.kv.support.transform.EntryTransformFactory;
-import com.github.knightliao.canalx.plugin.processor.kv.support.transform.IEntryTransform;
-import com.github.knightliao.canalx.plugin.processor.kv.support.transform.TransformResult;
-import com.github.knightliao.canalx.plugin.processor.kv.support.TableTopicUtil;
 
 /**
  * @author knightliao
@@ -22,11 +24,12 @@ import com.github.knightliao.canalx.plugin.processor.kv.support.TableTopicUtil;
  */
 @PluginName(name = "canalx-processor-kv")
 @EntryFilterList(classes = {EntryTimeFilter.class})
-public class CanalxKvProcessor implements ICanalxProcessor, ICanalxDataRouter {
+public class CanalxKvProcessor implements ICanalxProcessor, ICanalxDataRouter, ICanalxContextAware {
 
     protected static final Logger LOGGER = LoggerFactory.getLogger(CanalxKvProcessor.class);
 
-    private String fileName = "canalx-db-kv.xml";
+    //
+    private ICanalxContext iCanalxContext = null;
 
     // transform
     private IEntryTransform insertTransform = EntryTransformFactory.getInsertTransform();
@@ -84,7 +87,14 @@ public class CanalxKvProcessor implements ICanalxProcessor, ICanalxDataRouter {
     public void init() {
 
         LOGGER.info("start to init {}", CanalxKvProcessor.class.toString());
-        CanalxKvInstance.init(fileName);
+        CanalxKvInstance.init(iCanalxContext);
+    }
+
+    @Override
+    public void shutdown() {
+
+        CanalxKvInstance.shutdown();
+        LOGGER.info(CanalxKvProcessor.class.toString() + " stops gracefully");
     }
 
     /**
@@ -97,5 +107,10 @@ public class CanalxKvProcessor implements ICanalxProcessor, ICanalxDataRouter {
     public String get(String tableId, String key) {
 
         return CanalxKvInstance.get(tableId, key);
+    }
+
+    @Override
+    public void setCanalxContext(ICanalxContext iCanalxContext) {
+        this.iCanalxContext = iCanalxContext;
     }
 }

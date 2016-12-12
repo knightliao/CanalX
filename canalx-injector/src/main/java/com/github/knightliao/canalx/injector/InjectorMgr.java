@@ -5,7 +5,7 @@ import java.util.List;
 import com.github.knightliao.canalx.core.exception.CanalxInjectorException;
 import com.github.knightliao.canalx.core.exception.CanalxInjectorInitException;
 import com.github.knightliao.canalx.core.plugin.injector.ICanalxInjector;
-import com.github.knightliao.canalx.core.plugin.injector.template.IInjectEntryProcessCallback;
+import com.github.knightliao.canalx.core.plugin.injector.template.IInjectEventProcessCallback;
 import com.github.knightliao.canalx.core.support.context.ICanalxContextAware;
 
 /**
@@ -27,6 +27,13 @@ public interface InjectorMgr extends ICanalxContextAware {
     /**
      *
      */
-    void init(IInjectEntryProcessCallback injectEntryProcessCallback) throws
-            CanalxInjectorInitException;
+    void init() throws CanalxInjectorInitException;
+
+    /**
+     * @param injectEntryProcessCallback
+     */
+    void setupEventProcessCallback(IInjectEventProcessCallback injectEntryProcessCallback);
+
+    void shutdown();
+
 }

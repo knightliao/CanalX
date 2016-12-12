@@ -1,4 +1,4 @@
-package com.github.knightliao.canalx.plugin.processor.kv.support.transform;
+package com.github.knightliao.canalx.core.plugin.processor.support.transform;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

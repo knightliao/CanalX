@@ -26,4 +26,6 @@ public interface IRouterMgr extends ICanalxContextAware {
      *
      */
     void init() throws CanalxRouterException;
+
+    void shutdown();
 }

@@ -17,10 +17,10 @@ import com.github.knightliao.canalx.core.exception.CanalxPluginException;
 import com.github.knightliao.canalx.core.exception.CanalxProcessorException;
 import com.github.knightliao.canalx.core.exception.CanalxProcessorInitException;
 import com.github.knightliao.canalx.core.plugin.IPlugin;
-import com.github.knightliao.canalx.core.plugin.processor.EntryFilterChainFactory;
 import com.github.knightliao.canalx.core.plugin.processor.ICanalxProcessor;
-import com.github.knightliao.canalx.core.plugin.processor.IEntryFilter;
-import com.github.knightliao.canalx.core.plugin.processor.IEntryFilterChain;
+import com.github.knightliao.canalx.core.plugin.processor.support.EntryFilterChainFactory;
+import com.github.knightliao.canalx.core.plugin.processor.support.IEntryFilter;
+import com.github.knightliao.canalx.core.plugin.processor.support.IEntryFilterChain;
 import com.github.knightliao.canalx.core.support.annotation.EntryFilterList;
 import com.github.knightliao.canalx.core.support.annotation.PluginName;
 import com.github.knightliao.canalx.core.support.context.ICanalxContext;
@@ -161,6 +161,15 @@ public class ProcessorMgrImpl implements IProcessorMgr, IPlugin {
             }
 
             iCanalxProcessor.init();
+        }
+    }
+
+    @Override
+    public void shutdown() {
+
+        for (ICanalxProcessor iCanalxProcessor : iCanalxProcessors) {
+
+            iCanalxProcessor.shutdown();
         }
     }
 

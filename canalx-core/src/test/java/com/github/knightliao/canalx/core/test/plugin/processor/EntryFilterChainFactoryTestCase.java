@@ -9,9 +9,9 @@ import org.junit.Test;
 import com.github.knightliao.canalx.core.dto.MysqlEntry;
 import com.github.knightliao.canalx.core.dto.MysqlEntryWrap;
 import com.github.knightliao.canalx.core.exception.CanalxProcessorException;
-import com.github.knightliao.canalx.core.plugin.processor.EntryFilterChainFactory;
-import com.github.knightliao.canalx.core.plugin.processor.IEntryFilter;
-import com.github.knightliao.canalx.core.plugin.processor.IEntryFilterChain;
+import com.github.knightliao.canalx.core.plugin.processor.support.EntryFilterChainFactory;
+import com.github.knightliao.canalx.core.plugin.processor.support.IEntryFilter;
+import com.github.knightliao.canalx.core.plugin.processor.support.IEntryFilterChain;
 
 /**
  * @author knightliao

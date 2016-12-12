@@ -15,8 +15,8 @@ import com.github.knightliao.canalx.core.exception.CanalxInjectorInitException;
 import com.github.knightliao.canalx.core.plugin.IPlugin;
 import com.github.knightliao.canalx.core.plugin.injector.ICanalxInjector;
 import com.github.knightliao.canalx.core.plugin.injector.IInjectorEntryProcessorAware;
-import com.github.knightliao.canalx.core.plugin.injector.template.IInjectEntryProcessCallback;
-import com.github.knightliao.canalx.core.plugin.injector.template.InjectorEntryProcessTemplate;
+import com.github.knightliao.canalx.core.plugin.injector.template.IInjectEventProcessCallback;
+import com.github.knightliao.canalx.core.plugin.injector.template.InjectorEventProcessTemplate;
 import com.github.knightliao.canalx.core.support.annotation.PluginName;
 import com.github.knightliao.canalx.core.support.context.ICanalxContext;
 import com.github.knightliao.canalx.core.support.context.ICanalxContextAware;
@@ -114,14 +114,9 @@ public class InjectorMgrImpl implements InjectorMgr, IPlugin {
     }
 
     @Override
-    public void init(IInjectEntryProcessCallback injectEntryProcessCallback) throws CanalxInjectorInitException {
+    public void init() throws CanalxInjectorInitException {
 
         if (firstInjector != null) {
-
-            if (firstInjector instanceof IInjectorEntryProcessorAware) {
-                ((IInjectorEntryProcessorAware) firstInjector).setupProcessEntry(new InjectorEntryProcessTemplate
-                        (injectEntryProcessCallback));
-            }
 
             if (firstInjector instanceof ICanalxContextAware) {
                 ((ICanalxContextAware) firstInjector).setCanalxContext(iCanalxContext);
@@ -130,7 +125,31 @@ public class InjectorMgrImpl implements InjectorMgr, IPlugin {
             // init
             firstInjector.init();
         }
+    }
 
+    @Override
+    public void setupEventProcessCallback(IInjectEventProcessCallback injectEntryProcessCallback) {
+
+        if (firstInjector != null) {
+
+            if (firstInjector instanceof IInjectorEntryProcessorAware) {
+                ((IInjectorEntryProcessorAware) firstInjector).setupProcessEntry(new InjectorEventProcessTemplate
+                        (injectEntryProcessCallback));
+            }
+
+        }
+    }
+
+    @Override
+    public void shutdown() {
+
+        if (firstInjector != null) {
+            try {
+                firstInjector.shutdown();
+            } catch (CanalxInjectorException e) {
+                LOGGER.warn(e.toString());
+            }
+        }
     }
 
     @Override

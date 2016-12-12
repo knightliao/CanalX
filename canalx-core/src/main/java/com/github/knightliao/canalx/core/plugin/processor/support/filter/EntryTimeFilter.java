@@ -1,4 +1,4 @@
-package com.github.knightliao.canalx.plugin.processor.kv.support.filter;
+package com.github.knightliao.canalx.core.plugin.processor.support.filter;
 
 import java.sql.Timestamp;
 
@@ -7,8 +7,8 @@ import org.slf4j.LoggerFactory;
 
 import com.github.knightliao.canalx.core.dto.MysqlEntryWrap;
 import com.github.knightliao.canalx.core.exception.CanalxProcessorException;
-import com.github.knightliao.canalx.core.plugin.processor.IEntryFilter;
-import com.github.knightliao.canalx.core.plugin.processor.IEntryFilterChain;
+import com.github.knightliao.canalx.core.plugin.processor.support.IEntryFilter;
+import com.github.knightliao.canalx.core.plugin.processor.support.IEntryFilterChain;
 
 /**
  * @author knightliao

@@ -3,3 +3,4 @@
 /.project
 /target/
 /.classpath
+src/test/java/com/github/knightliao/canalx/plugin/processor/kv/test/jodis/

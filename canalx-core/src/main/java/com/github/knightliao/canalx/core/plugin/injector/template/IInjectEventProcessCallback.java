@@ -4,13 +4,12 @@ import com.github.knightliao.canalx.core.dto.MysqlEntryWrap;
 import com.github.knightliao.canalx.core.exception.CanalxInjectorException;
 
 /**
- * entry process template
- *
  * @author knightliao
- * @date 2016/11/24 11:58
+ * @date 2016/11/24 12:01
  */
-public interface IInjectEntryProcessOperator {
+public interface IInjectEventProcessCallback {
 
-    void processEntry(MysqlEntryWrap mysqlEntry) throws
-            CanalxInjectorException;
+    void processMysqlEntry(MysqlEntryWrap mysqlEntry) throws CanalxInjectorException;
+
+    void shutdown();
 }

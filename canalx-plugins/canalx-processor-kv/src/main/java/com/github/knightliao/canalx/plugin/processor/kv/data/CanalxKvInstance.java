@@ -1,16 +1,16 @@
 package com.github.knightliao.canalx.plugin.processor.kv.data;
 
-import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.github.knightliao.canalx.db.DbFetchControllerFactory;
-import com.github.knightliao.canalx.db.IDbFetchController;
-import com.github.knightliao.canalx.db.exception.CanalxSelectDbJsonInitException;
-import com.github.knightliao.canalx.plugin.processor.kv.data.impl.CanalxKvDefaultImpl;
+import com.github.knightliao.canalx.core.exception.CanalxProcessorException;
+import com.github.knightliao.canalx.core.support.context.ICanalxContext;
+import com.github.knightliao.canalx.plugin.processor.kv.data.store.ICanalxKv;
+import com.github.knightliao.canalx.plugin.processor.kv.data.support.CanalxKvConfig;
+import com.github.knightliao.canalx.plugin.processor.kv.data.support.DbStoreLoaderUtils;
 
 /**
  * 单实例
@@ -22,51 +22,35 @@ public class CanalxKvInstance {
 
     protected static final Logger LOGGER = LoggerFactory.getLogger(CanalxKvInstance.class);
 
-    private static ICanalxKv iCanalxKv = new CanalxKvDefaultImpl();
+    // kv impl
+    private static ICanalxKv iCanalxKv = null;
 
-    // id fetcher
-    private static IDbFetchController iDbFetchController = DbFetchControllerFactory.getDefaultDbController();
+    // config
+    private static CanalxKvConfig canalxKvConfig = new CanalxKvConfig();
 
     // 记录 tableid -> table key
     private static Map<String, String> tableKeyMap = new HashMap<>();
 
     private static volatile boolean isInit = false;
 
-    public static void init(String configFilePath) {
+    public static void init(ICanalxContext iCanalxContext) {
 
         try {
 
-            loadConfigAndInit(configFilePath);
+            // init config
+            canalxKvConfig.init(iCanalxContext);
+
+            // new canalx instance
+            iCanalxKv = CanalxKvFactory.getStoreInstance(canalxKvConfig.getStoreType(), iCanalxContext);
+
+            // load db data
+            DbStoreLoaderUtils.load(canalxKvConfig, iCanalxKv, tableKeyMap);
 
             isInit = true;
 
         } catch (Exception e) {
 
             LOGGER.error(e.toString());
-        }
-    }
-
-    /**
-     * @throws IOException
-     */
-    private static void loadConfigAndInit(String configFilePath)
-            throws IOException, ClassNotFoundException, CanalxSelectDbJsonInitException {
-
-        iDbFetchController.init(configFilePath);
-        Map<String, Map<String, String>> dataInitMap = iDbFetchController.getInitDbKv();
-
-        for (String tableId : dataInitMap.keySet()) {
-
-            Map<String, String> tableKvMap = dataInitMap.get(tableId);
-
-            for (String key : tableKvMap.keySet()) {
-
-                iCanalxKv.put(tableId, key, tableKvMap.get(key));
-            }
-
-            String tableKey = iDbFetchController.getTableKey(tableId);
-            tableKeyMap.put(tableId, tableKey);
-            LOGGER.info("tableId: {} , TableKey {} loads ok", tableId, tableKey);
         }
     }
 
@@ -79,7 +63,15 @@ public class CanalxKvInstance {
 
         if (isInit) {
 
-            return iCanalxKv.get(tableId, key);
+            try {
+
+                return iCanalxKv.get(tableId, key);
+
+            } catch (CanalxProcessorException e) {
+
+                LOGGER.error(e.toString());
+                return null;
+            }
         } else {
 
             return null;
@@ -95,9 +87,16 @@ public class CanalxKvInstance {
 
         if (isInit) {
 
-            iCanalxKv.put(tableId, key, value);
+            try {
 
-            return true;
+                iCanalxKv.put(tableId, key, value);
+                return true;
+
+            } catch (CanalxProcessorException e) {
+
+                LOGGER.error("cannot put {} {} {} ", tableId, key, value, e.toString());
+                return false;
+            }
 
         } else {
 
@@ -112,5 +111,10 @@ public class CanalxKvInstance {
 
             return "";
         }
+    }
+
+    public static void shutdown() {
+
+        iCanalxKv.shutdown();
     }
 }

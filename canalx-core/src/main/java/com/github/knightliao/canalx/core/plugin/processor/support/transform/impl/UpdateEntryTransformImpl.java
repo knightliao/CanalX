@@ -1,4 +1,4 @@
-package com.github.knightliao.canalx.plugin.processor.kv.support.transform.impl;
+package com.github.knightliao.canalx.core.plugin.processor.support.transform.impl;
 
 import java.util.HashMap;
 import java.util.List;
@@ -7,19 +7,19 @@ import java.util.Map;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.google.gson.Gson;
 import com.github.knightliao.canalx.core.dto.MysqlColumn;
 import com.github.knightliao.canalx.core.dto.MysqlEntry;
-import com.github.knightliao.canalx.plugin.processor.kv.support.transform.IEntryTransform;
-import com.github.knightliao.canalx.plugin.processor.kv.support.transform.TransformResult;
+import com.github.knightliao.canalx.core.plugin.processor.support.transform.IEntryTransform;
+import com.github.knightliao.canalx.core.plugin.processor.support.transform.TransformResult;
+import com.google.gson.Gson;
 
 /**
  * @author knightliao
  * @date 2016/12/7 16:33
  */
-public class InsertEntryTransformImpl implements IEntryTransform {
+public class UpdateEntryTransformImpl implements IEntryTransform {
 
-    protected static final Logger LOGGER = LoggerFactory.getLogger(InsertEntryTransformImpl.class);
+    protected static final Logger LOGGER = LoggerFactory.getLogger(UpdateEntryTransformImpl.class);
 
     protected static Gson gson = new Gson();
 

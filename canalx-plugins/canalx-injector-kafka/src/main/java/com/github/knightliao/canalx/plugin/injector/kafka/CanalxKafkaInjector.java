@@ -14,7 +14,7 @@ import com.github.knightliao.canalx.core.exception.CanalxInjectorException;
 import com.github.knightliao.canalx.core.exception.CanalxInjectorInitException;
 import com.github.knightliao.canalx.core.plugin.injector.ICanalxInjector;
 import com.github.knightliao.canalx.core.plugin.injector.IInjectorEntryProcessorAware;
-import com.github.knightliao.canalx.core.plugin.injector.template.InjectorEntryProcessTemplate;
+import com.github.knightliao.canalx.core.plugin.injector.template.InjectorEventProcessTemplate;
 import com.github.knightliao.canalx.core.support.annotation.PluginName;
 import com.github.knightliao.canalx.core.support.context.ICanalxContext;
 import com.github.knightliao.canalx.core.support.context.ICanalxContextAware;
@@ -37,7 +37,7 @@ public class CanalxKafkaInjector implements ICanalxInjector, IInjectorEntryProce
     private InjectorKafkaConfig injectorKafkaConfig = new InjectorKafkaConfig();
 
     // process entry template
-    private InjectorEntryProcessTemplate injectorEntryProcessTemplate;
+    private InjectorEventProcessTemplate injectorEventProcessTemplate;
 
     // thread executors
     private ExecutorService executor = null;
@@ -81,7 +81,7 @@ public class CanalxKafkaInjector implements ICanalxInjector, IInjectorEntryProce
 
                 ConsumerIterator<byte[], byte[]> it = newOrderStreams.get(0).iterator();
 
-                executor.submit(new InjectorSupport(it, topicStr, injectorEntryProcessTemplate));
+                executor.submit(new InjectorSupport(it, topicStr, injectorEventProcessTemplate));
             }
         }
     }
@@ -98,14 +98,22 @@ public class CanalxKafkaInjector implements ICanalxInjector, IInjectorEntryProce
                             injectorKafkaConfig.getTopicList());
                 }
             } catch (InterruptedException e) {
-                LOGGER.error("Interrupted during shutdown, exiting uncleanly");
+                LOGGER.warn("Interrupted during shutdown, exiting uncleanly");
+            }
+
+            // shut down callback
+            if (injectorEventProcessTemplate != null) {
+
+                injectorEventProcessTemplate.shutdown();
             }
         }
+
+        LOGGER.info(CanalxKafkaInjector.class.toString() + " stops gracefully");
     }
 
     @Override
-    public void setupProcessEntry(InjectorEntryProcessTemplate injectorEntryProcessTemplate) {
-        this.injectorEntryProcessTemplate = injectorEntryProcessTemplate;
+    public void setupProcessEntry(InjectorEventProcessTemplate injectorEventProcessTemplate) {
+        this.injectorEventProcessTemplate = injectorEventProcessTemplate;
     }
 
     @Override

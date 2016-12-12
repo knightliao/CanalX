@@ -1,4 +1,4 @@
-package com.github.knightliao.canalx.plugin.processor.kv.support;
+package com.github.knightliao.canalx.core.plugin.processor.support;
 
 import com.github.knightliao.canalx.core.dto.MysqlEntry;
 import com.github.knightliao.canalx.core.dto.MysqlEntryWrap;

@@ -13,8 +13,9 @@
     <packaging>pom</packaging>
     <version>0.0.1-SNAPSHOT</version>
     <modules>
-        <module>canalx-processor-kv</module>
         <module>canalx-injector-kafka</module>
+        <module>canalx-processor-kv</module>
+        <module>canalx-processor-codis</module>
         <module>canalx-router-rest</module>
     </modules>
 

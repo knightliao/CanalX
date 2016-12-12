@@ -76,6 +76,7 @@ public class CanalxRouterRest implements ICanalxRouter, ICanalxContextAware {
         if (isInit) {
             iCanalxRouterServer.stop();
         }
+        LOGGER.info(CanalxRouterRest.class.toString() + " stops gracefully");
     }
 
     @Override

@@ -34,6 +34,12 @@
         </dependency>
 
         <dependency>
+            <groupId>io.codis.jodis</groupId>
+            <artifactId>jodis</artifactId>
+            <version>0.3.0</version>
+        </dependency>
+
+        <dependency>
             <groupId>com.github.knightliao.canalx</groupId>
             <artifactId>canalx-select-db-json</artifactId>
             <version>${canalx-select-db-json.version}</version>

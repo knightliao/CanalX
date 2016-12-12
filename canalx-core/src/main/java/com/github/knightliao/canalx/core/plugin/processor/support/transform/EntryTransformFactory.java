@@ -1,7 +1,7 @@
-package com.github.knightliao.canalx.plugin.processor.kv.support.transform;
+package com.github.knightliao.canalx.core.plugin.processor.support.transform;
 
-import com.github.knightliao.canalx.plugin.processor.kv.support.transform.impl.InsertEntryTransformImpl;
-import com.github.knightliao.canalx.plugin.processor.kv.support.transform.impl.UpdateEntryTransformImpl;
+import com.github.knightliao.canalx.core.plugin.processor.support.transform.impl.InsertEntryTransformImpl;
+import com.github.knightliao.canalx.core.plugin.processor.support.transform.impl.UpdateEntryTransformImpl;
 
 /**
  * @author knightliao

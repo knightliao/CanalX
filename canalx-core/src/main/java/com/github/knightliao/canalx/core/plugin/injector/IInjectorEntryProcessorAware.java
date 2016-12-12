@@ -1,6 +1,6 @@
 package com.github.knightliao.canalx.core.plugin.injector;
 
-import com.github.knightliao.canalx.core.plugin.injector.template.InjectorEntryProcessTemplate;
+import com.github.knightliao.canalx.core.plugin.injector.template.InjectorEventProcessTemplate;
 
 /**
  * entry process aware
@@ -10,5 +10,5 @@ import com.github.knightliao.canalx.core.plugin.injector.template.InjectorEntryP
  */
 public interface IInjectorEntryProcessorAware {
 
-    void setupProcessEntry(InjectorEntryProcessTemplate injectorEntryProcessTemplate);
+    void setupProcessEntry(InjectorEventProcessTemplate injectorEntryProcessTemplate);
 }
