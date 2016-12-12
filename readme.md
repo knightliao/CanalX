@@ -20,17 +20,17 @@ docs: http://canalx.readthedocs.io/en/latest/
 `CanalX`是一个框架, 采用插件式开发, 可扩展性极强. 目前(以及短期)的插件有:
 
 - 数据导入功能(injector):
-	- 支持 `Canal`->`Kafka`->`CanalX` 的数据导入方案。(已发布, 插件 `canalx-injector-kafka`)
+	- 支持 `Canal`->`Kafka`->`CanalX` 的数据导入方案。(已发布, 插件 [`canalx-injector-kafka`](https://github.com/knightliao/CanalX/tree/master/canalx-plugins/canalx-injector-kafka))
 	- 支持 `Canal`->`CanalX` 的数据导入方案。(开发中, 插件 `canalx-injector-canal`)
 - 数据处理功能(processor):
-	- `Data`->`kv/codis`。将变更Data数据转化成 全内存的`kv`存储 或者 [`Codis(redis的某种实现)`](https://github.com/CodisLabs/jodis)中间件存储。(已发布, 插件 `canalx-processor-kv`)
-	- `Data`->`History`。将变更Data数据转化成`History`存储。(开发中, 插件 `canalx-processor-history`)
-	- `Data`->`Notification`。将变更Data数据转化成`Notification`存储。(开发中, 插件 `canalx-processor-notification`)
-	- `Data`->`ElasticSearch`。将变更Data数据转化成`ElasticSearch`搜索服务。(开发中, 插件 `canalx-processor-es`)
+	- `Data`->`kv/codis`。将变更Data数据转化成 全内存的`kv`存储 或者 [`Codis(redis的某种实现)`](https://github.com/CodisLabs/jodis)中间件存储。(已发布, 插件 [`canalx-processor-kv`](https://github.com/knightliao/CanalX/tree/master/canalx-plugins/canalx-processor-kv))
+	- `Data`->`History`。将变更Data数据转化成`History`存储。(pending, 插件 `canalx-processor-history`)
+	- `Data`->`Notification`。将变更Data数据转化成`Notification`存储。(pending, 插件 `canalx-processor-notification`)
+	- `Data`->`ElasticSearch`。将变更Data数据转化成`ElasticSearch`搜索服务。(pending, 插件 `canalx-processor-es`)
 - 数据发布功能(router):
-	- `web-rest`发布。将processor中的数据以 `web-rest` 接口的方式。(已发布, 插件 `canalx-router-rest`)
-	- `dubbo`发布。将processor中的数据以 `dubbo-rpc` 接口的方式(开发中, 插件 `canalx-router-dubbo`)
-	- `kepler`发布。将processor中的数据以 `kepler-rpc` 接口的方式(开发中, 插件 `canalx-router-kepler`)
+	- `web-rest`发布。将processor中的数据以 `web-rest` 接口的方式。(已发布, 插件 [`canalx-router-rest`]((https://github.com/knightliao/CanalX/tree/master/canalx-plugins/canalx-router-rest))
+	- `dubbo`发布。将processor中的数据以 `dubbo-rpc` 接口的方式(pending, 插件 `canalx-router-dubbo`)
+	- `kepler`发布。将processor中的数据以 `kepler-rpc` 接口的方式(pending, 插件 `canalx-router-kepler`)
 
 ### main dependency
 
