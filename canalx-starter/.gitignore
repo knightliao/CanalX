@@ -5,5 +5,5 @@
 /.classpath
 main/
 log
-profile/rd/codis.properties
+profile/rd/codis-example.properties
 coverage-report
