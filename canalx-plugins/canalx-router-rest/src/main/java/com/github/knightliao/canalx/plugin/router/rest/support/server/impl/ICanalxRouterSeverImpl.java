@@ -11,10 +11,10 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.github.knightliao.canalx.core.exception.CanalxRouterException;
+import com.github.knightliao.canalx.plugin.router.rest.CanalxRouterRest;
 import com.github.knightliao.canalx.plugin.router.rest.filter.RequestFilter;
 import com.github.knightliao.canalx.plugin.router.rest.handler.EntryPointHandler;
 import com.github.knightliao.canalx.plugin.router.rest.support.server.ICanalxRouterServer;
-import com.github.knightliao.canalx.plugin.router.rest.CanalxRouterRest;
 
 /**
  * @author knightliao
@@ -22,7 +22,7 @@ import com.github.knightliao.canalx.plugin.router.rest.CanalxRouterRest;
  */
 public class ICanalxRouterSeverImpl implements ICanalxRouterServer {
 
-    protected static final Logger LOGGER = LoggerFactory.getLogger(ICanalxRouterSeverImpl.class);
+    protected static final Logger LOGGER = LoggerFactory.getLogger(CanalxRouterRest.class);
 
     private Server jettyServer = null;
 
@@ -49,7 +49,7 @@ public class ICanalxRouterSeverImpl implements ICanalxRouterServer {
 
             jettyServer.start();
 
-            LOGGER.info("{} start ok", CanalxRouterRest.class.getName());
+            LOGGER.info("{} {} start ok", "http://0.0.0.0:" + port, CanalxRouterRest.class.getName());
 
             jettyServer.join();
 

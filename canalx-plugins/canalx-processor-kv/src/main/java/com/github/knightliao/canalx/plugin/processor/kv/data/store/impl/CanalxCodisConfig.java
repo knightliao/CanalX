@@ -77,7 +77,7 @@ public class CanalxCodisConfig implements IConfig {
 
         } else {
 
-            LOGGER.warn("cannot find config file {}", CONFIG_FILE_NAME);
+            throw new Exception("cannot find config file " + filePath);
         }
 
     }

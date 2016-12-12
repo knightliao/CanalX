@@ -167,6 +167,7 @@ public class CanalxCodisKvImpl implements ICanalxKv {
             return CanalxCodisKvImpl.create().poolConfig(processorCodisConfig.getJedisPoolConfig())
                     .zkSet(processorCodisConfig.getZkServer(), processorCodisConfig.getZkPath(), processorCodisConfig
                             .getZkTimeout()).build();
+
         } catch (Exception e) {
             throw new CanalxProcessorException(e);
         }

@@ -47,7 +47,7 @@ public class DbStoreLoaderUtils {
 
                 } catch (CanalxProcessorException e) {
 
-                    LOGGER.error("cannot put {} {} {} {} ", tableId, key, tableKvMap.get(key), e.toString());
+                    LOGGER.error("cannot put {} {} {}", tableId, key, tableKvMap.get(key), e);
                 }
             }
 

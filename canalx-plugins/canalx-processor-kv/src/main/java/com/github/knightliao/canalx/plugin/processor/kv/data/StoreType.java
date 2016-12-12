@@ -1,12 +1,17 @@
 package com.github.knightliao.canalx.plugin.processor.kv.data;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 /**
  * @author knightliao
  * @date 2016/12/12 19:01
  */
 public enum StoreType {
 
-    KV("kv"), CODIS("codis");
+    KV("kv"), CODIS("codis"), UNKNOWN("undown");
+
+    protected static final Logger LOGGER = LoggerFactory.getLogger(StoreType.class);
     private String name;
 
     StoreType(String name) {
@@ -22,7 +27,9 @@ public enum StoreType {
                 return temp;
             }
         }
-        return null;
+
+        LOGGER.error("cannot recognize store type: {}", name);
+        return StoreType.UNKNOWN;
     }
 
     public String getName() {

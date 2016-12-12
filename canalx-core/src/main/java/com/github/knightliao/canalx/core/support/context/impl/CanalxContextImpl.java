@@ -9,6 +9,9 @@ import java.util.Map;
 import java.util.Properties;
 import java.util.Set;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import com.github.knightliao.canalx.core.plugin.processor.ICanalxProcessor;
 import com.github.knightliao.canalx.core.plugin.router.ICanalxDataRouter;
 import com.github.knightliao.canalx.core.support.context.ICanalxContext;
@@ -19,6 +22,8 @@ import com.github.knightliao.canalx.core.support.context.IDataSourceAware;
  * @date 2016/12/6 19:32
  */
 public class CanalxContextImpl implements ICanalxContext, IDataSourceAware {
+
+    protected static final Logger LOGGER = LoggerFactory.getLogger(CanalxContextImpl.class);
 
     private final Properties properties;
 
@@ -78,14 +83,19 @@ public class CanalxContextImpl implements ICanalxContext, IDataSourceAware {
      */
     @Override
     public ICanalxDataRouter getProcessorAsDataSource(String processorName) {
-        for (String iCanalxProcessorName : iCanalxProcessorMap.keySet()) {
-            if (iCanalxProcessorName.equals(processorName)) {
 
-                ICanalxProcessor iCanalxProcessor = iCanalxProcessorMap.get(processorName);
-                if (iCanalxProcessor instanceof ICanalxDataRouter) {
-                    return (ICanalxDataRouter) iCanalxProcessor;
+        if (processorName != null) {
+            for (String iCanalxProcessorName : iCanalxProcessorMap.keySet()) {
+                if (iCanalxProcessorName.equals(processorName)) {
+
+                    ICanalxProcessor iCanalxProcessor = iCanalxProcessorMap.get(processorName);
+                    if (iCanalxProcessor instanceof ICanalxDataRouter) {
+                        return (ICanalxDataRouter) iCanalxProcessor;
+                    }
                 }
             }
+
+            LOGGER.warn("cannot get any data source as rest input: {} ", processorName);
         }
 
         return null;
