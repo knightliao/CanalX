@@ -6,3 +6,4 @@
 main/
 log
 profile/rd/codis.properties
+coverage-report
