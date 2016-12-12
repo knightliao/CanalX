@@ -15,7 +15,6 @@
     <modules>
         <module>canalx-injector-kafka</module>
         <module>canalx-processor-kv</module>
-        <module>canalx-processor-codis</module>
         <module>canalx-router-rest</module>
     </modules>
 
