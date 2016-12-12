@@ -1,4 +1,4 @@
-package com.github.knightliao.canalx.core.test.plugin.processor;
+package com.github.knightliao.canalx.core.test.plugin.processor.support.filter;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -9,9 +9,9 @@ import org.junit.Test;
 import com.github.knightliao.canalx.core.dto.MysqlEntry;
 import com.github.knightliao.canalx.core.dto.MysqlEntryWrap;
 import com.github.knightliao.canalx.core.exception.CanalxProcessorException;
-import com.github.knightliao.canalx.core.plugin.processor.support.EntryFilterChainFactory;
-import com.github.knightliao.canalx.core.plugin.processor.support.IEntryFilter;
-import com.github.knightliao.canalx.core.plugin.processor.support.IEntryFilterChain;
+import com.github.knightliao.canalx.core.plugin.processor.support.filter.EntryFilterChainFactory;
+import com.github.knightliao.canalx.core.plugin.processor.support.filter.IEntryFilter;
+import com.github.knightliao.canalx.core.plugin.processor.support.filter.IEntryFilterChain;
 
 /**
  * @author knightliao
@@ -36,7 +36,9 @@ public class EntryFilterChainFactoryTestCase {
 
         IEntryFilterChain iEntryFilterChain = EntryFilterChainFactory.getEntryFilterChain(filters);
         try {
+
             iEntryFilterChain.doFilter(new MysqlEntryWrap("topic", new MysqlEntry()));
+
         } catch (CanalxProcessorException e) {
             Assert.assertTrue(false);
         }
