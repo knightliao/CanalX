@@ -7,7 +7,7 @@ import com.github.knightliao.canalx.core.dto.MysqlEntryWrap;
 import com.github.knightliao.canalx.core.exception.CanalxProcessorException;
 import com.github.knightliao.canalx.core.plugin.processor.ICanalxProcessor;
 import com.github.knightliao.canalx.core.plugin.processor.support.TableTopicUtil;
-import com.github.knightliao.canalx.core.plugin.processor.support.filter.EntryTimeFilter;
+import com.github.knightliao.canalx.core.plugin.processor.support.filter.filters.EntryTimeFilter;
 import com.github.knightliao.canalx.core.plugin.processor.support.transform.EntryTransformFactory;
 import com.github.knightliao.canalx.core.plugin.processor.support.transform.IEntryTransform;
 import com.github.knightliao.canalx.core.plugin.processor.support.transform.TransformResult;

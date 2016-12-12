@@ -1,4 +1,4 @@
-package com.github.knightliao.canalx.core.plugin.processor.support;
+package com.github.knightliao.canalx.core.plugin.processor.support.filter;
 
 import com.github.knightliao.canalx.core.dto.MysqlEntryWrap;
 import com.github.knightliao.canalx.core.exception.CanalxProcessorException;

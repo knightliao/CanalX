@@ -1,8 +1,8 @@
-package com.github.knightliao.canalx.core.plugin.processor.support;
+package com.github.knightliao.canalx.core.plugin.processor.support.filter;
 
 import java.util.List;
 
-import com.github.knightliao.canalx.core.plugin.processor.impl.EntryFilterChainImpl;
+import com.github.knightliao.canalx.core.plugin.processor.support.filter.impl.EntryFilterChainImpl;
 
 /**
  * @author knightliao
