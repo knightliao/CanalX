@@ -102,6 +102,11 @@ public class CanalxContextImpl implements ICanalxContext, IDataSourceAware {
     }
 
     @Override
+    public String getProperty(String item, String defaultValue) {
+        return properties.getProperty(item, defaultValue);
+    }
+
+    @Override
     public String getProperty(String item) {
         return properties.getProperty(item);
     }

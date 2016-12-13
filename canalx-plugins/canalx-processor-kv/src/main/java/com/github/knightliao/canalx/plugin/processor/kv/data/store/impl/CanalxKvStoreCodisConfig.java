@@ -18,9 +18,9 @@ import redis.clients.jedis.JedisPoolConfig;
 
  */
 @Data
-public class CanalxCodisConfig implements IConfig {
+public class CanalxKvStoreCodisConfig implements IConfig {
 
-    protected static final Logger LOGGER = LoggerFactory.getLogger(CanalxCodisConfig.class);
+    protected static final Logger LOGGER = LoggerFactory.getLogger(CanalxKvStoreCodisConfig.class);
 
     private int redisMaxActive = 8;
     private int redisMaxIdle = 8;
@@ -37,7 +37,8 @@ public class CanalxCodisConfig implements IConfig {
     @Override
     public void init(ICanalxContext iCanalxContext) throws Exception {
 
-        String codisFilePath = iCanalxContext.getProperty("canalx.plugin.processor.codis.filepath");
+        // 默认是 codis.properties
+        String codisFilePath = iCanalxContext.getProperty("canalx.plugin.processor.codis.filepath", CONFIG_FILE_NAME);
         loadConfigAndInit(codisFilePath);
     }
 
@@ -47,12 +48,8 @@ public class CanalxCodisConfig implements IConfig {
 
     private void loadConfigAndInit(String filePath) throws Exception {
 
-        if (filePath == null) {
-            filePath = CONFIG_FILE_NAME;
-        }
-
         Properties properties = new Properties();
-        URL url = CanalxCodisConfig.class.getClassLoader().getResource(filePath);
+        URL url = CanalxKvStoreCodisConfig.class.getClassLoader().getResource(filePath);
         if (url != null) {
 
             LOGGER.info("loading processor codis config file {}", url.toString());

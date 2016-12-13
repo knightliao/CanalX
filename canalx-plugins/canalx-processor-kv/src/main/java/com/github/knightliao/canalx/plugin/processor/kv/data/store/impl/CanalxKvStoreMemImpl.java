@@ -13,9 +13,9 @@ import com.github.knightliao.canalx.plugin.processor.kv.data.store.ICanalxKv;
  * @author knightliao
  * @date 2016/11/28 17:39
  */
-public class CanalxKvImpl implements ICanalxKv {
+public class CanalxKvStoreMemImpl implements ICanalxKv {
 
-    protected static final Logger LOGGER = LoggerFactory.getLogger(CanalxKvImpl.class);
+    protected static final Logger LOGGER = LoggerFactory.getLogger(CanalxKvStoreMemImpl.class);
 
     ConcurrentMap<String, ConcurrentMap<String, String>> dataMap = new ConcurrentHashMap<>(100);
 
@@ -23,7 +23,7 @@ public class CanalxKvImpl implements ICanalxKv {
         return new Builder();
     }
 
-    private CanalxKvImpl() {
+    private CanalxKvStoreMemImpl() {
     }
 
     /**
@@ -40,7 +40,7 @@ public class CanalxKvImpl implements ICanalxKv {
         /**
          */
         public ICanalxKv build() {
-            return new CanalxKvImpl();
+            return new CanalxKvStoreMemImpl();
         }
     }
 

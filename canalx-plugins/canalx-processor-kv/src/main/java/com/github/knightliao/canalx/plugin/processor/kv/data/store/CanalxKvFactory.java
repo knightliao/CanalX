@@ -1,10 +1,9 @@
-package com.github.knightliao.canalx.plugin.processor.kv.data;
+package com.github.knightliao.canalx.plugin.processor.kv.data.store;
 
 import com.github.knightliao.canalx.core.exception.CanalxProcessorException;
 import com.github.knightliao.canalx.core.support.context.ICanalxContext;
-import com.github.knightliao.canalx.plugin.processor.kv.data.store.ICanalxKv;
-import com.github.knightliao.canalx.plugin.processor.kv.data.store.impl.CanalxCodisKvImpl;
-import com.github.knightliao.canalx.plugin.processor.kv.data.store.impl.CanalxKvImpl;
+import com.github.knightliao.canalx.plugin.processor.kv.data.store.impl.CanalxKvStoreCodisKvImpl;
+import com.github.knightliao.canalx.plugin.processor.kv.data.store.impl.CanalxKvStoreMemImpl;
 
 /**
  * @author knightliao
@@ -25,11 +24,11 @@ public class CanalxKvFactory {
 
         if (storeType.equals(StoreType.KV)) {
 
-            return CanalxKvImpl.create().build();
+            return CanalxKvStoreMemImpl.create().build();
 
         } else if (storeType.equals(StoreType.CODIS)) {
 
-            return CanalxCodisKvImpl.getInstance(iCanalxContext);
+            return CanalxKvStoreCodisKvImpl.getInstance(iCanalxContext);
         }
 
         throw new CanalxProcessorException("cannot find proper store type " + storeType);

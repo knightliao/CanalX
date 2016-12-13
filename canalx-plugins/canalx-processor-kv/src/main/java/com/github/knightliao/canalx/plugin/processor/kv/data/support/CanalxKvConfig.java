@@ -5,7 +5,7 @@ import org.slf4j.LoggerFactory;
 
 import com.github.knightliao.canalx.core.support.config.IConfig;
 import com.github.knightliao.canalx.core.support.context.ICanalxContext;
-import com.github.knightliao.canalx.plugin.processor.kv.data.StoreType;
+import com.github.knightliao.canalx.plugin.processor.kv.data.store.StoreType;
 
 import lombok.Data;
 
@@ -23,15 +23,21 @@ public class CanalxKvConfig implements IConfig {
 
     private String dbLoaderFilePath;
 
+    private boolean isInitWithDb = true;
+
     @Override
     public void init(ICanalxContext iCanalxContext) throws Exception {
 
-        this.dbLoaderFilePath = iCanalxContext.getProperty("canalx.plugin.processor.db.loader.filepath");
-        if (this.dbLoaderFilePath == null) {
-            this.dbLoaderFilePath = CONFIG_FILE_NAME;
-        }
+        // 默认是 CONFIG_FILE_NAME
+        this.dbLoaderFilePath =
+                iCanalxContext.getProperty("canalx.plugin.processor.db.loader.filepath", CONFIG_FILE_NAME);
 
-        String storeTypeStr = iCanalxContext.getProperty("canalx.plugin.processor.kv.type");
+        // 默认是KV
+        String storeTypeStr = iCanalxContext.getProperty("canalx.plugin.processor.kv.type", StoreType.KV.getName());
+
+        // 默认是true
+        isInitWithDb = Boolean.parseBoolean(iCanalxContext.getProperty("canalx.plugin.processor.db.loader.init",
+                "true"));
 
         this.storeType = StoreType.get(storeTypeStr);
     }

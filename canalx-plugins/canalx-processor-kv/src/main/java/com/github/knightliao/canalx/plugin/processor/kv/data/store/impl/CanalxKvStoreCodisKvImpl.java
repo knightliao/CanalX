@@ -18,19 +18,19 @@ import redis.clients.jedis.JedisPoolConfig;
  * @author knightliao
  * @date 2016/12/12 17:17
  */
-public class CanalxCodisKvImpl implements ICanalxKv {
+public class CanalxKvStoreCodisKvImpl implements ICanalxKv {
 
-    protected static final Logger LOGGER = LoggerFactory.getLogger(CanalxCodisKvImpl.class);
+    protected static final Logger LOGGER = LoggerFactory.getLogger(CanalxKvStoreCodisKvImpl.class);
 
     private String redisPrefix = "";
 
     //
-    private static CanalxCodisConfig processorCodisConfig = new CanalxCodisConfig();
+    private static CanalxKvStoreCodisConfig processorCodisConfig = new CanalxKvStoreCodisConfig();
 
     private JedisResourcePool jedisPool;
 
-    private CanalxCodisKvImpl(JedisPoolConfig poolConfig, String zkAddr, String zkProxyDir, int zkTimeout,
-                              String redisPrefix) {
+    private CanalxKvStoreCodisKvImpl(JedisPoolConfig poolConfig, String zkAddr, String zkProxyDir, int zkTimeout,
+                                     String redisPrefix) {
         this.redisPrefix = redisPrefix;
         jedisPool = RoundRobinJedisPool.create()
                 .curatorClient(zkAddr, zkTimeout).zkProxyDir(zkProxyDir).poolConfig(poolConfig).build();
@@ -82,7 +82,7 @@ public class CanalxCodisKvImpl implements ICanalxKv {
          */
         public ICanalxKv build() {
             validate();
-            return new CanalxCodisKvImpl(jedisPoolConfig, zkAddr, zkProxyDir, zkTimeout, redisPrefix);
+            return new CanalxKvStoreCodisKvImpl(jedisPoolConfig, zkAddr, zkProxyDir, zkTimeout, redisPrefix);
         }
     }
 
@@ -164,7 +164,7 @@ public class CanalxCodisKvImpl implements ICanalxKv {
         try {
 
             processorCodisConfig.init(iCanalxContext);
-            return CanalxCodisKvImpl.create().poolConfig(processorCodisConfig.getJedisPoolConfig())
+            return CanalxKvStoreCodisKvImpl.create().poolConfig(processorCodisConfig.getJedisPoolConfig())
                     .zkSet(processorCodisConfig.getZkServer(), processorCodisConfig.getZkPath(), processorCodisConfig
                             .getZkTimeout()).build();
 

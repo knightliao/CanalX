@@ -1,6 +1,5 @@
-package com.github.knightliao.canalx.plugin.processor.kv.data.support;
+package com.github.knightliao.canalx.plugin.processor.kv.data.db.impl;
 
-import java.io.IOException;
 import java.util.Map;
 
 import org.slf4j.Logger;
@@ -10,29 +9,31 @@ import com.github.knightliao.canalx.core.exception.CanalxProcessorException;
 import com.github.knightliao.canalx.db.DbFetchControllerFactory;
 import com.github.knightliao.canalx.db.IDbFetchController;
 import com.github.knightliao.canalx.db.exception.CanalxSelectDbJsonInitException;
+import com.github.knightliao.canalx.plugin.processor.kv.data.db.IDbStoreLoader;
+import com.github.knightliao.canalx.plugin.processor.kv.data.db.TableKey;
 import com.github.knightliao.canalx.plugin.processor.kv.data.store.ICanalxKv;
+import com.github.knightliao.canalx.plugin.processor.kv.data.support.CanalxKvConfig;
 
 /**
-
+ * @author knightliao
+ * @date 2016/12/13 15:05
  */
-public class DbStoreLoaderUtils {
+public class DbStoreLoaderImpl implements IDbStoreLoader {
 
-    protected static final Logger LOGGER = LoggerFactory.getLogger(DbStoreLoaderUtils.class);
+    protected final Logger LOGGER = LoggerFactory.getLogger(DbStoreLoaderImpl.class);
 
-    /**
-     * @param canalxKvConfig
-     * @param iCanalxKv
-     * @param tableKeyMap
-     *
-     * @throws IOException
-     * @throws ClassNotFoundException
-     * @throws CanalxSelectDbJsonInitException
-     */
-    public static void load(CanalxKvConfig canalxKvConfig, ICanalxKv iCanalxKv, Map<String, String> tableKeyMap)
-            throws IOException, ClassNotFoundException, CanalxSelectDbJsonInitException {
+    protected IDbFetchController iDbFetchController = DbFetchControllerFactory.getDefaultDbController();
 
-        IDbFetchController iDbFetchController = DbFetchControllerFactory.getDefaultDbController();
+    protected TableKey tableKey = new TableKey();
+
+    @Override
+    public void init(CanalxKvConfig canalxKvConfig) throws CanalxSelectDbJsonInitException {
+
         iDbFetchController.init(canalxKvConfig.getDbLoaderFilePath());
+    }
+
+    @Override
+    public void loadInitData(ICanalxKv iCanalxKv) throws CanalxSelectDbJsonInitException {
 
         Map<String, Map<String, String>> dataInitMap = iDbFetchController.getInitDbKv();
 
@@ -43,6 +44,7 @@ public class DbStoreLoaderUtils {
             for (String key : tableKvMap.keySet()) {
 
                 try {
+
                     iCanalxKv.put(tableId, key, tableKvMap.get(key));
 
                 } catch (CanalxProcessorException e) {
@@ -51,11 +53,16 @@ public class DbStoreLoaderUtils {
                 }
             }
 
-            String tableKey = iDbFetchController.getTableKey(tableId);
-            tableKeyMap.put(tableId, tableKey);
+            String key = iDbFetchController.getTableKey(tableId);
+            tableKey.setTableKey(tableId, key);
+
             LOGGER.info("tableId: {} , TableKey {} loads ok", tableId, tableKey);
         }
     }
+
+    @Override
+    public String getTableKey(String tableId) {
+
+        return tableKey.getTableKey(tableId);
+    }
 }
-
-

@@ -1,16 +1,15 @@
 package com.github.knightliao.canalx.plugin.processor.kv.data;
 
-import java.util.HashMap;
-import java.util.Map;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.github.knightliao.canalx.core.exception.CanalxProcessorException;
 import com.github.knightliao.canalx.core.support.context.ICanalxContext;
+import com.github.knightliao.canalx.plugin.processor.kv.data.db.IDbStoreLoader;
+import com.github.knightliao.canalx.plugin.processor.kv.data.db.impl.DbStoreLoaderImpl;
+import com.github.knightliao.canalx.plugin.processor.kv.data.store.CanalxKvFactory;
 import com.github.knightliao.canalx.plugin.processor.kv.data.store.ICanalxKv;
 import com.github.knightliao.canalx.plugin.processor.kv.data.support.CanalxKvConfig;
-import com.github.knightliao.canalx.plugin.processor.kv.data.support.DbStoreLoaderUtils;
 
 /**
  * 单实例
@@ -28,8 +27,8 @@ public class CanalxKvInstance {
     // config
     private static CanalxKvConfig canalxKvConfig = new CanalxKvConfig();
 
-    // 记录 tableid -> table key
-    private static Map<String, String> tableKeyMap = new HashMap<>();
+    //
+    private static IDbStoreLoader iDbStoreLoader = new DbStoreLoaderImpl();
 
     private static volatile boolean isInit = false;
 
@@ -43,8 +42,11 @@ public class CanalxKvInstance {
             // new canalx instance
             iCanalxKv = CanalxKvFactory.getStoreInstance(canalxKvConfig.getStoreType(), iCanalxContext);
 
-            // load db data
-            DbStoreLoaderUtils.load(canalxKvConfig, iCanalxKv, tableKeyMap);
+            // load db data and table key
+            iDbStoreLoader.init(canalxKvConfig);
+            if (canalxKvConfig.isInitWithDb()) {
+                iDbStoreLoader.loadInitData(iCanalxKv);
+            }
 
             isInit = true;
 
@@ -104,15 +106,20 @@ public class CanalxKvInstance {
         }
     }
 
+    /**
+     * 获取 table 要设定的 KEY
+     *
+     * @param tableId
+     *
+     * @return
+     */
     public static String getTableKey(String tableId) {
-        if (tableKeyMap.containsKey(tableId)) {
-            return tableKeyMap.get(tableId);
-        } else {
-
-            return "";
-        }
+        return iDbStoreLoader.getTableKey(tableId);
     }
 
+    /**
+     * 关闭
+     */
     public static void shutdown() {
 
         iCanalxKv.shutdown();

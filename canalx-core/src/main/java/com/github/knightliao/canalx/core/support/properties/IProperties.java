@@ -6,5 +6,7 @@ package com.github.knightliao.canalx.core.support.properties;
  */
 public interface IProperties {
 
+    String getProperty(String item, String defaultValue);
+
     String getProperty(String item);
 }

@@ -1,4 +1,4 @@
-package com.github.knightliao.canalx.plugin.processor.kv.data;
+package com.github.knightliao.canalx.plugin.processor.kv.data.store;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
