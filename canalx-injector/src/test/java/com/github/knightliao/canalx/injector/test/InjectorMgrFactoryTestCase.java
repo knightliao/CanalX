@@ -16,6 +16,7 @@ import com.github.knightliao.canalx.core.support.context.CanalxContextFactory;
 import com.github.knightliao.canalx.core.support.context.ICanalxContext;
 import com.github.knightliao.canalx.injector.InjectorMgr;
 import com.github.knightliao.canalx.injector.InjectorMgrFactory;
+import com.github.knightliao.canalx.injector.support.InjectConstants;
 
 /**
  * @author knightliao
@@ -37,7 +38,7 @@ public class InjectorMgrFactoryTestCase {
             ICanalxContext canalxContext = CanalxContextFactory.getDefaultCanalxContext();
 
             // load
-            ((IPlugin) injectorMgr).loadPlugin("com.github.knightliao.canalx.plugin.injector", specifyPluginNames);
+            ((IPlugin) injectorMgr).loadPlugin(InjectConstants.SCAN_PACK_PLUGIN_INJECT, specifyPluginNames);
 
             // get
             List<ICanalxInjector> canalxInjectors = injectorMgr.getInjectorPlugin();

@@ -1,4 +1,4 @@
-package com.github.knightliao.canalx.plugin.processor.kv.test.jodis;
+package com.github.knightliao.canalx.plugin.processor.empty.test.jodis;
 
 import io.codis.jodis.JedisResourcePool;
 import io.codis.jodis.RoundRobinJedisPool;

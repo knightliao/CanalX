@@ -102,34 +102,36 @@ public class ProcessorMgrImpl implements IProcessorMgr, IPlugin {
 
         // get filter list
         EntryFilterList entryFilterList = canalProcessorClass.getAnnotation(EntryFilterList.class);
-        Class<?>[] classes = entryFilterList.classes();
-        List<Class<?>> classList = new ArrayList<>(Arrays.asList(classes));
+        if (entryFilterList != null) {
+            Class<?>[] classes = entryFilterList.classes();
+            List<Class<?>> classList = new ArrayList<>(Arrays.asList(classes));
 
-        // add core
-        classList.add(ProcessCoreFilter.class);
+            // add core
+            classList.add(ProcessCoreFilter.class);
 
-        List<IEntryFilter> iEntryFilters = new ArrayList<>();
+            List<IEntryFilter> iEntryFilters = new ArrayList<>();
 
-        for (Class<?> curClass : classList) {
+            for (Class<?> curClass : classList) {
 
-            try {
+                try {
 
-                IEntryFilter iEntryFilter = (IEntryFilter) curClass.newInstance();
+                    IEntryFilter iEntryFilter = (IEntryFilter) curClass.newInstance();
 
-                // core filter
-                if (iEntryFilter instanceof ICanalxProcessorAware) {
-                    ((ICanalxProcessorAware) iEntryFilter).setupICanalxProcessor(iCanalxProcessor);
+                    // core filter
+                    if (iEntryFilter instanceof ICanalxProcessorAware) {
+                        ((ICanalxProcessorAware) iEntryFilter).setupICanalxProcessor(iCanalxProcessor);
+                    }
+
+                    iEntryFilters.add(iEntryFilter);
+
+                } catch (Exception e) {
+                    LOGGER.error(e.toString(), e);
                 }
-
-                iEntryFilters.add(iEntryFilter);
-
-            } catch (Exception e) {
-                LOGGER.error(e.toString(), e);
             }
-        }
 
-        IEntryFilterChain iEntryFilterChain = EntryFilterChainFactory.getEntryFilterChain(iEntryFilters);
-        innerCanalEntryFilterMap.put(pluginName, iEntryFilterChain);
+            IEntryFilterChain iEntryFilterChain = EntryFilterChainFactory.getEntryFilterChain(iEntryFilters);
+            innerCanalEntryFilterMap.put(pluginName, iEntryFilterChain);
+        }
     }
 
     @Override

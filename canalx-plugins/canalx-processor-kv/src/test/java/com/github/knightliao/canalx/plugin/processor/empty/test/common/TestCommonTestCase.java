@@ -1,4 +1,4 @@
-package com.github.knightliao.canalx.plugin.processor.kv.test.common;
+package com.github.knightliao.canalx.plugin.processor.empty.test.common;
 
 import org.junit.Test;
 

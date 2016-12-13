@@ -4,14 +4,14 @@
     <modelVersion>4.0.0</modelVersion>
     <parent>
         <groupId>com.github.knightliao.canalx</groupId>
-        <artifactId>canalx</artifactId>
+        <artifactId>canalx-plugins</artifactId>
         <version>0.0.1-SNAPSHOT</version>
     </parent>
 
-    <artifactId>canalx-processor</artifactId>
-    <name>canalx-processor</name>
+    <artifactId>canalx-processor-empty</artifactId>
+    <name>canalx-processor-empty</name>
     <packaging>jar</packaging>
-    <version>${canalx.version}</version>
+    <version>${canalx-processor-empty.version}</version>
 
     <dependencies>
 
@@ -23,31 +23,26 @@
         </dependency>
 
         <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+        </dependency>
+
+        <dependency>
             <groupId>com.github.knightliao.canalx</groupId>
             <artifactId>canalx-core</artifactId>
             <version>${canalx.version}</version>
         </dependency>
 
         <dependency>
-            <groupId>com.github.knightliao.canalx</groupId>
-            <artifactId>canalx-processor-kv</artifactId>
-            <version>${canalx-processor-kv.version}</version>
+            <groupId>io.codis.jodis</groupId>
+            <artifactId>jodis</artifactId>
+            <version>0.3.0</version>
         </dependency>
 
         <dependency>
             <groupId>com.github.knightliao.canalx</groupId>
-            <artifactId>canalx-processor-empty</artifactId>
-            <version>${canalx-processor-empty.version}</version>
-        </dependency>
-
-        <dependency>
-            <groupId>com.google.code.gson</groupId>
-            <artifactId>gson</artifactId>
-        </dependency>
-
-        <dependency>
-            <groupId>org.projectlombok</groupId>
-            <artifactId>lombok</artifactId>
+            <artifactId>canalx-select-db-json</artifactId>
+            <version>${canalx-select-db-json.version}</version>
         </dependency>
 
     </dependencies>

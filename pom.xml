@@ -18,6 +18,7 @@
         <canalx-select-db-json.version>0.0.2-SNAPSHOT</canalx-select-db-json.version>
         <canalx-injector-empty.version>0.0.1-SNAPSHOT</canalx-injector-empty.version>
         <canalx-injector-kafka.version>0.0.1-SNAPSHOT</canalx-injector-kafka.version>
+        <canalx-processor-empty.version>0.0.1-SNAPSHOT</canalx-processor-empty.version>
         <canalx-processor-kv.version>0.0.1-SNAPSHOT</canalx-processor-kv.version>
         <canalx-processor-codis.version>0.0.1-SNAPSHOT</canalx-processor-codis.version>
         <canalx-router-rest.version>0.0.1-SNAPSHOT</canalx-router-rest.version>
