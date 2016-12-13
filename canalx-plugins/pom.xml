@@ -13,6 +13,7 @@
     <packaging>pom</packaging>
     <version>0.0.1-SNAPSHOT</version>
     <modules>
+        <module>canalx-injector-empty</module>
         <module>canalx-injector-kafka</module>
         <module>canalx-processor-kv</module>
         <module>canalx-router-rest</module>

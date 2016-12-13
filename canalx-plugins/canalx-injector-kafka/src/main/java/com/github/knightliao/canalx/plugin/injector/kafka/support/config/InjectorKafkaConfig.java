@@ -11,6 +11,7 @@ import org.slf4j.LoggerFactory;
 
 import com.github.knightliao.canalx.core.support.config.IConfig;
 import com.github.knightliao.canalx.core.support.context.ICanalxContext;
+import com.google.common.base.Preconditions;
 
 import kafka.consumer.ConsumerConfig;
 import kafka.javaapi.consumer.ConsumerConnector;
@@ -37,19 +38,22 @@ public class InjectorKafkaConfig implements IConfig {
     @Override
     public void init(ICanalxContext iCanalxContext) throws Exception {
 
+        Preconditions.checkNotNull(iCanalxContext, "iCanalxContext can not be null");
+
         //
-        String currentTopics = iCanalxContext.getProperty("canalx.plugin.injector.topics");
+        String currentTopics = iCanalxContext.getProperty("canalx.plugin.injector.kafka.topics");
         this.topics = currentTopics.split(",");
 
         topicList = Arrays.asList(topics);
 
         LOGGER.debug("injector config: topics:{}", topicList);
+
+        // load kafka config
+        loadConfigAndInit();
     }
 
     @Override
     public void init() throws Exception {
-
-        loadConfigAndInit();
     }
 
     private void loadConfigAndInit() throws Exception {

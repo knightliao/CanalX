@@ -4,14 +4,14 @@
     <modelVersion>4.0.0</modelVersion>
     <parent>
         <groupId>com.github.knightliao.canalx</groupId>
-        <artifactId>canalx</artifactId>
+        <artifactId>canalx-plugins</artifactId>
         <version>0.0.1-SNAPSHOT</version>
     </parent>
 
-    <artifactId>canalx-injector</artifactId>
-    <name>canalx-injector</name>
+    <artifactId>canalx-injector-empty</artifactId>
+    <name>canalx-injector-empty</name>
     <packaging>jar</packaging>
-    <version>${canalx.version}</version>
+    <version>${canalx-injector-empty.version}</version>
 
     <dependencies>
 
@@ -23,26 +23,14 @@
         </dependency>
 
         <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+        </dependency>
+
+        <dependency>
             <groupId>com.github.knightliao.canalx</groupId>
             <artifactId>canalx-core</artifactId>
             <version>${canalx.version}</version>
-        </dependency>
-
-        <dependency>
-            <groupId>com.github.knightliao.canalx</groupId>
-            <artifactId>canalx-injector-empty</artifactId>
-            <version>${canalx-injector-empty.version}</version>
-        </dependency>
-
-        <dependency>
-            <groupId>com.github.knightliao.canalx</groupId>
-            <artifactId>canalx-injector-kafka</artifactId>
-            <version>${canalx-injector-kafka.version}</version>
-        </dependency>
-
-        <dependency>
-            <groupId>org.projectlombok</groupId>
-            <artifactId>lombok</artifactId>
         </dependency>
 
     </dependencies>
