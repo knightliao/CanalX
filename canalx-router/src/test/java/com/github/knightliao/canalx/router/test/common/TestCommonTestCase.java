@@ -1,4 +1,4 @@
-package com.github.knightliao.canalx.starter.test.common;
+package com.github.knightliao.canalx.router.test.common;
 
 import org.junit.Test;
 
@@ -13,6 +13,6 @@ public class TestCommonTestCase {
     @Test
     public void test() {
 
-        TestUtils.testAllClassUnderPackage("com.github.knightliao.canalx.starter");
+        TestUtils.testAllClassUnderPackage("com.github.knightliao.canalx.router");
     }
 }
