@@ -23,6 +23,7 @@
         <canalx-processor-codis.version>0.0.1-SNAPSHOT</canalx-processor-codis.version>
         <canalx-router-rest.version>0.0.1-SNAPSHOT</canalx-router-rest.version>
         <canalx-router-kepler.version>0.0.1-SNAPSHOT</canalx-router-kepler.version>
+        <canalx-router-empty.version>0.0.1-SNAPSHOT</canalx-router-empty.version>
 
         <!-- Spring項目配置 -->
         <encoding>UTF-8</encoding>

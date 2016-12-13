@@ -4,14 +4,14 @@
     <modelVersion>4.0.0</modelVersion>
     <parent>
         <groupId>com.github.knightliao.canalx</groupId>
-        <artifactId>canalx</artifactId>
+        <artifactId>canalx-plugins</artifactId>
         <version>0.0.1-SNAPSHOT</version>
     </parent>
 
-    <artifactId>canalx-router</artifactId>
-    <name>canalx-router</name>
+    <artifactId>canalx-router-empty</artifactId>
+    <name>canalx-router-empty</name>
     <packaging>jar</packaging>
-    <version>${canalx.version}</version>
+    <version>${canalx-router-empty.version}</version>
 
     <dependencies>
 
@@ -29,30 +29,8 @@
         </dependency>
 
         <dependency>
-            <groupId>com.google.code.gson</groupId>
-            <artifactId>gson</artifactId>
-        </dependency>
-
-        <dependency>
-            <groupId>org.reflections</groupId>
-            <artifactId>reflections</artifactId>
-        </dependency>
-
-        <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
-        </dependency>
-
-        <dependency>
-            <groupId>com.github.knightliao.canalx</groupId>
-            <artifactId>canalx-router-rest</artifactId>
-            <version>${canalx-router-rest.version}</version>
-        </dependency>
-
-        <dependency>
-            <groupId>com.github.knightliao.canalx</groupId>
-            <artifactId>canalx-router-empty</artifactId>
-            <version>${canalx-router-empty.version}</version>
         </dependency>
 
     </dependencies>
@@ -70,5 +48,23 @@
             </plugin>
         </plugins>
     </build>
+
+    <profiles>
+        <!-- 开发环境默认激活的profile -->
+        <profile>
+            <id>rd</id>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+            <build>
+                <resources>
+                    <!-- 指定环境差异配置的配置文件所在目录 -->
+                    <resource>
+                        <directory>${basedir}/profile/rd</directory>
+                    </resource>
+                </resources>
+            </build>
+        </profile>
+    </profiles>
 
 </project>

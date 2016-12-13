@@ -18,6 +18,7 @@
         <module>canalx-processor-kv</module>
         <module>canalx-processor-empty</module>
         <module>canalx-router-rest</module>
+        <module>canalx-router-empty</module>
     </modules>
 
 </project>
