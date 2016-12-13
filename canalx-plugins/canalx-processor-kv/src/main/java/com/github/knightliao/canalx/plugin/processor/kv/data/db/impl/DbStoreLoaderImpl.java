@@ -65,4 +65,10 @@ public class DbStoreLoaderImpl implements IDbStoreLoader {
 
         return tableKey.getTableKey(tableId);
     }
+
+    @Override
+    public String executeRowSql(String tableId, String keyValue) {
+
+        return iDbFetchController.getRowByExecuteSql(tableId, keyValue);
+    }
 }

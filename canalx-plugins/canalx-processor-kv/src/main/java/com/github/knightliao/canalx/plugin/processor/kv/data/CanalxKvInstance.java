@@ -67,7 +67,14 @@ public class CanalxKvInstance {
 
             try {
 
-                return iCanalxKv.get(tableId, key);
+                String value = iCanalxKv.get(tableId, key);
+                if (value == null && canalxKvConfig.isGetDbWhenNotHit()) {
+
+                    // select from db
+                    return iDbStoreLoader.executeRowSql(tableId, key);
+                }
+
+                return value;
 
             } catch (CanalxProcessorException e) {
 
@@ -124,4 +131,5 @@ public class CanalxKvInstance {
 
         iCanalxKv.shutdown();
     }
+
 }

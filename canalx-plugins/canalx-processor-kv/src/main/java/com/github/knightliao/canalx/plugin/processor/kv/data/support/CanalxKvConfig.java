@@ -25,6 +25,8 @@ public class CanalxKvConfig implements IConfig {
 
     private boolean isInitWithDb = true;
 
+    private boolean getDbWhenNotHit = false;
+
     @Override
     public void init(ICanalxContext iCanalxContext) throws Exception {
 
@@ -38,6 +40,11 @@ public class CanalxKvConfig implements IConfig {
         // 默认是true
         isInitWithDb = Boolean.parseBoolean(iCanalxContext.getProperty("canalx.plugin.processor.db.loader.init",
                 "true"));
+
+        // 默认是false
+        getDbWhenNotHit =
+                Boolean.parseBoolean(iCanalxContext.getProperty("canalx.plugin.processor.db.get.row.when.not.hit",
+                        "false"));
 
         this.storeType = StoreType.get(storeTypeStr);
     }

@@ -15,4 +15,6 @@ public interface IDbStoreLoader {
     void loadInitData(ICanalxKv iCanalxKv) throws CanalxSelectDbJsonInitException;
 
     String getTableKey(String tableId);
+
+    String executeRowSql(String tableId, String keyValue);
 }

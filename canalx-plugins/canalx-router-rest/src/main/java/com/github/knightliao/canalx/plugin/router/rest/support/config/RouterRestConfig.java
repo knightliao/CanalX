@@ -24,7 +24,7 @@ public class RouterRestConfig implements IConfig {
     @Override
     public void init(ICanalxContext iCanalxContext) throws Exception {
         // port
-        String port = iCanalxContext.getProperty("canalx.plugin.router.port");
+        String port = iCanalxContext.getProperty("canalx.plugin.router.port", String.valueOf(serverPort));
 
         //
         String dataSource = iCanalxContext.getProperty("canalx.plugin.router.datasource");
