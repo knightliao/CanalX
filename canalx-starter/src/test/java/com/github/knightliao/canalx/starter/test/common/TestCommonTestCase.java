@@ -13,6 +13,6 @@ public class TestCommonTestCase {
     @Test
     public void test() {
 
-        TestUtils.testAllClassUnderPackage("com.github.knightliao.canalx.starter");
+        TestUtils.testAllClassUnderPackage("com.github.knightliao.canalx");
     }
 }
