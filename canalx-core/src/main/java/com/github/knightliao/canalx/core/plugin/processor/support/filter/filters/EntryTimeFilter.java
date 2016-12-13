@@ -44,4 +44,8 @@ public class EntryTimeFilter implements IEntryFilter {
             iEntryFilterChain.doFilter(entry);
         }
     }
+
+    public static Logger getLOGGER() {
+        return LOGGER;
+    }
 }

@@ -1,5 +1,7 @@
 package com.github.knightliao.canalx.core.dto;
 
+import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -27,10 +29,10 @@ public class MysqlEntry {
     private char event;
 
     // 列
-    private List<MysqlColumn> columns;
+    private List<MysqlColumn> columns = new ArrayList<>();
 
     // keys
-    private Set<String> keys;
+    private Set<String> keys = new HashSet<>();
 
     public static final char MYSQL_INSERT = 'i';
     public static final char MYSQL_UPDATE = 'u';

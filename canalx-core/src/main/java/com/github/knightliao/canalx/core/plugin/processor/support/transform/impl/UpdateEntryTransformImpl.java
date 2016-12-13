@@ -37,14 +37,18 @@ public class UpdateEntryTransformImpl implements IEntryTransform {
             String key = mysqlColumn.getName();
             String value = mysqlColumn.getValue();
 
+            if (value == null) {
+                isNull = true;
+            }
+
             if (isNull) {
                 map.put(key, "");
             } else {
                 map.put(key, value);
-            }
 
-            if (key.equals(tableKey)) {
-                currentKeyValue = value;
+                if (key.equals(tableKey)) {
+                    currentKeyValue = value;
+                }
             }
         }
 

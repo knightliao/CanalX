@@ -164,7 +164,7 @@
                 <groupId>com.github.knightliao.test</groupId>
                 <artifactId>jutf</artifactId>
                 <scope>test</scope>
-                <version>1.0.2</version>
+                <version>1.0.3-SNAPSHOT</version>
             </dependency>
 
             <!-- logger -->

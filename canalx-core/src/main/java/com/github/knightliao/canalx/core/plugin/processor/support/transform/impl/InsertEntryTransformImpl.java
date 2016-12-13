@@ -37,18 +37,22 @@ public class InsertEntryTransformImpl implements IEntryTransform {
             String key = mysqlColumn.getName();
             String value = mysqlColumn.getValue();
 
+            if (value == null) {
+                isNull = true;
+            }
+
             if (isNull) {
                 map.put(key, "");
             } else {
                 map.put(key, value);
-            }
 
-            if (key.equals(tableKey)) {
-                currentKeyValue = value;
+                if (key.equals(tableKey)) {
+                    currentKeyValue = value;
+                }
             }
         }
 
-        if (currentKeyValue.equals("")) {
+        if ((currentKeyValue.equals(""))) {
             LOGGER.error("cannot find key {} for table {} with entry {}", tableKey, entry.getTable(), entry);
             return null;
 
