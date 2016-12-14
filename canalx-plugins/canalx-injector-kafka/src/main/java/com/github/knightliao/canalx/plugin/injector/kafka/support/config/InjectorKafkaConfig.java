@@ -1,8 +1,6 @@
 package com.github.knightliao.canalx.plugin.injector.kafka.support.config;
 
-import java.io.FileInputStream;
-import java.io.InputStreamReader;
-import java.net.URL;
+import java.io.InputStream;
 import java.util.List;
 import java.util.Properties;
 
@@ -59,13 +57,13 @@ public class InjectorKafkaConfig implements IConfig {
     private void loadConfigAndInit() throws Exception {
 
         Properties kafkaProps = new Properties();
-        URL url = InjectorKafkaConfig.class.getClassLoader().getResource(CONFIG_FILE_NAME);
-        if (url != null) {
+        InputStream inputStream = InjectorKafkaConfig.class.getClassLoader().getResourceAsStream(CONFIG_FILE_NAME);
 
-            LOGGER.info("loading injector kafka config file {}", url.toString());
+        if (inputStream != null) {
 
-            kafkaProps.load(new InputStreamReader(new FileInputStream(url.getPath()),
-                    "utf-8"));
+            kafkaProps.load(inputStream);
+
+            LOGGER.info("loading injector kafka config file {}", CONFIG_FILE_NAME);
 
             ConsumerConfig consumerConfig = new ConsumerConfig(kafkaProps);
 

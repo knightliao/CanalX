@@ -1,9 +1,7 @@
 package com.github.knightliao.canalx.core.support.context.impl;
 
-import java.io.FileInputStream;
 import java.io.IOException;
-import java.io.InputStreamReader;
-import java.net.URL;
+import java.io.InputStream;
 import java.util.LinkedHashSet;
 import java.util.Map;
 import java.util.Properties;
@@ -29,6 +27,8 @@ public class CanalxContextImpl implements ICanalxContext, IDataSourceAware {
 
     // data source provider
     private Map<String, ICanalxProcessor> iCanalxProcessorMap;
+
+    private String FILE_NAME = "canalx.properties";
 
     public CanalxContextImpl() {
         properties = new Properties();
@@ -70,8 +70,9 @@ public class CanalxContextImpl implements ICanalxContext, IDataSourceAware {
 
     @Override
     public void load() throws IOException {
-        URL url = CanalxContextImpl.class.getClassLoader().getResource("canalx.properties");
-        properties.load(new InputStreamReader(new FileInputStream(url.getPath()), "utf-8"));
+        InputStream inputStream = CanalxContextImpl.class.getClassLoader().getResourceAsStream(FILE_NAME);
+        properties.load(inputStream);
+        LOGGER.info("loading sys config: {}", FILE_NAME);
     }
 
     /**

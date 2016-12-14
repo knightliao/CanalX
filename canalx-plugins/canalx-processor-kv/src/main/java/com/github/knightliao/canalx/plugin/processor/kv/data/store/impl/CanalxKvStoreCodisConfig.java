@@ -1,8 +1,6 @@
 package com.github.knightliao.canalx.plugin.processor.kv.data.store.impl;
 
-import java.io.FileInputStream;
-import java.io.InputStreamReader;
-import java.net.URL;
+import java.io.InputStream;
 import java.util.Properties;
 
 import org.slf4j.Logger;
@@ -49,13 +47,14 @@ public class CanalxKvStoreCodisConfig implements IConfig {
     private void loadConfigAndInit(String filePath) throws Exception {
 
         Properties properties = new Properties();
-        URL url = CanalxKvStoreCodisConfig.class.getClassLoader().getResource(filePath);
-        if (url != null) {
 
-            LOGGER.info("loading processor codis config file {}", url.toString());
+        InputStream inputStream = CanalxKvStoreCodisConfig.class.getClassLoader().getResourceAsStream(filePath);
 
-            properties.load(new InputStreamReader(new FileInputStream(url.getPath()),
-                    "utf-8"));
+        if (inputStream != null) {
+
+            properties.load(inputStream);
+
+            LOGGER.info("loading processor codis config file {}", filePath);
 
             redisMaxActive = Integer.parseInt(properties.getProperty("redis.maxActive", "3000"));
             redisMaxIdle = Integer.parseInt(properties.getProperty("redis.maxIdle", "50"));
