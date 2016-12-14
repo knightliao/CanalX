@@ -1,6 +1,7 @@
+ Kafka消息 Speicification
+=======
 
-
-## Kafka消息 Speicification
+Kafka消息 Speicification
 
 | 名字 | 类型 | 对应Java类型 | 意义 |
 | ------| ------ | ------ | ---- |
@@ -35,11 +36,9 @@ INSERT消息样例：
 	"event": "i",
 	"columns": [ 
 	{ "n": "order_id", "t": "bigint(20)", "v": "126", "null": false }, 
-	{ "n": "driver_id", "t": "bigint(20)", "v": "123456", "null": false }, 
-	{ "n": "driver_phone", "t": "varchar(15)", "v": "13264494028", "null": false }, 
-	{ "n": "passenger_id", "t": "bigint(20)", "v": "654321", "null": false },
-	{ "n": "starting_lat", "t": "decimal(10,6)", "v": "121.445000", "null": false },
-	{ "n": "consult_time", "t": "timestamp", "v": "2015-08-10 13:08:13", "null": false }
+	{ "n": "x_id", "t": "bigint(20)", "v": "123456", "null": false }, 
+	{ "n": "phone", "t": "varchar(15)", "v": "13264494028", "null": false }, 
+	{ "n": "time", "t": "timestamp", "v": "2015-08-10 13:08:13", "null": false }
 	],
 	"keys": [ "order_id" ] }
 
@@ -54,13 +53,8 @@ UPDATE消息样例：
 	"event": "u",
 	"columns": [
 	{"n": "order_id", "t": "bigint(20)", "v": "126", "null": false, "updated": false},
-	{"n": "driver_id", "t": "bigint(20)", "v": "123456", "null": false, "updated": false},
-	{ "n": "passenger_id", "t": "bigint(20)", "v": "654321", "null": false, "updated": false},
-	{"n": "current_lng", "t": "decimal(10,6)", "v": "39.021400", "null": false, "updated": false},
-	{"n": "current_lat", "t": "decimal(10,6)", "v": "120.423300", "null": false, "updated": false},
-	{ "n": "starting_lng", "t": "decimal(10,6)", "v": "38.128000", "null": false, "updated": false},
-	{ "n": "starting_lat", "t": "decimal(10,6)", "v": "121.445000", "null": false, "updated": false},
-	{ "n": "dest_name", "t": "varchar(100)", "v": "Renmin University", "origin_val": "知春路", "null": false, "updated": true}
+	{"n": "x_id", "t": "bigint(20)", "v": "123456", "null": false, "updated": false},
+	{ "n": "name", "t": "varchar(100)", "v": "小春", "origin_val": "小明", "null": false, "updated": true}
 	],
 	"keys": ["order_id"]
 	}
@@ -76,10 +70,8 @@ DELETE消息样例：
 	"event": "d",
 	"columns": [
 	{"n": "order_id", "t": "bigint(20)", "v": "126", "null": false},
-	{"n": "driver_id", "t": "bigint(20)", "v": "123456", "null": false},
-	{"n": "driver_phone", "t": "varchar(15)", "v": "13264494028", "null": false},
-	{"n": "passenger_id", "t": "bigint(20)", "v": "654321", "null": false},
-	{"n": "current_lng", "t": "decimal(10,6)", "v": "39.021400", "null": false}
+	{"n": "x_id", "t": "bigint(20)", "v": "123456", "null": false},
+	{"n": "phone", "t": "varchar(15)", "v": "13264494028", "null": false}
 	],
 	"keys": ["order_id"]
 	}
