@@ -7,11 +7,12 @@ import java.util.Map;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.github.knightliao.canalx.core.dto.MysqlColumn;
 import com.github.knightliao.canalx.core.dto.MysqlEntry;
 import com.github.knightliao.canalx.core.plugin.processor.support.transform.IEntryTransform;
 import com.github.knightliao.canalx.core.plugin.processor.support.transform.TransformResult;
-import com.google.gson.Gson;
 
 /**
  * @author knightliao
@@ -20,8 +21,6 @@ import com.google.gson.Gson;
 public class InsertEntryTransformImpl implements IEntryTransform {
 
     protected static final Logger LOGGER = LoggerFactory.getLogger(InsertEntryTransformImpl.class);
-
-    protected static Gson gson = new Gson();
 
     @Override
     public TransformResult entry2Json(MysqlEntry entry, String tableKey) {
@@ -58,7 +57,14 @@ public class InsertEntryTransformImpl implements IEntryTransform {
 
         } else {
 
-            String value = gson.toJson(map);
+            String value;
+            try {
+                value = new ObjectMapper().writeValueAsString(map);
+            } catch (JsonProcessingException e) {
+                LOGGER.error("json dump error, key {} for table {} with entry {}", tableKey, entry.getTable
+                        (), entry);
+                return null;
+            }
 
             return new TransformResult(currentKeyValue, value);
         }

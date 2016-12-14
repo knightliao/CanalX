@@ -1,7 +1,7 @@
- Kafka消息 Speicification
+ Kafka消息 Specification
 =======
 
-Kafka消息 Speicification
+Kafka消息 specification, encoded using GSON library.
 
 | 名字 | 类型 | 对应Java类型 | 意义 |
 | ------| ------ | ------ | ---- |

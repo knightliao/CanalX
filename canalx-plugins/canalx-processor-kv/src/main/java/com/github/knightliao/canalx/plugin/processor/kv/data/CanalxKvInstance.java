@@ -65,6 +65,10 @@ public class CanalxKvInstance {
 
         if (isInit) {
 
+            if (tableId == null || key == null) {
+                return null;
+            }
+
             try {
 
                 String value = iCanalxKv.get(tableId, key);
