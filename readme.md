@@ -39,7 +39,6 @@ docs: http://canalx.readthedocs.io/en/latest/
 ## 推荐
 
 - 有态度无广告的搜索引擎: https://www.sov5.com
-- 微读 - 高品质阅读: http://www.100weidu.com
 - Python中国社区: http://www.python88.com
 - Disconf - 分布式配置管理平台: http://github.com/knightliao/disconf
 - CanalX - 基于 `Canal` 的数据感知服务框架: http://github.com/knightliao/canalX
