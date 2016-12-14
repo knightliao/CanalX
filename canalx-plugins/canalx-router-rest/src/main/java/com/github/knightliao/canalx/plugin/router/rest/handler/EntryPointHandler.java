@@ -42,8 +42,12 @@ public class EntryPointHandler {
     @Produces(MediaType.APPLICATION_JSON)
     public String get(@QueryParam("tableId") String tableId, @QueryParam("key") String key) {
 
-        return CanalxDataGetter.get(tableId, key);
+        String val = CanalxDataGetter.get(tableId, key);
+        if (val == null) {
+            return "";
+        }
 
+        return val;
     }
 
 }
