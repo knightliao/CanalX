@@ -100,6 +100,8 @@ public class CanalxKvStoreCodisKvImpl implements ICanalxKv {
         Jedis jedis = null;
         try {
 
+            LOGGER.debug("jedis get: {} {}", tableId, key);
+
             jedis = jedisPool.getResource();
 
             String hKey = redisPrefix + tableId;

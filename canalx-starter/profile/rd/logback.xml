@@ -26,6 +26,14 @@
         </encoder>
     </appender>
 
+    <logger name="io.codis.jodis">
+        <level value="DEBUG"/>
+    </logger>
+
+    <logger name="redis.clients.jedis">
+        <level value="DEBUG"/>
+    </logger>
+
     <logger name="org.apache.zookeeper">
         <level value="ERROR"/>
     </logger>
