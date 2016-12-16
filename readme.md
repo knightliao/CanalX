@@ -29,6 +29,7 @@ docs: http://canalx.readthedocs.io/en/latest/
 	- `Data`->`ElasticSearch`。将变更Data数据转化成`ElasticSearch`搜索服务。(pending, 插件 `canalx-processor-es`)
 - 数据发布功能(router):
 	- `web-rest`发布。将processor中的数据以 `web-rest` 接口的方式。(已发布, 插件 [`canalx-router-rest`](https://github.com/knightliao/CanalX/tree/master/canalx-plugins/canalx-router-rest))
+		- rest-client 可使用 https://github.com/knightliao/JRestClient
 	- `dubbo`发布。将processor中的数据以 `dubbo-rpc` 接口的方式(pending, 插件 `canalx-router-dubbo`)
 	- `kepler`发布。将processor中的数据以 `kepler-rpc` 接口的方式(pending, 插件 `canalx-router-kepler`)
 
