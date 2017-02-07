@@ -17,6 +17,7 @@
         <module>canalx-injector-kafka</module>
         <module>canalx-processor-kv</module>
         <module>canalx-processor-empty</module>
+        <module>canalx-processor-mybatis</module>
         <module>canalx-router-rest</module>
         <module>canalx-router-empty</module>
     </modules>

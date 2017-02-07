@@ -100,38 +100,41 @@ public class ProcessorMgrImpl implements IProcessorMgr, IPlugin {
     private void loadEntryFilterList(String pluginName, Class<ICanalxProcessor> canalProcessorClass, ICanalxProcessor
             iCanalxProcessor) {
 
+        List<Class<?>> classList = new ArrayList<>();
+
         // get filter list
         EntryFilterList entryFilterList = canalProcessorClass.getAnnotation(EntryFilterList.class);
+
         if (entryFilterList != null) {
             Class<?>[] classes = entryFilterList.classes();
-            List<Class<?>> classList = new ArrayList<>(Arrays.asList(classes));
-
-            // add core
-            classList.add(ProcessCoreFilter.class);
-
-            List<IEntryFilter> iEntryFilters = new ArrayList<>();
-
-            for (Class<?> curClass : classList) {
-
-                try {
-
-                    IEntryFilter iEntryFilter = (IEntryFilter) curClass.newInstance();
-
-                    // core filter
-                    if (iEntryFilter instanceof ICanalxProcessorAware) {
-                        ((ICanalxProcessorAware) iEntryFilter).setupICanalxProcessor(iCanalxProcessor);
-                    }
-
-                    iEntryFilters.add(iEntryFilter);
-
-                } catch (Exception e) {
-                    LOGGER.error(e.toString(), e);
-                }
-            }
-
-            IEntryFilterChain iEntryFilterChain = EntryFilterChainFactory.getEntryFilterChain(iEntryFilters);
-            innerCanalEntryFilterMap.put(pluginName, iEntryFilterChain);
+            classList = new ArrayList<>(Arrays.asList(classes));
         }
+
+        // add core
+        classList.add(ProcessCoreFilter.class);
+
+        List<IEntryFilter> iEntryFilters = new ArrayList<>();
+
+        for (Class<?> curClass : classList) {
+
+            try {
+
+                IEntryFilter iEntryFilter = (IEntryFilter) curClass.newInstance();
+
+                // core filter
+                if (iEntryFilter instanceof ICanalxProcessorAware) {
+                    ((ICanalxProcessorAware) iEntryFilter).setupICanalxProcessor(iCanalxProcessor);
+                }
+
+                iEntryFilters.add(iEntryFilter);
+
+            } catch (Exception e) {
+                LOGGER.error(e.toString(), e);
+            }
+        }
+
+        IEntryFilterChain iEntryFilterChain = EntryFilterChainFactory.getEntryFilterChain(iEntryFilters);
+        innerCanalEntryFilterMap.put(pluginName, iEntryFilterChain);
     }
 
     @Override

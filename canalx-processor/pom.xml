@@ -41,6 +41,12 @@
         </dependency>
 
         <dependency>
+            <groupId>com.github.knightliao.canalx</groupId>
+            <artifactId>canalx-processor-mybatis</artifactId>
+            <version>${canalx-processor-mybatis.version}</version>
+        </dependency>
+
+        <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
         </dependency>
