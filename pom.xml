@@ -21,6 +21,7 @@
         <canalx-processor-empty.version>0.0.1-SNAPSHOT</canalx-processor-empty.version>
         <canalx-processor-kv.version>0.0.1-SNAPSHOT</canalx-processor-kv.version>
         <canalx-processor-codis.version>0.0.1-SNAPSHOT</canalx-processor-codis.version>
+        <canalx-processor-mybatis.version>0.0.1-SNAPSHOT</canalx-processor-mybatis.version>
         <canalx-router-rest.version>0.0.1-SNAPSHOT</canalx-router-rest.version>
         <canalx-router-kepler.version>0.0.1-SNAPSHOT</canalx-router-kepler.version>
         <canalx-router-empty.version>0.0.1-SNAPSHOT</canalx-router-empty.version>
@@ -29,12 +30,12 @@
         <encoding>UTF-8</encoding>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.compiler.encoding>UTF-8</maven.compiler.encoding>
+        <spring.version>4.2.4.RELEASE</spring.version>
 
         <!-- JAVA环境 -->
         <java.version>1.7</java.version>
         <source.version>1.7</source.version>
         <target.version>1.7</target.version>
-        <spring.version>4.1.7.RELEASE</spring.version>
         <spring.amqp.version>1.4.5.RELEASE</spring.amqp.version>
         <jsp.version>2.0</jsp.version>
         <servlet.version>2.5</servlet.version>
@@ -139,13 +140,6 @@
                 <version>${jackson.version}</version>
             </dependency>
 
-            <!-- spring -->
-            <dependency>
-                <groupId>org.springframework</groupId>
-                <artifactId>spring-context</artifactId>
-                <version>${spring.version}</version>
-            </dependency>
-
             <!-- tools -->
             <dependency>
                 <groupId>org.projectlombok</groupId>
@@ -203,6 +197,8 @@
                 <artifactId>log4j</artifactId>
                 <version>${log4j.version}</version>
             </dependency>
+
+
 
         </dependencies>
     </dependencyManagement>

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.github.knightliao.canalx.plugin.processor.mybatis.dao.ext.TestDao">
+  <resultMap id="BaseResultMap" type="com.github.knightliao.canalx.plugin.processor.mybatis.entity.Test" extends="com.github.knightliao.canalx.plugin.processor.mybatis.dao.gen.TestMapper.BaseResultMap">
+   
+  </resultMap>
+  
+  <sql id="Base_Column_List">
+  		id,
+  		name
+  </sql>
+  
+  
+</mapper>
