@@ -36,7 +36,7 @@ public class CanalxMybatisProcessor implements ICanalxProcessor, ICanalxDataRout
     @Override
     public void processUpdate(MysqlEntryWrap entry) throws CanalxProcessorException {
         if (mybatisMgr != null) {
-            mybatisMgr.doWork();
+            //mybatisMgr.doWork();
         }
     }
 
