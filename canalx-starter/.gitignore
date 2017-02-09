@@ -3,7 +3,6 @@
 /.project
 /target/
 /.classpath
-main/
 log
 profile/rd/codis-example.properties
 coverage-report
