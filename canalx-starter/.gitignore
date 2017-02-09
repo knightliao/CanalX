@@ -4,6 +4,5 @@
 /target/
 /.classpath
 log
-profile/rd/codis-example.properties
 coverage-report
 dependency-reduced-pom.xml
