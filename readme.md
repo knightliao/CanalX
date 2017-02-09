@@ -25,7 +25,7 @@ docs: http://canalx.readthedocs.io/en/latest/
 - 数据处理功能(processor):
 	- `Data`->`kv/codis`。将变更Data数据转化成 全内存的`kv`存储 或者 [`Codis(redis的某种实现)`](https://github.com/CodisLabs/jodis)中间件存储。(已发布, 插件 [`canalx-processor-kv`](https://github.com/knightliao/CanalX/tree/master/canalx-plugins/canalx-processor-kv))
 	- `Data`->`History`。将变更Data数据转化成`History`存储。(pending, 插件 `canalx-processor-history`)
-	- `Data`->`Mysql(Mybatis)`。将变更Data数据写到Mysql(使用Spring/Mybatis)的示例。(插件 `canalx-processor-mybatis`)
+	- `Data`->`Mysql(Mybatis)`。将变更Data数据写到Mysql(使用Spring/Mybatis)的示例。(插件 [`canalx-processor-mybatis`](https://github.com/knightliao/CanalX/tree/master/canalx-plugins/canalx-processor-mybatis)
 	- `Data`->`Notification`。将变更Data数据转化成`Notification`存储。(pending, 插件 `canalx-processor-notification`)
 	- `Data`->`ElasticSearch`。将变更Data数据转化成`ElasticSearch`搜索服务。(pending, 插件 `canalx-processor-es`)
 - 数据发布功能(router):
