@@ -34,6 +34,7 @@ public class CanalxKvProcessor implements ICanalxProcessor, ICanalxDataRouter, I
     // transform
     private IEntryTransform insertTransform = EntryTransformFactory.getInsertTransform();
     private IEntryTransform updateTransform = EntryTransformFactory.getUpdateTransform();
+    private IEntryTransform deleteTransform = EntryTransformFactory.getDeleteTransform();
 
     @Override
     public void processUpdate(MysqlEntryWrap entry) throws CanalxProcessorException {
@@ -78,6 +79,18 @@ public class CanalxKvProcessor implements ICanalxProcessor, ICanalxDataRouter, I
 
         // not process
         LOGGER.info(entry.toString());
+
+        String tableId = TableTopicUtil.getTableId(entry);
+
+        String tableKey = CanalxKvInstance.getTableKey(tableId);
+
+        if (tableKey.equals("")) {
+            LOGGER.error("cannot find tableKey for tableId {} with update op. ", tableId);
+        } else {
+
+            TransformResult transformResult = insertTransform.entry2Json(entry.getMysqlEntry(), tableKey);
+            CanalxKvInstance.put(tableId, transformResult.getKey(), "");
+        }
     }
 
     /**

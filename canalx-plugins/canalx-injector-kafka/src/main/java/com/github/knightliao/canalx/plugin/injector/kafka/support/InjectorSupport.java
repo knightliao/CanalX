@@ -52,9 +52,6 @@ public class InjectorSupport implements Runnable {
                 long offset = mm.offset();
 
                 MysqlEntry entry = gson.fromJson(message, MysqlEntry.class);
-                if (entry.getEvent() == MysqlEntry.MYSQL_DELETE) {
-                    continue;
-                }
 
                 // warp
                 MysqlEntryWrap mysqlEntryWrap = new MysqlEntryWrap(topic, entry);
