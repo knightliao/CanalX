@@ -1,5 +1,7 @@
 package com.github.knightliao.canalx.plugin.processor.mybatis;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import com.github.knightliao.canalx.core.dto.MysqlEntryWrap;
@@ -23,6 +25,8 @@ public class CanalxMybatisProcessor implements ICanalxProcessor, ICanalxDataRout
 
     private MybatisMgr mybatisMgr = null;
 
+    protected static final Logger LOGGER = LoggerFactory.getLogger(CanalxMybatisProcessor.class);
+
     @Override
     public void setCanalxContext(ICanalxContext iCanalxContext) {
         this.iCanalxContext = iCanalxContext;
@@ -37,17 +41,18 @@ public class CanalxMybatisProcessor implements ICanalxProcessor, ICanalxDataRout
     public void processUpdate(MysqlEntryWrap entry) throws CanalxProcessorException {
         if (mybatisMgr != null) {
             //mybatisMgr.doWork();
+            LOGGER.info(entry.toString());
         }
     }
 
     @Override
     public void processInsert(MysqlEntryWrap entry) throws CanalxProcessorException {
-
+        LOGGER.info(entry.toString());
     }
 
     @Override
     public void processDelete(MysqlEntryWrap entry) throws CanalxProcessorException {
-
+        LOGGER.info(entry.toString());
     }
 
     @Override
