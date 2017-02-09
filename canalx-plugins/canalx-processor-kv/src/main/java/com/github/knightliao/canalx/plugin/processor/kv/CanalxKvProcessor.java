@@ -89,7 +89,7 @@ public class CanalxKvProcessor implements ICanalxProcessor, ICanalxDataRouter, I
         } else {
 
             TransformResult transformResult = insertTransform.entry2Json(entry.getMysqlEntry(), tableKey);
-            CanalxKvInstance.put(tableId, transformResult.getKey(), "");
+            CanalxKvInstance.delete(tableId, transformResult.getKey());
         }
     }
 

@@ -118,6 +118,32 @@ public class CanalxKvInstance {
     }
 
     /**
+     * @param key
+     *
+     * @return
+     */
+    public static boolean delete(String tableId, String key) {
+
+        if (isInit) {
+
+            try {
+
+                iCanalxKv.delete(tableId, key);
+                return true;
+
+            } catch (CanalxProcessorException e) {
+
+                LOGGER.error("cannot put {} {} ", tableId, key, e.toString());
+                return false;
+            }
+
+        } else {
+
+            return false;
+        }
+    }
+
+    /**
      * 获取 table 要设定的 KEY
      *
      * @param tableId

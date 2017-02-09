@@ -149,6 +149,29 @@ public class CanalxKvStoreCodisKvImpl implements ICanalxKv {
     }
 
     @Override
+    public void delete(String tableId, String key) throws CanalxProcessorException {
+        Jedis jedis = null;
+        try {
+
+            LOGGER.debug("jedis get: {} {}", tableId, key);
+
+            jedis = jedisPool.getResource();
+
+            String hKey = redisPrefix + tableId;
+            jedis.hdel(hKey, key);
+
+        } catch (Exception e) {
+
+            throw new CanalxProcessorException(e);
+        } finally {
+
+            if (jedis != null) {
+                jedis.close();
+            }
+        }
+    }
+
+    @Override
     public void shutdown() {
 
         if (jedisPool != null) {

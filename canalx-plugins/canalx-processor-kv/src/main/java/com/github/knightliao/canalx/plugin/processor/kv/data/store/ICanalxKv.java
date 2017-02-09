@@ -12,6 +12,8 @@ public interface ICanalxKv {
 
     void put(String tableId, String key, String value) throws CanalxProcessorException;
 
+    void delete(String tableId, String key) throws CanalxProcessorException;
+
     void shutdown();
 
 }

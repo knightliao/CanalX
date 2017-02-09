@@ -71,6 +71,13 @@ public class CanalxKvStoreMemImpl implements ICanalxKv {
     }
 
     @Override
+    public void delete(String tableId, String key) throws CanalxProcessorException {
+        if (dataMap.keySet().contains(tableId)) {
+            dataMap.get(tableId).remove(key);
+        }
+    }
+
+    @Override
     public void shutdown() {
 
         dataMap.clear();
