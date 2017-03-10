@@ -82,6 +82,7 @@ public class CanalxKafkaInjector implements ICanalxInjector, IInjectorEntryProce
                 ConsumerIterator<byte[], byte[]> it = newOrderStreams.get(0).iterator();
 
                 executor.submit(new InjectorSupport(it, topicStr, injectorEventProcessTemplate));
+                LOGGER.info("submit thread-{} ", topicStr);
             }
         }
     }

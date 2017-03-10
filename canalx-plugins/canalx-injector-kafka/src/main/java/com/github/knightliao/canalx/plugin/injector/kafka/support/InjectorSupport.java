@@ -38,7 +38,7 @@ public class InjectorSupport implements Runnable {
     @Override
     public void run() {
 
-        LOGGER.info("start to run Injector{} for Topic{}", CanalxKafkaInjector.class.toString(), topic);
+        LOGGER.info("start to run Injector{} for Topic {}", CanalxKafkaInjector.class.toString(), topic);
 
         while (it.hasNext()) {
 
