@@ -34,7 +34,7 @@ public class MysqlEntry {
     // keys
     private Set<String> keys = new HashSet<>();
 
-    private String transactionId;
+    private String xid;
 
     public static final char MYSQL_INSERT = 'i';
     public static final char MYSQL_UPDATE = 'u';
