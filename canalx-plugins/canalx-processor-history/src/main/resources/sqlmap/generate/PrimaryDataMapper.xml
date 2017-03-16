@@ -1,0 +1,260 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.didichuxing.canalx.plugin.history.dao.PrimaryDataDao">
+  <resultMap id="BaseResultMap" type="com.didichuxing.canalx.plugin.history.model.PrimaryData">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="user_id" jdbcType="BIGINT" property="userId" />
+    <result column="user_name" jdbcType="VARCHAR" property="userName" />
+    <result column="user_ip" jdbcType="VARCHAR" property="userIp" />
+    <result column="trace_id" jdbcType="VARCHAR" property="traceId" />
+    <result column="xid" jdbcType="VARCHAR" property="xid" />
+    <result column="status" jdbcType="INTEGER" property="status" />
+    <result column="log_time" jdbcType="TIMESTAMP" property="logTime" />
+    <result column="canal_time" jdbcType="TIMESTAMP" property="canalTime" />
+    <result column="binlog" jdbcType="VARCHAR" property="binlog" />
+    <result column="db_name" jdbcType="VARCHAR" property="dbName" />
+    <result column="table_name" jdbcType="VARCHAR" property="tableName" />
+    <result column="table_event" jdbcType="VARCHAR" property="tableEvent" />
+    <result column="table_keys" jdbcType="VARCHAR" property="tableKeys" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+  </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.didichuxing.canalx.plugin.history.model.PrimaryData">
+    <result column="table_columns" jdbcType="LONGVARCHAR" property="tableColumns" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, user_id, user_name, user_ip, trace_id, xid, status, log_time, canal_time, binlog, 
+    db_name, table_name, table_event, table_keys, create_time, update_time
+  </sql>
+  <sql id="Blob_Column_List">
+    table_columns
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="ResultMapWithBLOBs">
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from primary_data
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from primary_data
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.didichuxing.canalx.plugin.history.model.PrimaryData">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into primary_data (user_id, user_name, user_ip, 
+      trace_id, xid, status, 
+      log_time, canal_time, binlog, 
+      db_name, table_name, table_event, 
+      table_keys, create_time, update_time, 
+      table_columns)
+    values (#{userId,jdbcType=BIGINT}, #{userName,jdbcType=VARCHAR}, #{userIp,jdbcType=VARCHAR}, 
+      #{traceId,jdbcType=VARCHAR}, #{xid,jdbcType=VARCHAR}, #{status,jdbcType=INTEGER}, 
+      #{logTime,jdbcType=TIMESTAMP}, #{canalTime,jdbcType=TIMESTAMP}, #{binlog,jdbcType=VARCHAR}, 
+      #{dbName,jdbcType=VARCHAR}, #{tableName,jdbcType=VARCHAR}, #{tableEvent,jdbcType=VARCHAR}, 
+      #{tableKeys,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}, 
+      #{tableColumns,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.didichuxing.canalx.plugin.history.model.PrimaryData">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into primary_data
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="userId != null">
+        user_id,
+      </if>
+      <if test="userName != null">
+        user_name,
+      </if>
+      <if test="userIp != null">
+        user_ip,
+      </if>
+      <if test="traceId != null">
+        trace_id,
+      </if>
+      <if test="xid != null">
+        xid,
+      </if>
+      <if test="status != null">
+        status,
+      </if>
+      <if test="logTime != null">
+        log_time,
+      </if>
+      <if test="canalTime != null">
+        canal_time,
+      </if>
+      <if test="binlog != null">
+        binlog,
+      </if>
+      <if test="dbName != null">
+        db_name,
+      </if>
+      <if test="tableName != null">
+        table_name,
+      </if>
+      <if test="tableEvent != null">
+        table_event,
+      </if>
+      <if test="tableKeys != null">
+        table_keys,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="updateTime != null">
+        update_time,
+      </if>
+      <if test="tableColumns != null">
+        table_columns,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="userId != null">
+        #{userId,jdbcType=BIGINT},
+      </if>
+      <if test="userName != null">
+        #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="userIp != null">
+        #{userIp,jdbcType=VARCHAR},
+      </if>
+      <if test="traceId != null">
+        #{traceId,jdbcType=VARCHAR},
+      </if>
+      <if test="xid != null">
+        #{xid,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=INTEGER},
+      </if>
+      <if test="logTime != null">
+        #{logTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="canalTime != null">
+        #{canalTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="binlog != null">
+        #{binlog,jdbcType=VARCHAR},
+      </if>
+      <if test="dbName != null">
+        #{dbName,jdbcType=VARCHAR},
+      </if>
+      <if test="tableName != null">
+        #{tableName,jdbcType=VARCHAR},
+      </if>
+      <if test="tableEvent != null">
+        #{tableEvent,jdbcType=VARCHAR},
+      </if>
+      <if test="tableKeys != null">
+        #{tableKeys,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tableColumns != null">
+        #{tableColumns,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.didichuxing.canalx.plugin.history.model.PrimaryData">
+    update primary_data
+    <set>
+      <if test="userId != null">
+        user_id = #{userId,jdbcType=BIGINT},
+      </if>
+      <if test="userName != null">
+        user_name = #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="userIp != null">
+        user_ip = #{userIp,jdbcType=VARCHAR},
+      </if>
+      <if test="traceId != null">
+        trace_id = #{traceId,jdbcType=VARCHAR},
+      </if>
+      <if test="xid != null">
+        xid = #{xid,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=INTEGER},
+      </if>
+      <if test="logTime != null">
+        log_time = #{logTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="canalTime != null">
+        canal_time = #{canalTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="binlog != null">
+        binlog = #{binlog,jdbcType=VARCHAR},
+      </if>
+      <if test="dbName != null">
+        db_name = #{dbName,jdbcType=VARCHAR},
+      </if>
+      <if test="tableName != null">
+        table_name = #{tableName,jdbcType=VARCHAR},
+      </if>
+      <if test="tableEvent != null">
+        table_event = #{tableEvent,jdbcType=VARCHAR},
+      </if>
+      <if test="tableKeys != null">
+        table_keys = #{tableKeys,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tableColumns != null">
+        table_columns = #{tableColumns,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.didichuxing.canalx.plugin.history.model.PrimaryData">
+    update primary_data
+    set user_id = #{userId,jdbcType=BIGINT},
+      user_name = #{userName,jdbcType=VARCHAR},
+      user_ip = #{userIp,jdbcType=VARCHAR},
+      trace_id = #{traceId,jdbcType=VARCHAR},
+      xid = #{xid,jdbcType=VARCHAR},
+      status = #{status,jdbcType=INTEGER},
+      log_time = #{logTime,jdbcType=TIMESTAMP},
+      canal_time = #{canalTime,jdbcType=TIMESTAMP},
+      binlog = #{binlog,jdbcType=VARCHAR},
+      db_name = #{dbName,jdbcType=VARCHAR},
+      table_name = #{tableName,jdbcType=VARCHAR},
+      table_event = #{tableEvent,jdbcType=VARCHAR},
+      table_keys = #{tableKeys,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      table_columns = #{tableColumns,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.didichuxing.canalx.plugin.history.model.PrimaryData">
+    update primary_data
+    set user_id = #{userId,jdbcType=BIGINT},
+      user_name = #{userName,jdbcType=VARCHAR},
+      user_ip = #{userIp,jdbcType=VARCHAR},
+      trace_id = #{traceId,jdbcType=VARCHAR},
+      xid = #{xid,jdbcType=VARCHAR},
+      status = #{status,jdbcType=INTEGER},
+      log_time = #{logTime,jdbcType=TIMESTAMP},
+      canal_time = #{canalTime,jdbcType=TIMESTAMP},
+      binlog = #{binlog,jdbcType=VARCHAR},
+      db_name = #{dbName,jdbcType=VARCHAR},
+      table_name = #{tableName,jdbcType=VARCHAR},
+      table_event = #{tableEvent,jdbcType=VARCHAR},
+      table_keys = #{tableKeys,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

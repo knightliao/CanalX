@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:jdbc="http://www.springframework.org/schema/jdbc" xmlns:tx="http://www.springframework.org/schema/tx"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd http://www.springframework.org/schema/jdbc http://www.springframework.org/schema/jdbc/spring-jdbc.xsd http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd">
+
+    <context:property-placeholder location="application_test.properties"/>
+    
+    <context:component-scan base-package="com.didichuxing.canalx.plugin.history"/>
+
+    <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
+        <property name="driverClassName" value="${h2.driver}"/>
+        <property name="url" value="${h2.url}"/>
+        <property name="username" value="${h2.username}"/>
+        <property name="password" value="${h2.password}"/>
+    </bean>
+
+    <jdbc:initialize-database data-source="dataSource">
+        <jdbc:script location="classpath:sql/canalx_init.sql"/>
+    </jdbc:initialize-database>
+
+    <!-- 事务管理器 -->
+    <bean id="transactionManager"
+          class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+        <property name="dataSource" ref="dataSource"></property>
+    </bean>
+    <tx:annotation-driven transaction-manager="transactionManager"/>
+
+
+    <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+        <property name="basePackage" value="com.didichuxing.canalx.plugin.history.dao"/>
+        <property name="sqlSessionFactoryBeanName" value="sqlSessionFactory"/>
+    </bean>
+
+    <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+        <property name="dataSource" ref="dataSource"/>
+        <property name="mapperLocations" value="classpath*:sqlmap/**/*.xml"/>
+    </bean>
+
+    <!--<bean id="databaseConfig" class="com.github.springtestdbunit.bean.DatabaseConfigBean">-->
+        <!--<property name="allowEmptyFields" value="true"></property>-->
+    <!--</bean>-->
+    <!--<bean id="dataSourceConnection" class="com.github.springtestdbunit.bean.DatabaseDataSourceConnectionFactoryBean">-->
+        <!--<property name="dataSource" ref="dataSource"></property>-->
+        <!--<property name="databaseConfig" ref="databaseConfig"></property>-->
+    <!--</bean>-->
+
+</beans>

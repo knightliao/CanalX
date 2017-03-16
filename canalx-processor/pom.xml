@@ -28,22 +28,27 @@
             <version>${canalx.version}</version>
         </dependency>
 
-        <dependency>
-            <groupId>com.github.knightliao.canalx</groupId>
-            <artifactId>canalx-processor-kv</artifactId>
-            <version>${canalx-processor-kv.version}</version>
-        </dependency>
+        <!--<dependency>-->
+            <!--<groupId>com.github.knightliao.canalx</groupId>-->
+            <!--<artifactId>canalx-processor-kv</artifactId>-->
+            <!--<version>${canalx-processor-kv.version}</version>-->
+        <!--</dependency>-->
 
-        <dependency>
-            <groupId>com.github.knightliao.canalx</groupId>
-            <artifactId>canalx-processor-empty</artifactId>
-            <version>${canalx-processor-empty.version}</version>
-        </dependency>
+        <!--<dependency>-->
+            <!--<groupId>com.github.knightliao.canalx</groupId>-->
+            <!--<artifactId>canalx-processor-empty</artifactId>-->
+            <!--<version>${canalx-processor-empty.version}</version>-->
+        <!--</dependency>-->
 
+        <!--<dependency>-->
+            <!--<groupId>com.github.knightliao.canalx</groupId>-->
+            <!--<artifactId>canalx-processor-mybatis</artifactId>-->
+            <!--<version>${canalx-processor-mybatis.version}</version>-->
+        <!--</dependency>-->
         <dependency>
             <groupId>com.github.knightliao.canalx</groupId>
-            <artifactId>canalx-processor-mybatis</artifactId>
-            <version>${canalx-processor-mybatis.version}</version>
+            <artifactId>canalx-processor-history</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
         </dependency>
 
         <dependency>

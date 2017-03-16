@@ -46,6 +46,8 @@
         <level value="WARN"/>
     </logger>
 
+    <logger name="com.ibatis" level="debug" />
+
     <root level="INFO">
         <appender-ref ref="stdout"/>
         <appender-ref ref="logfile"/>

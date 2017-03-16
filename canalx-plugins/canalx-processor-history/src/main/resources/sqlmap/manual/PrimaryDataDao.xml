@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.didichuxing.canalx.plugin.history.dao.PrimaryDataDao">
+    <update id="updateTraceId">
+        update primary_data pd set pd.status=1,pd.trace_id=#{traceId} where pd.xid=#{xid}
+    </update>
+</mapper>

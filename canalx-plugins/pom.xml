@@ -20,6 +20,7 @@
         <module>canalx-processor-mybatis</module>
         <module>canalx-router-rest</module>
         <module>canalx-router-empty</module>
+        <module>canalx-processor-history</module>
     </modules>
 
 </project>

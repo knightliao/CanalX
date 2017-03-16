@@ -68,7 +68,10 @@ public class ReflectionUtil {
     public static Reflections getReflection(String packName) {
 
         List<String> curList = new ArrayList<>();
-        curList.add(packName);
+        String[] split = packName.split(",");
+        for (String s : split) {
+            curList.add(s);
+        }
 
         return getReflection(curList);
     }
