@@ -38,10 +38,3 @@ docs: http://canalx.readthedocs.io/en/latest/
 
 - canalx-select-db-json - Fetch MYSQL's data to K-V style data.  http://github.com/knightliao/canalx-select-db-json
 
-## 推荐
-
-- Disconf - 分布式配置管理平台: http://github.com/knightliao/disconf
-- CanalX - 基于 `Canal` 的数据感知服务框架: http://github.com/knightliao/canalX
-- jutf - Java Unit Test Framework: https://github.com/knightliao/jutf
-- pfrock - A plugin-based server for running fake HTTP services (especially SOA service): https://github.com/knightliao/pfrock
-- pdbsync - configurable db sync tool using python: https://github.com/knightliao/pdbsync
