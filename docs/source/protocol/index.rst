@@ -1,8 +1,8 @@
-协议
-====
+数据导入功能(injector)
+================
 
 .. toctree::
     :maxdepth: 2
-    :numbered: 2
 
-    src/protocol
+* :doc:`src/canalx-injector-kafka`
+    * :doc:`src/canalx-injector-kafka/protocol`
