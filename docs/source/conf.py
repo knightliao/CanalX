@@ -29,7 +29,7 @@ from recommonmark.parser import CommonMarkParser
 
 extensions = [
     'recommonmark',
-    'sphinx_markdown_tables'
+    'sphinx-markdown-tables'
 ]
 
 # Add any paths that contain templates here, relative to this directory.
