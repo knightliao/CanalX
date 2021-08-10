@@ -8,10 +8,10 @@
         <version>0.0.1-SNAPSHOT</version>
     </parent>
 
-    <artifactId>canalx-processor-kv</artifactId>
-    <name>canalx-processor-kv</name>
+    <artifactId>canalx-processor-kv-codis</artifactId>
+    <name>canalx-processor-kv-codis</name>
     <packaging>jar</packaging>
-    <version>${canalx-processor-kv.version}</version>
+    <version>${canalx-processor-kv-codis.version}</version>
 
     <dependencies>
 

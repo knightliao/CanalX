@@ -19,8 +19,7 @@
         <canalx-injector-empty.version>0.0.1-SNAPSHOT</canalx-injector-empty.version>
         <canalx-injector-kafka.version>0.0.1-SNAPSHOT</canalx-injector-kafka.version>
         <canalx-processor-empty.version>0.0.1-SNAPSHOT</canalx-processor-empty.version>
-        <canalx-processor-kv.version>0.0.1-SNAPSHOT</canalx-processor-kv.version>
-        <canalx-processor-codis.version>0.0.1-SNAPSHOT</canalx-processor-codis.version>
+        <canalx-processor-kv-codis.version>0.0.1-SNAPSHOT</canalx-processor-kv-codis.version>
         <canalx-processor-mybatis.version>0.0.1-SNAPSHOT</canalx-processor-mybatis.version>
         <canalx-router-rest.version>0.0.1-SNAPSHOT</canalx-router-rest.version>
         <canalx-router-kepler.version>0.0.1-SNAPSHOT</canalx-router-kepler.version>

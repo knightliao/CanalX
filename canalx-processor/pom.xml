@@ -30,8 +30,8 @@
 
         <dependency>
             <groupId>com.github.knightliao.canalx</groupId>
-            <artifactId>canalx-processor-kv</artifactId>
-            <version>${canalx-processor-kv.version}</version>
+            <artifactId>canalx-processor-kv-codis</artifactId>
+            <version>${canalx-processor-kv-codis.version}</version>
         </dependency>
 
         <dependency>

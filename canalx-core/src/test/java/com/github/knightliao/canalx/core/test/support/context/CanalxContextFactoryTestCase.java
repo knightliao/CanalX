@@ -28,7 +28,7 @@ public class CanalxContextFactoryTestCase {
             Assert.assertEquals(injectorPluginNameSet.toString(), "[canalx-injector-kafka]");
 
             Set<String> processorPluginNameSet = iCanalxContext.getProcessorPluginName();
-            Assert.assertEquals(processorPluginNameSet.toString(), "[canalx-processor-kv]");
+            Assert.assertEquals(processorPluginNameSet.toString(), "[canalx-processor-kv-codis]");
 
             Set<String> routerPluginNameSet = iCanalxContext.getRouterPluginName();
             Assert.assertEquals(routerPluginNameSet.toString(), "[canalx-router-rest]");
