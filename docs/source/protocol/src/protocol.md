@@ -3,6 +3,11 @@
 
 Kafka消息 specification, encoded using GSON library.
 
+| 表头1 | 表头2 |
+|---|---|
+| 1 | 3 |
+
+
 | 名字 | 类型 | 对应Java类型 | 意义 |
 | ------| ------ | ------ | ---- |
 | binlog | 字符串 | String | MYSQL的binlog文件和offset，格式为offset@binlog-file |
